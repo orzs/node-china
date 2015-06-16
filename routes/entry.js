@@ -24,8 +24,10 @@ exports.submit = function(req,res,next){
   
   var entry = new Entry({
     "username": res.locals.user.name,
+    "author_id": res.locals.user._id,  
     "title": data.title,
-    "body": data.body
+    "body": data.body,
+    "tab": data.tab 
   })
   
   entry.save(function(err){

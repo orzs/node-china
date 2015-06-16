@@ -13,9 +13,13 @@
     "ejs": "~2.3.1",
     "express": "~4.12.4",
     "express-session": "^1.11.2",
+    "hiredis": "^0.4.0",
     "mongoose": "^4.0.5",
     "morgan": "~1.5.3",
     "redis": "^0.12.1",
     "serve-favicon": "~2.2.1"
+  },
+  "devDependencies": {
+    "mongo-express": "^0.21.0"
   }
 }
