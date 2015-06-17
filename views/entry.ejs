@@ -5,15 +5,18 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <% include menu %>
-    <% entries.forEach(function(entry){ %>
+      <p><%= author.name %></p> 
       <div class='entry'>
         <h3><a href='/entry/<%= entry._id %>'><%= entry.title %></a></h3>
         <p><%= entry.body %></p>
         <p><Posted by <%= entry.username %></p>
       </div>
+    <% replies.forEach(function(reply){ %>
+      <div class='entry'>
+        <h3><%= reply.usernmae %></a></h3>
+        <p><%= reply.body %></p>
+      </div>
     <% }) %>
-
-    <% include pager %>
+    
   </body>
 </html>

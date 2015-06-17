@@ -12,7 +12,7 @@ var register = require('./routes/register')
 var login = require('./routes/login')
 var user = require('./lib/middleware/user')
 var messages = require('./lib/messages')
-var entries = require('./routes/entry')
+var entry = require('./routes/entry')
 var models = require("./lib/main")
 var Entry = models.Entry  
 var validate = require('./lib/middleware/validate')
@@ -39,14 +39,15 @@ app.use(messages)
 app.get('/register',register.form)
 app.get('/login',login.form)
 app.get('/logout',login.logout)
-app.get('/post',entries.form)
+app.get('/post',entry.form)
+app.get('/entry/:id',entry.full)
 
 // post
 app.post('/register',register.submit)
 app.post('/login',login.submit)
-app.post('/post',validate.required('title'),validate.lengthAbove('title',4),entries.submit)
+app.post('/post',validate.required('title'),validate.lengthAbove('title',4),entry.submit)
 
-app.use('/:page?',page(Entry.getCount,5), entries.list);
+app.use('/:page?',page(Entry.getCount,5), entry.list);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
