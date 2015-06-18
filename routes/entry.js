@@ -1,5 +1,5 @@
-var models = require("../lib/main")
-var Entry = models.Entry  
+var proxy = require("../proxy/main")
+var Entry = proxy.Entry 
 
 exports.list = function(req,res,next){
   var page = req.page 
@@ -20,14 +20,7 @@ exports.form = function(req,res){
 
 exports.submit = function(req,res,next){
   var data = req.body
-  var entry = new Entry({
-    "username": res.locals.user.name,
-    "author_id": res.locals.user._id,  
-    "title": data.title,
-    "body": data.body,
-    "tab": data.tab 
-  })
-  entry.save(function(err){
+  Entry.createAndSave(res,data.title,data.body,data.tab,function(err){
     if(err) return next(err)
     res.redirect('/')
   })
@@ -36,11 +29,9 @@ exports.submit = function(req,res,next){
 exports.full = function(req,res,next){
   var entry_id = req.params['id']
   Entry.getFullEntry(entry_id,function(err,entry,author,replies){
-    console.log('*******',entry)
-    console.log('*******',author)
-    console.log('*******',replies)
     if(err) return next(err)
     res.render('entry',{
+      title:'Entry',
       entry:entry,
       author:author,
       replies:replies

@@ -1,5 +1,5 @@
-var models = require("../lib/main")
-var User = models.User   
+var proxy = require("../proxy/main")
+var User = proxy.User   
 
 exports.form = function(req,res){
   res.render('login',{title: 'Login'})

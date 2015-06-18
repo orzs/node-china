@@ -10,11 +10,12 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var register = require('./routes/register')
 var login = require('./routes/login')
+var reply = require('./routes/reply')
 var user = require('./lib/middleware/user')
 var messages = require('./lib/messages')
 var entry = require('./routes/entry')
-var models = require("./lib/main")
-var Entry = models.Entry  
+var proxy = require("./proxy/main")
+var Entry = proxy.Entry  
 var validate = require('./lib/middleware/validate')
 var page = require('./lib/middleware/page')
 
@@ -46,6 +47,7 @@ app.get('/entry/:id',entry.full)
 app.post('/register',register.submit)
 app.post('/login',login.submit)
 app.post('/post',validate.required('title'),validate.lengthAbove('title',4),entry.submit)
+app.post('/reply',reply.submit)
 
 app.use('/:page?',page(Entry.getCount,5), entry.list);
 

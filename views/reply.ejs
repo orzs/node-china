@@ -1,0 +1,10 @@
+<% replies.forEach(function(reply){ %>
+  <div class='entry'>
+    <p><%= reply.body %>&nbsp;&nbsp;<%= reply.username %></p>
+  </div>
+<% }) %>
+<form action='/reply' method='post'>
+  <p><input  type='hidden' name='entry_id' value='<%= entry._id %>'/></p>
+  <textarea name='body' placeholder="comment..."></textarea>
+  <p><input type='submit' value="comment"/></p>
+</form>
