@@ -37,11 +37,11 @@ app.use(user)
 app.use(messages)
 
 // get  
+app.get('/entry/:id',entry.full)
 app.get('/register',register.form)
 app.get('/login',login.form)
 app.get('/logout',login.logout)
 app.get('/post',entry.form)
-app.get('/entry/:id',entry.full)
 
 // post
 app.post('/register',register.submit)
