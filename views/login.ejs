@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+ <% include layout_header %>
     <% include menu %>
     <h1><%= title %></h1>
     <p>Fill in the form below to sign in</p>
@@ -15,5 +9,4 @@
       <p><input type='password' name=pass placeholder='Password' /></p>
       <p><input type='submit' value="login"/></p>
     </form>
-  </body>
-</html>
+ <% include layout_footer %>

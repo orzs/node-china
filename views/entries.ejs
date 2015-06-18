@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <% include menu %>
-    <% entries.forEach(function(entry){ %>
-      <div class='entry'>
-        <h3><a href='/entry/<%= entry._id %>'><%= entry.title %></a></h3>
-        <p><%= entry.body %></p>
-        <p><Posted by <%= entry.username %></p>
-      </div>
-    <% }) %>
+ <% include layout_header %>
+ <% include menu %>
+ <% entries.forEach(function(entry){ %>
+   <div class='entry'>
+     <h3><a href='/entry/<%= entry._id %>'><%= entry.title %></a></h3>
+     <p><%= entry.body %></p>
+     <p><Posted by <%= entry.username %></p>
+   </div>
+ <% }) %>
 
-    <% include pager %>
-  </body>
-</html>
+ <% include pager %>
+ <% include layout_footer %>
