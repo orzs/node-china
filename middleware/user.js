@@ -1,4 +1,4 @@
-var proxy = require('../../proxy/main')
+var proxy = require('../proxy/main')
 var User = proxy.User  
 
 module.exports = function(req,res,next){
