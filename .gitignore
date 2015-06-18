@@ -31,7 +31,7 @@ node_modules/
 
 ## bower
 bower_components/
-
+public/bower_components 
 # CocoaPods
 #
 # We recommend against adding the Pods directory to your .gitignore. However
