@@ -5,7 +5,7 @@ exports.list = function(req,res,next){
   var page = req.page 
   Entry.getRange(page.skip,page.perpage,function(err,entries){
     if(err) return next(err)
-    res.render('entries',{
+    res.render('index',{
       title: 'Entries',
       entries: entries
     })

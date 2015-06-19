@@ -16,7 +16,7 @@ exports.submit = function(req,res,next){
       User.createAndSave(data.name,data.pass,function(err,user){
         if(err) return next(err)
         req.session.uid = user._id
-        res.redirect('/')
+        res.redirect('/entries')
       })
     }
   })

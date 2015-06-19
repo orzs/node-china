@@ -11,7 +11,7 @@ exports.submit = function(req,res,next){
     if(err) return next(err)
     if(user){
       req.session.uid = user._id
-      res.redirect('/')
+      res.redirect('/entries')
     }else{
       res.error('Sorry! invalid credentials.')
       res.redirect('back')
@@ -22,6 +22,6 @@ exports.submit = function(req,res,next){
 exports.logout = function(req,res){
   req.session.destroy(function(err){
     if(err) throw err
-    res.redirect('/')
+    res.redirect('/entries')
   })
 }

@@ -49,7 +49,7 @@ app.post('/login',login.submit)
 app.post('/post',validate.required('title'),validate.lengthAbove('title',4),entry.submit)
 app.post('/reply',reply.submit)
 
-app.use('/:page?',page(Entry.getCount,5), entry.list);
+app.use('/entries/:page?',page(Entry.getCount,25), entry.list);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
