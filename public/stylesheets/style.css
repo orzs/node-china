@@ -17,7 +17,7 @@ body {
 .avatar-48 {
   width: 48px;
   height: 48px;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .media-object {
@@ -31,3 +31,110 @@ body {
   color: #A1C3EE;
 }
 
+a {
+  color: #356DD0;
+}
+
+footer a {
+  color: #666;
+}
+
+.topics .topic .info .node {
+  padding: 1px 5px;
+  color: #778087;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+
+.topics .topic .info {
+  color: #aaa;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.topics .topic .info a {
+  color: #666;
+}
+
+.topics .topic .title {
+  font-size: 15px;
+}
+
+.topics .topic .count {
+  width: 100px;
+  text-align: right;
+  padding-top: 15px;
+}
+
+.topics .topic .count a.state-true, .topics .topic .count a:visited {
+  background: #AAA;
+}
+
+.topics .topic .count a:link {
+  background: #98ACDF;
+}
+
+.topics .topic .count a:hover{
+  background: #102b6a;
+}
+  
+.topics .topic .count a:link, .topics .topic .count a:hover, .topics .topic .count a:visited {
+  line-height: 12px;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 80px;
+  padding: 2px 10px 2px 10px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.topics .topic {
+  min-height: 68px;
+  border-bottom: 1px solid #F0F0F0;
+  padding: 10px 15px;
+  margin: 0 -15px;
+  vertical-align: top;
+  position: relative;
+}
+
+.node-list .node {
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+.node-list .node .name {
+  margin-bottom: 10px;
+  width: 100px;
+  display: block;
+  float: left;
+  text-align: left;
+}
+
+.node-list .node label {
+  font-weight: normal;
+  color: #aaa;
+  text-align: right;
+}
+
+.node-list .node .media-left {
+  min-width: 130px;
+}
+
+.media-left, .media>.pull-left {
+  padding-right: 10px;
+}
+
+.node-list .node .name a:link, .node-list .node .name a:visited {
+  color: #333;
+}
+
+a:focus, a:hover {
+  color: #23527c;
+  text-decoration: underline;
+}
+
+.location-list .name a {
+  color: #666;
+  margin: 6px;
+  display: inline-block;
+}

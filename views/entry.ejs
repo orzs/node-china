@@ -1,11 +1,12 @@
- <% include layout_header %>
-    <p><%= author.name %></p> 
-    <div class='entry'>
-      <h3><a href='/entry/<%= entry._id %>'><%= entry.title %></a></h3>
-      <p><%= entry.body %></p>
-      <p><Posted by <%= entry.username %></p>
-    </div>
+<% include layout_header %>
+<% include menu %>
+  <p><%= author.name %></p> 
+  <div class='entry'>
+    <h3><a href='/entry/<%= entry._id %>'><%= entry.title %></a></h3>
+    <p><%= entry.body %></p>
+    <p><Posted by <%= entry.username %></p>
+  </div>
 
-    <h4> 评论:</h4>
-    <% include reply %> 
- <% include layout_footer %>
+  <h4> 评论:</h4>
+<% include reply %> 
+<% include layout_footer %>
