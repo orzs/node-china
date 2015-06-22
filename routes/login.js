@@ -7,7 +7,7 @@ exports.form = function(req,res){
 
 exports.submit = function(req,res,next){
   var data = req.body
-  User.authenticate(data.name,data.pass,function(err,user){
+  User.authenticate(data.login_name,data.pass,function(err,user){
     if(err) return next(err)
     if(user){
       req.session.uid = user._id

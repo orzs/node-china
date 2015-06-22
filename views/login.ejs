@@ -1,12 +1,63 @@
- <% include layout_header %>
-    <% include menu %>
-    <h1><%= title %></h1>
-    <p>Fill in the form below to sign in</p>
-    <% include messages %>
-
-    <form action='/login' method='post'>
-      <p><input type='text' name=name placeholder='Username' /></p>
-      <p><input type='password' name=pass placeholder='Password' /></p>
-      <p><input type='submit' value="login"/></p>
-    </form>
+<% include layout_header %>
+<% include menu %>
+<div id="main" class="main-container container">
+  <div class="row">
+    <div class="col-md-5 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          登录
+        </div>
+        <div class="panel-body">
+          <% include messages %>
+          <form class="simple_form " novalidate="novalidate" id="new_user" action="/login"
+          accept-charset="UTF-8" method="post">
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="用户名 / Email" name=login_name
+              id="user_login">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="密码" name=pass
+              id="user_password">
+            </div>
+            <div class="from-group checkbox">
+              <label for="user_remember_me">
+                <input name="user[remember_me]" type="hidden" value="0">
+                <input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
+                记住登录状态
+              </label>
+            </div>
+            <div class="form-group">
+              <input type="submit" name="commit" value="登录" class="btn btn-primary btn-block"
+              data-disable-with="正在登录">
+            </div>
+          </form>
+        </div>
+        <div class="panel-footer">
+          <a href="/account/sign_up">
+            注册
+          </a>
+          <a href="/account/password/new">
+            忘记了密码?
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          用其他平台的帐号登录
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a class="btn btn-default" href="/account/auth/github">
+              <i class="fa fa-github">
+              </i>
+              GitHub
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
  <% include layout_footer %>

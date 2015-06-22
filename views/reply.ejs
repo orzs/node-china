@@ -1,10 +1,49 @@
-<% replies.forEach(function(reply){ %>
-  <div class='entry'>
-    <p><%= reply.body %>&nbsp;&nbsp;<%= reply.username %></p>
+<div class="items panel-body">
+  <% replies.forEach(function(reply){ %>
+  <div class="reply" id="reply1">
+    <div class="avatar">
+      <a href="/ryudoawaru">
+        <img class="media-object avatar-48" src="https://ruby-china.org/avatar/c7c4962ce9539d003fd7f0f06539e9d3.png?s=96&amp;d=404"
+        alt="C7c4962ce9539d003fd7f0f06539e9d3">
+      </a>
+    </div>
+    <div class="infos">
+      <div class="info">
+        <span class="name">
+          <a data-name="Mu-Fan teng" href="/ryudoawaru">
+            <%= reply.username %>
+          </a>
+        </span>
+        ·
+        <span class="time">
+          <a class="reply-floor" href="#reply1">
+            #1
+          </a>
+          ·
+          <abbr class="timeago" title="2015-06-04T22:14:20+08:00">
+            17 天前
+          </abbr>
+        </span>
+        <span class="opts pull-right">
+          <a title="喜欢" data-count="3" data-state="" data-type="Reply" data-id="261737"
+          class="likeable " href="#">
+            <i class="fa fa-heart-o">
+            </i>
+            <span>
+              3 人喜欢
+            </span>
+          </a>
+          <a class="edit fa fa-pencil" data-uid="5841" title="修改回帖" href="/topics/25886/replies/261737/edit">
+          </a>
+          <a data-floor="1" data-login="ryudoawaru" title="回复此楼" class="btn-reply fa fa-mail-reply"
+          href="#">
+          </a>
+        </span>
+      </div>
+      <div class="markdown">
+        <%= reply.body %> 
+      </div>
+    </div>
   </div>
-<% }) %>
-<form action='/reply' method='post'>
-  <p><input  type='hidden' name='entry_id' value='<%= entry._id %>'/></p>
-  <textarea name='body' placeholder="comment..."></textarea>
-  <p><input type='submit' value="comment"/></p>
-</form>
+  <% }) %>
+</div>

@@ -1,12 +1,110 @@
 <% include layout_header %>
 <% include menu %>
-  <p><%= author.name %></p> 
-  <div class='entry'>
-    <h3><a href='/entry/<%= entry._id %>'><%= entry.title %></a></h3>
-    <p><%= entry.body %></p>
-    <p><Posted by <%= entry.username %></p>
-  </div>
 
-  <h4> 评论:</h4>
-<% include reply %> 
+<div id="main" class="main-container container">
+  <div class="row">
+    <div class="col-md-9">
+    <!--  start 问题详情 -->
+      <div class="topic-detail panel panel-default">
+        <div class="panel-heading media clearfix">
+          <div class="media-body">
+            <h1 class="media-heading">
+              <%= entry.title %>
+            </h1>
+            <div class="info">
+              <a class="node" href="/topics/node51">
+                <%= entry.tab %> 
+              </a>
+              ·
+              <a data-author="true" data-name="Mu-Fan teng" href="/ryudoawaru">
+                <%= entry.username %> 
+              </a>
+              · 于
+              <abbr class="timeago" title="<%= entry.create_date %>">
+                17 天前
+              </abbr>
+              发布 · 最后由
+              <a data-name="fredwu" href="/fredwu">
+                fredwu
+              </a>
+              于
+              <abbr class="timeago" title="2015-06-19T20:59:28+08:00">
+                2 天前
+              </abbr>
+              回复 · 705 次阅读
+            </div>
+          </div>
+          <div class="avatar media-right">
+            <a href="/ryudoawaru">
+              <img class="media-object avatar-48" src="https://ruby-china.org/avatar/c7c4962ce9539d003fd7f0f06539e9d3.png?s=96&amp;d=404"
+              alt="C7c4962ce9539d003fd7f0f06539e9d3">
+            </a>
+          </div>
+        </div>
+        <div class="panel-body ">
+          <%= entry.body %>
+        </div>
+        <div class="panel-footer clearfix">
+          <div class="opts">
+            <a title="喜欢" data-count="2" data-state="" data-type="Topic" data-id="25886"
+            class="likeable " href="#">
+              <i class="fa fa-heart-o">
+              </i>
+              <span>
+                2 人喜欢
+              </span>
+            </a>
+            <a data-id="25886" data-followed="false" class="follow" href="#">
+              <i class="fa fa-eye">
+              </i>
+              关注
+            </a>
+            <a title="收藏" class="bookmark " data-id="25886" href="#">
+              <i class="fa fa-bookmark">
+              </i>
+            </a>
+            <span class="pull-right opts">
+            </span>
+          </div>
+        </div>
+      </div>
+    <!--  end 问题详情 -->
+
+    <!--  start回复列表 -->
+      <% if(replies.length > 0){ %> 
+      <div id="replies" class="panel panel-default" data-last-floor="5">
+        <div class="total panel-heading">
+          共收到
+          <b>
+            <%= replies.length %> 
+          </b>
+          条回复
+        </div>
+        <% include reply %>
+        <div class="panel-footer clearfix">
+        </div>
+      </div>
+      <% } %>
+    <!--  end 回复列表 -->
+
+    <!-- start 回复框 --> 
+      <div id="reply" class="panel panel-default">
+        <div class="panel-heading">
+          回帖
+        </div>
+        <div class="panel-body">
+          <% include new_reply_form %>
+        </div>
+      </div>
+    <!-- end 回复框 -->
+    </div>
+
+    <div class="sidebar col-md-3">
+      <!-- 小贴士-->
+      <% include tip %>
+      <!-- start  其它节点话题 -->
+      <% include other_entries %>
+    </div>
+  </div>
+</div>
 <% include layout_footer %>

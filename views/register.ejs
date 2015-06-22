@@ -1,12 +1,56 @@
- <% include layout_header %>
-    <% include menu %>
-    <h1><%= title %></h1>
-    <p> Fill in the form below to sign up</p>
-    <% include messages %>
-    <form action='/register' method = 'post'>
-      <p><input type='text' name=name placeholder='Username' /></p>
-      <p><input type='password' name=pass placeholder='Password' /></p>
-      <p><input type='submit' value='Sign up' />
-    </form>
+<% include layout_header %>
+<% include menu %>
+
+<div id="main" class="main-container container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          注册新用户
+        </div>
+        <div class="panel-body">
+          <% include messages %>
+          <form class="simple_form " novalidate="novalidate" id="new_user" action="/register"
+          accept-charset="UTF-8" method="post">
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="用户名" hint="谨慎填写，以后不可修改，建议用 Twitter ID。"
+              name=login_name id="user_login">
+            </div>
+            <div class="form-group">
+              <input class="form-control" placeholder="名字" type="text" name=user_name
+              id="username">
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Email" value=""
+              name=email id="user_email">
+            </div>
+            <div class="form-group">
+              <div class="checkbox">
+                <label for="user_email_public" class="checkbox">
+                  <input name="user[email_public]" type="hidden" value="0">
+                  <input type="checkbox" value="1" checked="checked" name="user[email_public]"
+                  id="user_email_public">
+                  公开 Email
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <input class="form-control" placeholder="密码" type="password" name=pass
+              id="user_password">
+            </div>
+            <div class="form-group">
+              <input class="form-control" placeholder="确认密码" type="password" name=confirm_pass
+              id="user_password_confirmation">
+            </div>
+            <div class="form-group">
+              <input type="submit" name="commit" value="提交注册信息" class="btn btn-primary"
+              data-disable-with="正在提交">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
  <% include layout_footer %>
 

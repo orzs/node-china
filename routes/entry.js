@@ -22,7 +22,7 @@ exports.submit = function(req,res,next){
   var data = req.body
   Entry.createAndSave(res,data.title,data.body,data.tab,function(err){
     if(err) return next(err)
-    res.redirect('/')
+    res.redirect('/entries')
   })
 }
 
