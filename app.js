@@ -7,7 +7,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var register = require('./routes/register')
 var login = require('./routes/login')
 var reply = require('./routes/reply')
@@ -42,9 +41,10 @@ app.get('/register',register.form)
 app.get('/login',login.form)
 app.get('/logout',login.logout)
 app.get('/post',entry.form)
+app.get('/active_acount',login.activeAcount)
 
 // post
-app.post('/register',register.submit)
+app.post('/register',validate.required('login_name'),validate.lengthAbove('login_name',4),validate.required('email'),validate.emailConfirm(),validate.passConfirm(),register.submit)
 app.post('/login',login.submit)
 app.post('/post',validate.required('title'),validate.lengthAbove('title',4),entry.submit)
 app.post('/reply',reply.submit)

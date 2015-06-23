@@ -29,7 +29,7 @@ exports.getFullEntry = function(entry_id,fn){
 
 exports.createAndSave = function(res,title,body,tab,fn){
   var entry = new Entry({
-    "username": res.locals.user.name,
+    "username": res.locals.user.login_name,
     "author_id": res.locals.user._id,  
     "title": title,
     "body": body,

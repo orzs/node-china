@@ -17,7 +17,7 @@ exports.getReplyByReplyId = function(reply_id,fn){
 
 exports.createAndSave = function(res,entry_id,body,fn){
   var reply = new Reply({
-    "username": res.locals.user.name,
+    "username": res.locals.user.login_name,
     "author_id": res.locals.user._id,  
     "entry_id": entry_id,
     "body": body,
