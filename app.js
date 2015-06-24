@@ -14,8 +14,11 @@ var user = require('./middleware/user')
 var messages = require('./lib/messages')
 var entry = require('./routes/entry')
 var proxy = require("./proxy/main")
+var User = proxy.User
+var Reply = proxy.Reply
 var Entry = proxy.Entry  
 var validate = require('./middleware/validate')
+var statistics = require('./middleware/statistics')
 var page = require('./middleware/page')
 
 var app = express();
@@ -49,7 +52,7 @@ app.post('/login',login.submit)
 app.post('/post',validate.required('title'),validate.lengthAbove('title',4),entry.submit)
 app.post('/reply',reply.submit)
 
-app.use('/entries/:page?',page(Entry.getCount,25), entry.list);
+app.use('/entries/:page?',page(Entry.getCount,25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.list);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

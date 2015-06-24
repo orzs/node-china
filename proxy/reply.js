@@ -15,6 +15,10 @@ exports.getReplyByReplyId = function(reply_id,fn){
   })
 }
 
+exports.getCount = function(fn){
+  Reply.count({},fn)
+}
+
 exports.createAndSave = function(res,entry_id,body,fn){
   var reply = new Reply({
     "username": res.locals.user.login_name,

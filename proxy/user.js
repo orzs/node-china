@@ -30,6 +30,10 @@ exports.get = function(id,fn){
   })
 }
 
+exports.getCount = function(fn){
+  User.count({},fn)
+}
+
 exports.createAndSave = function(data,fn){
   if(data.email_public == 1){
     data.email_public = true
