@@ -1,27 +1,62 @@
 <div class="panel-footer clearfix">
   <ul class="pagination">
-    <li class="prev previous_page disabled"><a href="#">← 上一页</a></li> 
-    <li class="active"><a rel="start" href="/topics?page=1">1</a></li> 
-    <li><a rel="next" href="/topics?page=2">2</a></li> 
-    <li><a href="/topics?page=3">3</a></li> 
-    <li><a href="/topics?page=4">4</a></li> 
-    <li><a href="/topics?page=5">5</a></li> 
-    <li class="disabled"><a href="#">…</a></li> 
-    <li><a href="/topics?page=99">99</a></li> 
-    <li><a href="/topics?page=100">100</a></li> 
-    <li class="next next_page "><a rel="next" href="/topics?page=2">下一页 →</a></li>
-
     <% if (page.count > 1) { %>
       <% if(page.number) {%>
         <li class="prev previous_page"><a href="/entries/<%= page.number %>">← 上一页</a></li> 
+      <% }else{ %>
+        <li class="prev previous_page disabled"><a href="#">← 上一页</a></li> 
       <% } %>
-      <% if (page.number < page.count - 1){ %>
-        <% if (page.number){ %>
-          &nbsp;&nbsp;
+      <li><a href="/entries/1">1</a></li> 
+      <li><a href="/entries/2">2</a></li> 
+
+      <% if(page.number < 2){ %> 
+        <li><a href="/entries/3">3</a></li> 
+        <li><a href="/entries/4">4</a></li> 
+        <li><a href="/entries/5">5</a></li> 
+        <li class="disabled"><a href="#">…</a></li> 
+      <% } %>  
+
+      <% if(page.number < 6 && page.number > 1){ %>
+        <% for(var i=3;i<page.number + 4;i++){ %>
+          <li><a href="/entries/<%= i%>"><%= i%></a></li> 
         <% } %>
-          <li class="next next_page "><a rel="next" href="/entries/<%= page.number %>">下一页 →</a></li>
+        <li class="disabled"><a href="#">…</a></li> 
+      <% } %> 
+
+      <% if(page.number > 5 && page.number < 94){ %>
+        <li class="disabled"><a href="#">…</a></li> 
+        <li><a href="/entries/<%= page.number - 1%>"><%= page.number - 1 %></a></li>
+        <li><a href="/entries/<%= page.number %>"><%= page.number %></a></li>
+        <li><a href="/entries/<%= page.number + 1%>"><%= page.number + 1 %></a></li>
+        <li><a href="/entries/<%= page.number + 2%>"><%= page.number + 2 %></a></li>
+        <li><a href="/entries/<%= page.number + 3%>"><%= page.number + 3 %></a></li>
+        <li class="disabled"><a href="#">…</a></li> 
+      <% } %>
+
+      <% if(page.number > 93 && page.number < 98) {%>
+        <li class="disabled"><a href="#">…</a></li> 
+        <% for(var i=page.number - 1;i<99;i++){ %> 
+          <li><a href="/entries/<%= i%>"><%= i%></a></li> 
+        <% } %>
+      <% } %>
+
+      <% if(page.number > 97){ %> 
+        <li class="disabled"><a href="#">…</a></li> 
+        <li><a href="/entries/97">97</a></li> 
+        <li><a href="/entries/98">98</a></li> 
+      <% } %>  
+     
+      <li><a href="/entries/99">99</a></li> 
+      <li><a href="/entries/100">100</a></li> 
+
+      <% if (page.number < 99){ %>
+          <li class="next next_page "><a rel="next" href="/entries/<%= page.number + 2 %>">下一页 →</a></li>
+      <% }else{ %>
+        <li class="next next_page disabled"><a href="#">下一页 →</a></li>
       <% } %>
     <% } %>
-
   </ul>
 </div>
+
+<script type="text/javascript">
+</script>

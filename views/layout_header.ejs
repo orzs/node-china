@@ -3,6 +3,19 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css' />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/editor/0.1.0/editor.css" />
+    <link rel="stylesheet" href="/bower_components/nprogress/nprogress.css" />
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/editor/0.1.0/editor.js"></script>
+    <script src="//cdn.jsdelivr.net/editor/0.1.0/marked.js"></script>
+    <script src='/bower_components/nprogress/nprogress.js'></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript">
+      $(window).load(function(){
+        NProgress.configure({ showSpinner: false });
+        NProgress.start();
+        NProgress.done();
+      });
+    </script>  
   </head>
   <body>

@@ -26,8 +26,8 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <textarea class="topic-editor form-control closewarning" rows="20" name=body
+        <div id='ask' class="form-group">
+          <textarea id='editor' class="topic-editor form-control closewarning" rows="20" name=body
           id="topic_body" style="height: 400px;">
           </textarea>
         </div>
@@ -43,9 +43,16 @@
             </a>
           </div>
         </div>
-
       </form>
     </div>
   </div>
 </div>
+
+<script type='text/javascript'>
+  var editor = new Editor({
+    element: document.getElementById('editor'),
+    status:false
+  })
+  editor.render()
+</script>
  <% include layout_footer %>

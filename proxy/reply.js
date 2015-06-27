@@ -1,5 +1,6 @@
 var models = require('../lib/main')
 var Reply = models.Reply 
+var Marked = require('marked');
 
 exports.getRepliesByEntryId = function(entry_id,fn){
   Reply.find({entry_id:entry_id},function(err,replies){
@@ -24,7 +25,8 @@ exports.createAndSave = function(res,entry_id,body,fn){
     "username": res.locals.user.login_name,
     "author_id": res.locals.user._id,  
     "entry_id": entry_id,
-    "body": body,
+    "html": Marked(body),
+    "body": body
   })
   reply.save(fn)
 }

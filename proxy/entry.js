@@ -3,6 +3,7 @@ var User = require('./user')
 var Reply = require('./reply') 
 var Eventproxy = require('eventproxy')
 var Entry = models.Entry 
+var Marked = require('marked');
 
 exports.getRange = function(skip,perpage,fn){
   Entry.find({deleted:false},{},{ skip: skip,limit:perpage,sort:"-is_top -create_date" },function(err,entries){
@@ -33,6 +34,7 @@ exports.createAndSave = function(res,title,body,tab,fn){
     "author_id": res.locals.user._id,  
     "title": title,
     "body": body,
+    "html": Marked(body),
     "tab": tab 
   })
   entry.save(fn)

@@ -214,3 +214,15 @@ b , strong{
 #replies .reply .info .reply-floor {
   color: #7AA87A;
 }
+
+#reply .CodeMirror{
+  height: 150px
+}
+
+#ask .CodeMirror{
+  height: 320px
+}
+
+.pagination li > a {
+  color: #222527;
+}
