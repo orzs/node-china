@@ -226,3 +226,8 @@ b , strong{
 .pagination li > a {
   color: #222527;
 }
+
+.topics .topic .title i.fa {
+  color: #999;
+  margin-left: 3px;
+}
