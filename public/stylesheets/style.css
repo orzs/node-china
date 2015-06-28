@@ -231,3 +231,11 @@ b , strong{
   color: #999;
   margin-left: 3px;
 }
+
+.topics .filter a.popular {
+  color: #EB5424;
+}
+
+.notification-count .new {
+  color: #F86334; 
+}

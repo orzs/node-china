@@ -1,10 +1,11 @@
 var express = require('express');
 var session = require('express-session')
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var path = require('path')
+var favicon = require('serve-favicon')
+var logger = require('morgan')
+var cookieParser = require('cookie-parser')
+var bodyParser = require('body-parser')
+var RedisStore = require('connect-redis')(session)
 
 var routes = require('./routes/index');
 var register = require('./routes/register')
@@ -22,7 +23,22 @@ var statistics = require('./middleware/statistics')
 var page = require('./middleware/page')
 
 var app = express();
-app.use(session({secret: 'mexiqq'}));
+app.use(session({
+  cookie: { 
+    path: '/', 
+    httpOnly: true,
+    secure: false, 
+    maxAge: 3*24*60*6000 
+  },
+  secret: 'node-china_dev',
+  saveUninitialized: false,
+  name: 'node-china.id',
+  resave: true,
+  store: new RedisStore({
+    host: '127.0.0.1',
+    post: '6379'
+  })
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

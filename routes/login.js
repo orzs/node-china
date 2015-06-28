@@ -20,7 +20,7 @@ exports.submit = function(req,res,next){
         res.error('该账户未被激活，激活邮件已发送到' + user.email + ',请到邮箱内激活')
         res.redirect('back')
       }else{
-        req.session.uid = user._id
+        req.session.user = user
         res.redirect('/entries')
       }
     }else{
