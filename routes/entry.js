@@ -20,7 +20,7 @@ exports.form = function(req,res){
 
 exports.submit = function(req,res,next){
   var data = req.body
-  Entry.createAndSave(res,data.title,data.body,data.tab,function(err){
+  Entry.createAndSave(res,data.title,data.body,data.tab_id,function(err){
     if(err) return next(err)
     res.redirect('/entries')
   })

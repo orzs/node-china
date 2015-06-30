@@ -28,14 +28,14 @@ exports.getFullEntry = function(entry_id,fn){
   })) 
 }
 
-exports.createAndSave = function(res,title,body,tab,fn){
+exports.createAndSave = function(res,title,body,tab_id,fn){
   var entry = new Entry({
     "username": res.locals.user.login_name,
     "author_id": res.locals.user._id,  
     "title": title,
     "body": body,
     "html": Marked(body),
-    "tab": tab 
+    "tab_id": tab_id  
   })
   entry.save(fn)
 }

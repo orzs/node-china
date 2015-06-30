@@ -7,29 +7,24 @@
     </div>
     <div class="panel-body">
       <% include messages %>
-      <form class="simple_form form" novalidate="novalidate" id="new_topic"
-      action="/post" accept-charset="UTF-8" method="post">
+      <form class="simple_form form" novalidate="novalidate" id="new_topic" action="/post" accept-charset="UTF-8" method="post">
+      
         <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-btn">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">选择节点 <span class="caret"></span></button>
-                <ul class="dropdown-menu" role="menu" name=tab>
-                  <li><a href="#">ruby</a></li>
-                  <li><a href="#">rails</a></li>
-                  <li><a href="#">node</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">新手问题</a></li>
-                </ul>
-            </div>
-            <input class="form-control" placeholder="在这里填写标题" type="text" name=title
-            id="topic_title">
-          </div>
+          <input class="form-control" placeholder="在这里填写标题" type="text" name=title id="topic_title">
+        </div>
+
+        <div class="form-group"> 
+          <select id='tab' class=".js-example-basic-single col-md-3">
+          </select>
+          <input id='tab_id' type='hidden' name=tab_id >
+        </div>
+
+        <div class="inline-group"> 
+          <p style='color:gray'>若无此标签，点击右侧按钮添加</p>
         </div>
 
         <div id='ask' class="form-group">
-          <textarea id='editor' class="topic-editor form-control closewarning" rows="20" name=body
-          id="topic_body" style="height: 400px;">
-          </textarea>
+          <textarea id='editor' class="topic-editor form-control closewarning" rows="20" name=body id="topic_body"></textarea>
         </div>
 
         <div class="form-group">
@@ -54,5 +49,27 @@
     status:false
   })
   editor.render()
+
+  $("#tab").select2({
+    placeholder: "tab: like node",
+    ajax: {
+      url: './tabs', 
+      dataType: 'json',
+      delay: 50,
+      data: function (item) {
+        return item
+      },
+      processResults: function (data, page) {
+        return {
+          results: JSON.parse(data)
+        }
+      },
+      cache: true
+    },
+    minimumInputLength: 1,
+    templateResult: function(item){ return '<span style="color:green">' + item.name + '</span><span style="font-size:8px">: ' + item.description + '</span>'},
+    templateSelection: function(item) { return item.name },
+    escapeMarkup: function (markup) { return markup;},
+  });
 </script>
- <% include layout_footer %>
+<% include layout_footer %>
