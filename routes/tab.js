@@ -11,9 +11,10 @@ exports.getTabsJson = function(req,res,next){
 
 exports.submit = function(req,res,next){
   var data = req.body
+  console.log(data)
   Tab.createAndSave(data.name,data.description,function(err,tab){
     if(err) return next(err)
-    res.end('ok')
+    res.json({status: 0})
   })
 }
 exports.form = function(req,res){

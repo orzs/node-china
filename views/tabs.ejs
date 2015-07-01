@@ -3,21 +3,11 @@
    <div class="panel-body">
      <div class="row node-list">
        <div class="node media">
-         <label class="media-left">Ruby</label>
+         <label class="media-left">热门标签</label>
          <span class="nodes media-body">
-           <span class="name"><a title="Ruby" href="/topics/node1">Ruby</a></span>
-           <span class="name"><a title="Rails" href="/topics/node2">Rails</a></span>
-           <span class="name"><a title="Gem" href="/topics/node3">Gem</a></span>
-           <span class="name"><a title="重构" href="/topics/node29">重构</a></span>
-           <span class="name"><a title="Testing" href="/topics/node37">Testing</a></span>
-           <span class="name"><a title="Sinatra" href="/topics/node43">Sinatra</a></span>
-           <span class="name"><a title="部署" href="/topics/node44">部署</a></span>
-           <span class="name"><a title="RVM" href="/topics/node45">RVM</a></span>
-           <span class="name"><a title="开源项目" href="/topics/node47">开源项目</a></span>
-           <span class="name"><a title="mRuby" href="/topics/node66">mRuby</a></span>
-           <span class="name"><a title="新手问题" href="/topics/node52">新手问题</a></span>
-           <span class="name"><a title="JRuby" href="/topics/node54">JRuby</a></span>
-         </span>
+         <% tabs.forEach(function(tab){ %>
+           <span class="name"><a title="<%= tab.name %>" href="/tab/<%= tab.name %>"><%= tab.name %></a></span>
+         <% }) %>
        </div>
      </div>
    </div>
@@ -26,17 +16,6 @@
    <div class="panel-heading">热门城市</div>
    <div class="panel-body location-list" style="text-align:center;">
     <span class="name"><a href="/users/city/%E5%8C%97%E4%BA%AC">北京</a></span>
-    <span class="name"><a href="/users/city/%E4%B8%8A%E6%B5%B7">上海</a></span>
-    <span class="name"><a href="/users/city/%E6%9D%AD%E5%B7%9E">杭州</a></span>
-    <span class="name"><a href="/users/city/%E6%88%90%E9%83%BD">成都</a></span>
-    <span class="name"><a href="/users/city/%E5%B9%BF%E5%B7%9E">广州</a></span>
-    <span class="name"><a href="/users/city/%E6%B7%B1%E5%9C%B3">深圳</a></span>
-    <span class="name"><a href="/users/city/%E5%8D%97%E4%BA%AC">南京</a></span>
-    <span class="name"><a href="/users/city/%E6%AD%A6%E6%B1%89">武汉</a></span>
-    <span class="name"><a href="/users/city/%E8%A5%BF%E5%AE%89">西安</a></span>
-    <span class="name"><a href="/users/city/%E5%A4%A7%E8%BF%9E">大连</a></span>
-    <span class="name"><a href="/users/city/%E9%87%8D%E5%BA%86">重庆</a></span>
-    <span class="name"><a href="/users/city/%E9%9D%92%E5%B2%9B">青岛</a></span>
   </div>
 </div>
 

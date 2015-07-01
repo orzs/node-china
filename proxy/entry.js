@@ -3,13 +3,16 @@ var User = require('./user')
 var Reply = require('./reply') 
 var Eventproxy = require('eventproxy')
 var Entry = models.Entry 
+var Tab = require('./tab')
 var Marked = require('marked');
 
 exports.getRange = function(skip,perpage,fn){
-  Entry.find({deleted:false},{},{ skip: skip,limit:perpage,sort:"-is_top -create_date" },function(err,entries){
-    if(err) return fn(err)
-    fn(null,entries)
-  }) 
+  var ep = Eventproxy.create("entries","tabs",function(entries,tabs){
+    fn(null,entries,tabs)
+  })
+  ep.fail(fn)
+  Entry.find({deleted:false},{},{ skip: skip,limit:perpage,sort:"-is_top -create_date" },ep.done('entries'))
+  Tab.getHotTabs(ep.done('tabs'))
 }
 
 exports.getCount = function(fn){

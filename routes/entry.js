@@ -3,13 +3,18 @@ var Entry = proxy.Entry
 
 exports.list = function(req,res,next){
   var page = req.page 
-  Entry.getRange(page.skip,page.perpage,function(err,entries){
+  Entry.getRange(page.skip,page.perpage,function(err,entries,tabs){
     if(err) return next(err)
     res.render('index',{
-      title: 'Entries',
-      entries: entries
+      title: '首页',
+      entries: entries,
+      tabs: tabs 
     })
   })
+}
+
+exports.list = function(req,res,next){
+
 }
 
 exports.form = function(req,res){

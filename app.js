@@ -61,7 +61,6 @@ app.get('/register',register.form)
 app.get('/login',login.form)
 app.get('/logout',login.logout)
 app.get('/post',entry.form)
-app.get('/tab',tab.form)
 app.get('/active_acount',login.activeAcount)
 app.get('/tabs',tab.getTabsJson)
 
@@ -72,6 +71,7 @@ app.post('/post',validate.required('title'),validate.lengthAbove('title',4),entr
 app.post('/reply',reply.submit)
 app.post('/tab',tab.submit)
 
+app.use('/tab/:name/:page?',entry.listWithTab)
 app.use('/entries/:page?',page(Entry.getCount,25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.list);
 
 // catch 404 and forward to error handler

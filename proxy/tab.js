@@ -24,3 +24,10 @@ exports.getTabsBySchema = function(schema,fn){
     fn(null,tabs)
   }) 
 }
+
+exports.getHotTabs = function(fn){
+  Tab.find({},{},{limit:50,sort:"follower_count"},function(err,tabs){
+    if(err) return fn(err)
+    fn(null,tabs)
+  })
+}
