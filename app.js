@@ -71,8 +71,8 @@ app.post('/post',validate.required('title'),validate.lengthAbove('title',4),entr
 app.post('/reply',reply.submit)
 app.post('/tab',tab.submit)
 
-app.use('/tab/:name/:page?',entry.listWithTab)
-app.use('/entries/:page?',page(Entry.getCount,25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.list);
+app.use('/tab/:name/:page?',page(Entry.getCount,{tab:'tab'},25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.listWithTab)
+app.use('/entries/:page?',page(Entry.getCount,null,25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.list);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

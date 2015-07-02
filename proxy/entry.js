@@ -15,8 +15,17 @@ exports.getRange = function(skip,perpage,fn){
   Tab.getHotTabs(ep.done('tabs'))
 }
 
-exports.getCount = function(fn){
-  Entry.count({},fn)
+exports.getTabRange = function(tab,skip,perpage,fn){
+  var ep = Eventproxy.create("entries","tab",function(entries,tab){
+    fn(null,entries,tab)
+  }) 
+  ep.fail(fn)
+  Entry.find({deleted:false,tab:tab},{},{ skip: skip,limit:perpage,sort:"-is_top -create_date"},ep.done('entries'))
+  Tab.getByMame(tab,ep.done('tab'))
+}
+
+exports.getCount = function(options,fn){
+  Entry.count(options,fn)
 }
 
 exports.getFullEntry = function(entry_id,fn){

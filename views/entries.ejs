@@ -6,7 +6,12 @@
      <div class="infos media-body">
        <div class="title media-heading">
           <a href='/entry/<%= entry._id %>'><%= entry.title %></a>
-          <i class="fa fa-thumb-tack" title="置顶"></i>
+          <% if(entry.is_top){ %>
+            <i class="fa fa-thumb-tack" title="置顶"></i>
+          <% } %>
+          <% if(entry.is_good){ %>
+            <i title="精华帖" class="fa fa-diamond"></i>
+          <% } %>
        </div>
        <div class="info">
           <a class="node" href="/topics/node51">RubyConf</a>

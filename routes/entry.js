@@ -13,8 +13,17 @@ exports.list = function(req,res,next){
   })
 }
 
-exports.list = function(req,res,next){
-
+exports.listWithTab = function(req,res,next){
+  var tab = req.params['name']
+  var page = req.page 
+  Entry.getTabRange(tab,page.skip,page.perpage,function(err,entries,tab){
+    if(err) return next(err)
+    res.render('tab_entries',{
+      title: tab.name,
+      tab: tab,
+      entries: entries
+    }) 
+  })
 }
 
 exports.form = function(req,res){

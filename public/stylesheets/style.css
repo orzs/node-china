@@ -239,3 +239,20 @@ b , strong{
 .notification-count .new {
   color: #F86334; 
 }
+
+.topics .node-info .name strong {
+  font-weight: bold;
+  color: #666;
+  text-align: left;
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+
+.topics .node-info .summary {
+  color: #888;
+  font-size: 13px;
+}
+
+.topics .topic .title i.fa-diamond {
+  color: #EB5424;
+}
