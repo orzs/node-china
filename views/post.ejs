@@ -14,7 +14,7 @@
         </div>
 
         <div class="form-group"> 
-          <p style="color:gray"><select id='searchTab' class=".js-example-basic-single col-md-3">
+          <p style="color:gray"><select id='searchTab' class="js-example-basic-single col-md-3">
           </select>
             若无此标签，点击右侧按钮添加
             <a href='#' data-toggle="modal" data-target="#myModal" style='color:black'><i class="fa fa-plus-square"></i> </a> 
@@ -51,25 +51,28 @@
   editor.render()
 
   $("#searchTab").select2({
-    placeholder: "tab: like node",
     ajax: {
       url: './tabs', 
       dataType: 'json',
-      delay: 50,
+      delay: 250,
       data: function (item) {
         return item
       },
       processResults: function (data, page) {
+        var tabs = JSON.parse(data)
+        tabs.forEach(function(tab,index){
+          tabs[index].id = tab._id  
+        })
         return {
-          results: JSON.parse(data)
+          results: tabs  
         }
       },
       cache: true
     },
     minimumInputLength: 1,
-    templateResult: function(item){ return '<span style="color:green">' + item.name + '</span><span style="font-size:8px">: ' + item.description + '</span>'},
-    templateSelection: function(item) { return item.name },
-    escapeMarkup: function (markup) { return markup;},
+    templateResult: function(item){if(item.loading) return item.text; return '<span style="color:green">' + item.name + '</span><span style="font-size:8px">: ' + item.description + '</span>'},
+    templateSelection: function(item) { $("#tab_id").val(item.id); return item.name },
+    escapeMarkup: function (markup) { return markup },
   });
 </script>
 

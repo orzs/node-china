@@ -20,7 +20,9 @@ exports.getTabRange = function(tab,skip,perpage,fn){
     fn(null,entries,tab)
   }) 
   ep.fail(fn)
-  Entry.find({deleted:false,tab:tab},{},{ skip: skip,limit:perpage,sort:"-is_top -create_date"},ep.done('entries'))
+  var filter = { deleted: false, tab:tab }
+  var option = { skip: skip, limit:perpage, sort:"-is_top -create_date" }
+  Entry.find(filter,{},option,ep.done('entries'))
   Tab.getByMame(tab,ep.done('tab'))
 }
 

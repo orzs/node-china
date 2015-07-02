@@ -34,6 +34,7 @@ exports.form = function(req,res){
 
 exports.submit = function(req,res,next){
   var data = req.body
+  console.log(data)
   Entry.createAndSave(res,data.title,data.body,data.tab_id,function(err){
     if(err) return next(err)
     res.redirect('/entries')
