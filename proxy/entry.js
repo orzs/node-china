@@ -11,7 +11,7 @@ exports.getRange = function(skip,perpage,fn){
     fn(null,entries,tabs)
   })
   ep.fail(fn)
-  Entry.find({deleted:false},{},{ skip: skip,limit:perpage,sort:"-is_top -create_date" },ep.done('entries'))
+  Entry.find({deleted:false},{},{ skip:skip,limit:perpage,sort:"-is_top -create_date" },ep.done('entries'))
   Tab.getHotTabs(ep.done('tabs'))
 }
 
@@ -21,9 +21,26 @@ exports.getTabRange = function(tab,skip,perpage,fn){
   }) 
   ep.fail(fn)
   var filter = { deleted: false, tab:tab }
-  var option = { skip: skip, limit:perpage, sort:"-is_top -create_date" }
+  var option = { skip:skip, limit:perpage, sort:"-is_top -create_date" }
   Entry.find(filter,{},option,ep.done('entries'))
   Tab.getByMame(tab,ep.done('tab'))
+}
+
+exports.getFeatureRange = function(feature,skip,perpage,fn){
+  var filter = { deleted: false }
+  var option = { skip:skip, limit:perpage, sort:"-is_top -create_date" }
+  if(feature == 'good'){
+    filter = { deleted:false,is_good:true }
+  }else if(feature == 'no_reply'){
+    filter = { deleted:false,reply_count:0 }
+  }else if(feature == 'last'){
+    option = { skip:skip, limit:perpage, sort:"-create_date" }
+  }
+
+  Entry.find(filter,{},option,function(err,entries){
+    if(err) return fn(err)
+    fn(null,entries)
+  })
 }
 
 exports.getCount = function(options,fn){

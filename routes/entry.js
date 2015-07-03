@@ -26,6 +26,18 @@ exports.listWithTab = function(req,res,next){
   })
 }
 
+exports.listWithFeature = function(req,res,next){
+  var feature = req.params['feature']
+  var page = req.page
+  Entry.getFeatureRange(feature,page.skip,page.perpage,function(err,entries){
+    if(err) return next(err)
+    res.render('feature_entries',{
+      title: feature,
+      entries: entries 
+    })
+  })
+}
+
 exports.form = function(req,res){
   res.render('post',{
     title: 'Post'
