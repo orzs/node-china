@@ -13,12 +13,18 @@ exports.createAndSave = function(name,description,fn){
   tab.save(fn)
 }
 
-exports.addFollowerCount = function(id){
-  Tab.update({'_id':id},{'$inc':{'follower_count':1}});
+exports.addFollowerCount = function(id,fn){
+  Tab.update({'_id':id},{'$inc':{'follower_count':1}},function(err,tab){
+    if(err) return fn(err)
+    fn(null,tab)
+  });
 }
 
-exports.addEntryCount = function(id){
-  Tab.update({'_id':id},{'$inc':{'entry_count':1}});
+exports.addEntryCount = function(id,fn){
+  Tab.update({'_id':id},{'$inc':{'entry_count':1}},function(err,tab){
+    if(err) return fn(err)
+    fn(null,tab)
+  });
 }
 
 // 用于 select2 首字母匹配 

@@ -1,6 +1,6 @@
 <div class="items panel-body">
-  <% replies.forEach(function(reply){ %>
-  <div class="reply" id="reply1">
+  <% replies.forEach(function(reply,index){ %>
+  <div class="reply" id="reply<%= index + 1 %>">
     <div class="avatar">
       <a href="/ryudoawaru">
         <img class="media-object avatar-48" src="https://ruby-china.org/avatar/c7c4962ce9539d003fd7f0f06539e9d3.png?s=96&amp;d=404"
@@ -16,7 +16,7 @@
         </span>
         ·
         <span class="time">
-          <a class="reply-floor" href="#reply1">
+          <a class="reply-floor" href="#reply<%= index + 1 %>">
             #1
           </a>
           ·

@@ -16,6 +16,8 @@ exports.list = function(req,res,next){
 exports.listWithTab = function(req,res,next){
   var tab = req.params['name']
   var page = req.page 
+  console.log("tab",tab)
+  
   Entry.getTabRange(tab,page.skip,page.perpage,function(err,entries,tab){
     if(err) return next(err)
     res.render('tab_entries',{
@@ -37,7 +39,6 @@ exports.listWithFeature = function(req,res,next){
     })
   })
 }
-
 exports.form = function(req,res){
   res.render('post',{
     title: 'Post'
@@ -46,8 +47,7 @@ exports.form = function(req,res){
 
 exports.submit = function(req,res,next){
   var data = req.body
-  console.log(data)
-  Entry.createAndSave(res,data.title,data.body,data.tab_id,function(err){
+  Entry.createAndSave(res,data.title,data.body,data.tab_id,data.tab_name,function(err){
     if(err) return next(err)
     res.redirect('/entries')
   })

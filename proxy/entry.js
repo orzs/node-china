@@ -47,6 +47,13 @@ exports.getCount = function(options,fn){
   Entry.count(options,fn)
 }
 
+exports.updateReplyInfo = function(id,last_reply,login_name,fn){
+  Entry.update({'_id':id},{'$inc':{'reply_count':1},'$set':{'last_reply':last_reply},'$set':{'last_reply_user':login_name}},function(err,entry){
+    if(err) return fn(err)
+    fn(null,entry)
+  });
+}
+
 exports.getFullEntry = function(entry_id,fn){
   var ep = Eventproxy.create("entry","author","replies",function(entry,author,replies){
     fn(null,entry,author,replies)
@@ -59,14 +66,20 @@ exports.getFullEntry = function(entry_id,fn){
   })) 
 }
 
-exports.createAndSave = function(res,title,body,tab_id,fn){
+exports.createAndSave = function(res,title,body,tab_id,tab_name,fn){
   var entry = new Entry({
     "username": res.locals.user.login_name,
     "author_id": res.locals.user._id,  
     "title": title,
     "body": body,
     "html": Marked(body),
-    "tab_id": tab_id  
+    "tab_id": tab_id,
+    "tab": tab_name  
   })
-  entry.save(fn)
+  var ep = Eventproxy.create("saveEntry","updateTab",function(entry,tab){
+    fn(null,entry)
+  })
+  ep.fail(fn)
+  entry.save(ep.done('saveEntry'))
+  Tab.addEntryCount(tab_id,ep.done('updateTab'))
 }

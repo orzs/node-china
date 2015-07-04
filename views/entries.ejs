@@ -1,7 +1,7 @@
 <% entries.forEach(function(entry){ %>
-  <div class="topic media topic-25886">
+  <div class="topic media topic-<%= entry._id %>">
      <div class="avatar media-left">
-       <a href="/ryudoawaru"><img class="media-object avatar-48" src="https://ruby-china.org/avatar/c7c4962ce9539d003fd7f0f06539e9d3.png?s=96&amp;d=404" alt="C7c4962ce9539d003fd7f0f06539e9d3"></a>
+       <a href="/<%= entry.username %>"><img class="media-object avatar-48" src="/<%= user.avatar %> " alt="avatar"></a>
      </div>
      <div class="infos media-body">
        <div class="title media-heading">
@@ -14,15 +14,19 @@
           <% } %>
        </div>
        <div class="info">
-          <a class="node" href="/topics/node51">RubyConf</a>
-          <a data-name="Mu-Fan teng" href="/ryudoawaru"><%= entry.username %></a>
+          <a class="node" href="/tab/<%= entry.tab %>"><%= entry.tab %></a>
+          <a data-name="Mu-Fan teng" href="/<%= entry.username %>"><%= entry.username %></a>
           <span class="hidden-mobile">
-            最后由 <a data-name="yfractal" href="/yfractal">yfractal</a> 于 <abbr class="timeago" title="11 天前">11 天前</abbr>回复
+          <% if(entry.last_reply_user){ %> 
+            最后由 <a data-name="<%= entry.last_reply_user %>" href="/<%= entry.last_reply_user %>"><%= entry.last_reply_user %></a> 于 <abbr class="timeago" title="11 天前">11 天前</abbr>回复
+          <% }else{ %> 
+            于 <abbr class="timeago" title="11 天前">11 天前</abbr>发布
+          <% } %>
           </span>
        </div>
      </div>
      <div class="count media-right">
-       <a class="state-false" href="/topics/25886#reply4">4</a>
+       <a class="state-false" href="/entry/<%= entry._id %>#reply<%= entry.reply_count %>"><%= entry.reply_count %></a>
      </div>
   </div>
 <% }) %>

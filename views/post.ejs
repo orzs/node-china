@@ -1,5 +1,6 @@
 <% include layout_header %>
 <% include menu %>
+
 <div id="main" class="main-container container">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -20,6 +21,7 @@
             <a href='#' data-toggle="modal" data-target="#myModal" style='color:black'><i class="fa fa-plus-square"></i> </a> 
           </p>
           <input id='tab_id' type='hidden' name=tab_id >
+          <input id='tab_name' type='hidden' name=tab_name >
         </div>
 
         <div id='ask' class="form-group">
@@ -71,7 +73,7 @@
     },
     minimumInputLength: 1,
     templateResult: function(item){if(item.loading) return item.text; return '<span style="color:green">' + item.name + '</span><span style="font-size:8px">: ' + item.description + '</span>'},
-    templateSelection: function(item) { $("#tab_id").val(item.id); return item.name },
+    templateSelection: function(item) { $("#tab_id").val(item.id); $('#tab_name').val(item.name); return item.name },
     escapeMarkup: function (markup) { return markup },
   });
 </script>

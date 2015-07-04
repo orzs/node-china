@@ -3,8 +3,8 @@ var Reply = proxy.Reply
 
 exports.submit = function(req,res,next){
   var data = req.body
-  Reply.createAndSave(res,data.entry_id,data.body,function(err){
+  Reply.createAndSave(res,data.entry_id,data.body,function(err,reply,entry){
     if(err) return next(err)
-    res.redirect('/entry/'+data.entry_id)
+    res.redirect('/entry/' + data.entry_id + "#reply1")
   })
 }

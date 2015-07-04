@@ -22,4 +22,3 @@ exports.form = function(req,res){
     title: 'Post'
   })
 }
-
