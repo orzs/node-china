@@ -16,7 +16,6 @@ exports.list = function(req,res,next){
 exports.listWithTab = function(req,res,next){
   var tab = req.params['name']
   var page = req.page 
-  console.log("tab",tab)
   
   Entry.getTabRange(tab,page.skip,page.perpage,function(err,entries,tab){
     if(err) return next(err)
@@ -31,6 +30,7 @@ exports.listWithTab = function(req,res,next){
 exports.listWithFeature = function(req,res,next){
   var feature = req.params['feature']
   var page = req.page
+
   Entry.getFeatureRange(feature,page.skip,page.perpage,function(err,entries){
     if(err) return next(err)
     res.render('feature_entries',{
@@ -39,6 +39,7 @@ exports.listWithFeature = function(req,res,next){
     })
   })
 }
+
 exports.form = function(req,res){
   res.render('post',{
     title: 'Post'

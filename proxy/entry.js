@@ -11,7 +11,19 @@ exports.getRange = function(skip,perpage,fn){
     fn(null,entries,tabs)
   })
   ep.fail(fn)
-  Entry.find({deleted:false},{},{ skip:skip,limit:perpage,sort:"-is_top -create_date" },ep.done('entries'))
+  Entry.find({deleted:false},{},{ skip:skip,limit:perpage,sort:"-is_top -create_date" },ep.done(function(entries){
+    var proxy = new Eventproxy()
+    proxy.after('entris_ready',entries.length,function(detail_entries){
+      ep.emit('entries',detail_entries) 
+    })
+    entries.forEach(function(entry,index){
+      User.get(entry.author_id,function(err,user){
+        if(err) return fn(err)
+        entry.author = user  
+        proxy.emit('entris_ready',entry)
+      })
+    })
+  }))
   Tab.getHotTabs(ep.done('tabs'))
 }
 
@@ -22,7 +34,19 @@ exports.getTabRange = function(tab,skip,perpage,fn){
   ep.fail(fn)
   var filter = { deleted: false, tab:tab }
   var option = { skip:skip, limit:perpage, sort:"-is_top -create_date" }
-  Entry.find(filter,{},option,ep.done('entries'))
+  Entry.find(filter,{},option,ep.done(function(entries){
+    var proxy = new Eventproxy()
+    proxy.after('entris_ready',entries.length,function(detail_entries){
+      ep.emit('entries',detail_entries)
+    })
+    entries.forEach(function(entry,index){
+      User.get(entry.author_id,function(err,user){
+        if(err) fn(err)
+        entry.author = user
+        proxy.emit('entris_ready',entry)
+      })
+    })
+  }))
   Tab.getByMame(tab,ep.done('tab'))
 }
 
@@ -39,7 +63,17 @@ exports.getFeatureRange = function(feature,skip,perpage,fn){
 
   Entry.find(filter,{},option,function(err,entries){
     if(err) return fn(err)
-    fn(null,entries)
+    var ep = new Eventproxy()
+    ep.after('entris_ready',entries.length,function(detail_entries){
+      fn(null,detail_entries)
+    })
+    entries.forEach(function(entry,index){
+      User.get(entry.author_id,function(err,user){
+        if(err) fn(err)
+        entry.author = user
+        ep.emit('entris_ready',entry)
+      })
+    })
   })
 }
 

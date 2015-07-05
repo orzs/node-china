@@ -1,7 +1,7 @@
 <% entries.forEach(function(entry){ %>
   <div class="topic media topic-<%= entry._id %>">
      <div class="avatar media-left">
-       <a href="/<%= entry.username %>"><img class="media-object avatar-48" src="/<%= user.avatar %> " alt="avatar"></a>
+       <a href="/<%= entry.author.login_name%>"><img class="media-object avatar-48" src="<%= entry.author.avatar %> " alt="avatar"></a>
      </div>
      <div class="infos media-body">
        <div class="title media-heading">
@@ -15,7 +15,8 @@
        </div>
        <div class="info">
           <a class="node" href="/tab/<%= entry.tab %>"><%= entry.tab %></a>
-          <a data-name="Mu-Fan teng" href="/<%= entry.username %>"><%= entry.username %></a>
+           • 
+          <a data-name="Mu-Fan teng" href="/<%= entry.username %>"><%= entry.username %></a> •
           <span class="hidden-mobile">
           <% if(entry.last_reply_user){ %> 
             最后由 <a data-name="<%= entry.last_reply_user %>" href="/<%= entry.last_reply_user %>"><%= entry.last_reply_user %></a> 于 <abbr class="timeago" title="11 天前">11 天前</abbr>回复
