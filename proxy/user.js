@@ -5,7 +5,7 @@ var User = models.User
 exports.getByMame = function(login_name,fn){
   User.findOne({login_name:login_name},function(err,user){
     if(err) return fn(err)
-    user = user || {};
+    user = user || {}
     fn(null,user)
   })
 }
@@ -54,3 +54,21 @@ exports.activeAcount = function(id,fn){
   User.update({_id:id},{$set:{verifined:true}},fn);
 }
 
+exports.updateUserInfo = function(id,data,fn){
+  User.update({_id:id},{'$set':{
+    'name': data.name,
+    'avatar': data.avatar,
+    'email_public': data.email_public,
+    'location_city': data.location_city,
+    'company': data.company,
+    'github': data.github,
+    'twitter': data.twitter,
+    'weibo': data.weibo,
+    'website': data.website,
+    'signature': data.signature,
+    'summary': data.summary
+  }},function(err,data){
+    if(err) return fn(err)
+    fn(null,data)
+  })
+}

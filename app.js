@@ -1,4 +1,5 @@
 var express = require('express');
+var multer = require('multer')
 var session = require('express-session')
 var path = require('path')
 var favicon = require('serve-favicon')
@@ -15,6 +16,7 @@ var user = require('./middleware/user')
 var messages = require('./lib/messages')
 var entry = require('./routes/entry')
 var tab = require('./routes/tab')
+var account = require('./routes/user')
 var proxy = require("./proxy/main")
 var User = proxy.User
 var Reply = proxy.Reply
@@ -63,6 +65,7 @@ app.get('/logout',login.logout)
 app.get('/post',entry.form)
 app.get('/active_acount',login.activeAcount)
 app.get('/tabs',tab.getTabsJson)
+app.get('/user/edit',account.form)
 
 // post
 app.post('/register',validate.required('login_name'),validate.lengthAbove('login_name',4),validate.required('email'),validate.emailConfirm(),validate.passConfirm(),register.submit)
@@ -70,6 +73,25 @@ app.post('/login',login.submit)
 app.post('/post',validate.required('title'),validate.lengthAbove('title',4),entry.submit)
 app.post('/reply',reply.submit)
 app.post('/tab',tab.submit)
+app.post('/account',multer({
+  dest:'./public/images/',
+  rename: function(fieldname,filename){
+    return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()
+  },
+  limits:{ filesize: 4*1000*1000 },
+  includeEmptyFields: true,
+  inMemory: false,
+  onFileUploadStart: function (file, req, res) {
+    console.log(file.fieldname + ' is starting ...')
+  },
+  onFileUploadComplete: function (file, req, res) {
+    console.log(file.fieldname + ' uploaded to  ' + file.path)
+  },
+  onError: function (error, next) {
+    console.log(error)
+    next(error)
+  }
+  }),account.update)
 
 app.use('/list/:feature',page(Entry.getCount,'feature',25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.listWithFeature)
 

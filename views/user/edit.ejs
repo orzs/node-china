@@ -1,0 +1,284 @@
+<% include ../layout_header %>
+<% include ../menu %>
+<div id="main" class="main-container container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          个人资料设置
+        </div>
+        <div class="panel-body">
+          <form enctype="multipart/form-data" novalidate="novalidate" class="simple_form form-horizontal edit_user"
+          id="edit_user" action="/account" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓">
+            <div class="form-group string optional user_name">
+              <label class="string optional control-label col-sm-2" for="user_name">
+                名字
+              </label>
+              <div class="col-sm-10">
+                <input class="string optional form-control" type="text" value="<%= user.name %>" name=name
+                id="user_name">
+              </div>
+            </div>
+            <div class="form-group file optional user_avatar">
+              <label class="file optional control-label col-sm-2" for="user_avatar">
+                头像
+              </label>
+              <div class="col-sm-10">
+                <input class="file optional form-control" type="file" name=avatar
+                id="user_avatar">
+              </div>
+            </div>
+            <div class="form-group email optional user_email">
+              <label class="email optional control-label col-sm-2" for="user_email">
+                Email
+              </label>
+              <div class="col-sm-10">
+                <input class="string email optional span4 form-control" disabled="disabled"
+                type="email" value="<%= user.email %>" name=email id="user_email">
+                <p class="help-block">
+                  保存以后就不可以改了哦！
+                </p>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-10 col-sm-offset-2">
+                <div class="checkbox">
+                  <label for="user_email_public" class="checkbox">
+                    <input name=email_public type="hidden" value="0">
+                    <input type="checkbox" value="1" checked="checked" name=email_public
+                    id="user_email_public">
+                    公开 Email
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group string optional user_location">
+              <label class="string optional control-label col-sm-2" for="user_location">
+                城市
+              </label>
+              <div class="col-sm-10">
+                <input class="string optional form-control" type="text" value="<%= user.location_city %>" name=location_city 
+                id="user_location">
+                <p class="help-block">
+                  请用中文填写所在城市
+                </p>
+              </div>
+            </div>
+            <div class="form-group string optional user_company">
+              <label class="string optional control-label col-sm-2" for="user_company">
+                公司
+              </label>
+              <div class="col-sm-10">
+                <input class="string optional form-control" type="text" value="<%= user.company %>" name=company
+                id="user_company">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="string optional control-label col-sm-2" for="user_github">
+                GitHub
+              </label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    https://github.com/
+                  </span>
+                  <input type="email" class="form-control" placeholder="yourname" value="<%= user.github %>"
+                  name=github id="user_github">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="string optional control-label col-sm-2" for="user_twitter">
+                Twitter
+              </label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    http://twitter.com/
+                  </span>
+                  <input type="email" class="form-control" placeholder="yourname" value="<%= user.twitter %>"
+                  name=twitter id="user_twitter">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="string optional control-label col-sm-2" for="user_weibo">
+                Weibo
+              </label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    http://weibo.com/
+                  </span>
+                  <input type="email" class="form-control" placeholder="yourname" value="<%= user.weibo %>"
+                  name=weibo id="user_weibo">
+                </div>
+              </div>
+            </div>
+            <div class="form-group string optional user_website">
+              <label class="string optional control-label col-sm-2" for="user_website">
+                个人主页
+              </label>
+              <div class="col-sm-10">
+                <input placeholder="http://" class="string optional form-control" type="text"
+                value="<%= user.website %>" name=website id="user_website">
+              </div>
+            </div>
+            <div class="form-group string optional user_tagline">
+              <label class="string optional control-label col-sm-2" for="user_tagline">
+                签名
+              </label>
+              <div class="col-sm-10">
+                <input class="string optional form-control" type="text" value="<%= user.signature %>"
+                name=signature id="user_signature">
+              </div>
+            </div>
+            <div class="form-group text optional user_bio">
+              <label class="text optional control-label col-sm-2" for="user_bio">
+                个人介绍
+              </label>
+              <div class="col-sm-10">
+                <textarea class="text optional xxlarge form-control" rows="6" name=summary 
+                id=user_summary><%= user.summary %></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-10 col-sm-offset-2">
+                <button type="submit" class="btn btn-primary" data-disable-with="正在保存">
+                  更新资料
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          修改密码
+        </div>
+        <div class="panel-body">
+          <form novalidate="novalidate" class="simple_form form-horizontal edit_user"
+          id="edit_user" action="/account?by=pwd" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓">
+            <input type="hidden" name="_method" value="put">
+            <input type="hidden" name="authenticity_token" value="7VfrDlWrese6OjATN/hUuJTr2mH6FB1k81FUSmCCXE5DK2runD2LasfdnMh7hjrNYo7H8aRDT4sJ1hgOymLohQ==">
+            <input type="hidden" name="by" value="pwd">
+            <div class="form-group password optional user_current_password">
+              <label class="password optional control-label col-sm-2" for="user_current_password">
+                旧密码
+              </label>
+              <div class="col-sm-10">
+                <input class="password optional form-control" type="password" name="user[current_password]"
+                id="user_current_password">
+              </div>
+            </div>
+            <div class="form-group password optional user_password">
+              <label class="password optional control-label col-sm-2" for="user_password">
+                密码
+              </label>
+              <div class="col-sm-10">
+                <input class="password optional form-control" type="password" name="user[password]"
+                id="user_password">
+              </div>
+            </div>
+            <div class="form-group password optional user_password_confirmation">
+              <label class="password optional control-label col-sm-2" for="user_password_confirmation">
+                确认密码
+              </label>
+              <div class="col-sm-10">
+                <input class="password optional form-control" type="password" name="user[password_confirmation]"
+                id="user_password_confirmation">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-10 col-sm-offset-2">
+                <input type="submit" name="commit" value="修改密码" class="btn btn-success"
+                data-disable-with="正在保存">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar col-md-3">
+      <div class="panel panel-default" style="text-align:center;">
+        <div class="panel-body">
+          <a href="/mexiqq">
+            <img class="media-object avatar-120" src="https://ruby-china-files.b0.upaiyun.com/user/big_avatar/18899.jpg"
+            alt="18899">
+          </a>
+        </div>
+        <div class="panel-footer">
+          如需修改头像，请进入
+          <a href="http://www.gravatar.com">
+            gravatar.com
+          </a>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          绑定其他帐号用于登陆
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            GitHub
+            <a rel="twitsy nofollow" title="点击解除绑定" data-method="delete" href="/account/auth/github/unbind">
+              <i class="fa fa-remove">
+              </i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="panel panel-default">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a href="/oauth/applications">
+              管理我的应用
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          密钥
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <input id="private_token" class="form-control" value="71539b0cd05e70fe10e0:18899"
+            readonly="readonly">
+          </div>
+          <div class="buttons">
+            <a href="#" class="btn btn-default btn-sm" id="update_private_token">
+              更换一个
+            </a>
+            <span class="help-inline">
+              用于浏览器 Push 通知
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          删除账号
+        </div>
+        <div class="panel-body">
+          <form class="edit_user" id="edit_user" action="/account" accept-charset="UTF-8"
+          method="post">
+            <input name="utf8" type="hidden" value="✓">
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="authenticity_token" value="7VfrDlWrese6OjATN/hUuJTr2mH6FB1k81FUSmCCXE5DK2runD2LasfdnMh7hjrNYo7H8aRDT4sJ1hgOymLohQ==">
+            <input type="hidden" name="by" value="destroy">
+            <div class="form-group">
+              <input class="form-control" placeholder="要删除账号，请输入你的密码" type="password"
+              name="user[current_password]" id="user_current_password">
+            </div>
+            <input type="submit" name="commit" value="确定删除我的账号" class="btn btn-danger btn-sm btn-block"
+            data-disable-with="正在提交">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../layout_footer %>
