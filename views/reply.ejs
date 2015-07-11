@@ -2,22 +2,20 @@
   <% replies.forEach(function(reply,index){ %>
   <div class="reply" id="reply<%= index + 1 %>">
     <div class="avatar">
-      <a href="/ryudoawaru">
-        <img class="media-object avatar-48" src="https://ruby-china.org/avatar/c7c4962ce9539d003fd7f0f06539e9d3.png?s=96&amp;d=404"
-        alt="C7c4962ce9539d003fd7f0f06539e9d3">
+      <a href="/user/<%= reply.author.login_name %>">
+        <img class="media-object avatar-48" src="<%= reply.author.avatar %>">
       </a>
     </div>
     <div class="infos">
       <div class="info">
         <span class="name">
-          <a data-name="Mu-Fan teng" href="/ryudoawaru">
+          <a data-name="Mu-Fan teng" href="/user/<%= reply.author.login_name %>">
             <%= reply.username %>
           </a>
         </span>
-        ·
         <span class="time">
           <a class="reply-floor" href="#reply<%= index + 1 %>">
-            #1
+            #<%= index + 1 %>
           </a>
           ·
           <abbr class="timeago" title="2015-06-04T22:14:20+08:00">
