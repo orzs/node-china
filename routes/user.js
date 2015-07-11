@@ -36,3 +36,14 @@ exports.update = function(req,res,next){
     }
   })
 }
+
+exports.show = function(req,res,next){
+  var login_name = req.params['login_name']
+  User.getByMame(login_name,function(err,user){
+    if(err) return next(err)
+    res.render('user/index',{
+      title: 'account',
+      user: user
+    })
+  })
+}

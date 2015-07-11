@@ -296,3 +296,74 @@ textarea.form-control, #preview.form-control, textarea.form-control:focus {
 textarea.form-control, #preview.form-control {
   border: 1px solid #D5DCE1;
 }
+
+.avatar-120 {
+  width: 80px;
+  height: 80px;
+  border-radius: 2px;
+}
+
+.sidebar .profile .number {
+  color: #999;
+}
+
+.label-info {
+  background: #ADD0FF;
+  color: #4A5E9E;
+}
+
+.sidebar .profile .follow-info a.counter:hover {
+  color: #317DDA;
+}
+
+.sidebar .profile .follow-info a.counter {
+  font-size: 32px;
+  color: #356DD0;
+}
+
+.sidebar .profile .follow-info a {
+  display: block;
+  text-decoration: none;
+}
+
+.sidebar .profile .follow-info a.text {
+  color: #999;
+}
+
+.sidebar .profile .follow-info {
+  border-top: 1px solid #f0f0f0;
+  text-align: center;
+  margin-top: 15px;
+  padding-top: 15px;
+}
+
+.userinfo li {
+  border-color: #f0f0f0;
+  font-size: 13px;
+}
+
+.userinfo li label {
+  color: #999;
+  margin-right: 8px;
+  display: inline-block;
+  width: 80px;
+  text-align: right;
+}
+
+.recent-topics ul li .node a {
+  color: #444;
+}
+
+.recent-topics ul li .node {
+  margin-right: 5px;
+}
+
+.recent-topics ul li .info {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #bbb;
+}
+
+.panel-body {
+  padding: 15px;
+}

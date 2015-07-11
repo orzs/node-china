@@ -1,0 +1,261 @@
+<% include ../layout_header %>
+<% include ../menu %>
+<div id="main" class="main-container container">
+  <div class="row">
+    <div class="sidebar col-md-4">
+      <% include left_slider %>
+    </div>
+    <div class="col-md-8">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="/mexiqq">
+            个人信息
+          </a>
+        </li>
+        <li class="">
+          <a href="/mexiqq/topics">
+            帖子
+          </a>
+        </li>
+        <li class="">
+          <a href="/mexiqq/favorites">
+            收藏
+          </a>
+        </li>
+        <li class="">
+          <a href="/mexiqq/notes">
+            记事本
+          </a>
+        </li>
+        <li class="">
+          <a href="/mexiqq/followers">
+            关注者
+          </a>
+        </li>
+        <li class="">
+          <a href="/mexiqq/following">
+            正在关注
+          </a>
+        </li>
+        <li class="">
+          <a href="/mexiqq/blocked">
+            已屏蔽
+          </a>
+        </li>
+      </ul>
+      <div class="panel panel-default userinfo">
+        <div class="panel-body vcard clearfix">
+          <ul class="list-group">
+            <% if(user.location_city != ''){ %>
+              <li class="adr list-group-item">
+                <label>
+                  城市:
+                </label>
+                <span class="region">
+                  <a href="/users/city/%E5%8C%97%E4%BA%AC">
+                    <%= user.location_city %>
+                  </a>
+                </span>
+              </li>
+            <% } %>
+            <% if(user.company != ''){ %>
+              <li class="adr list-group-item">
+                <label>
+                  公司:
+                </label>
+                <span class="org">
+                  <%= user.company %>
+                </span>
+              </li>
+            <% } %>
+            <li class="list-group-item">
+              <label>
+                Email:
+              </label>
+              <span>
+                <a href="mailto:ljw040426@gmail.com">
+                  <%= user.email %>
+                </a>
+              </span>
+            </li>
+            <% if(user.github != ''){ %>
+              <li class="list-group-item">
+                <label>
+                  github:
+                </label>
+                <span>
+                  <a target="_blank" class="url" rel="nofollow" href="http://github.com/<%= user.github %>">
+                    @<%= user.github %>
+                  </a>
+                </span>
+              </li>
+            <% } %>
+            <% if(user.twitter != ''){ %>
+              <li class="list-group-item">
+                <label>
+                  Twitter:
+                </label>
+                <span>
+                  <a target="_blank" class="url" rel="nofollow" href="http://twitter.com/<%= user.twitter %>">
+                    @<%= user.twitter %>
+                  </a>
+                </span>
+              </li>
+            <% } %>
+            <% if(user.website != ''){ %>
+              <li class="list-group-item">
+                <label>
+                  博客:
+                </label>
+                <span>
+                  <a target="_blank" class="url" rel="nofollow" href="<%= user.website %>">
+                    <%= user.website %>
+                  </a>
+                </span>
+              </li>
+            <% } %>
+            <% if(user.signature != ''){ %>
+              <li class="list-group-item">
+                <label>
+                  签名:
+                </label>
+                <span>
+                  <%= user.signature %>
+                </span>
+              </li>
+            <% } %>
+            <li class="list-group-item">
+              <label>
+                Since:
+              </label>
+              <span>
+                <%= user.create_date %>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <% if(user.summary != ''){ %>
+        <div class="panel panel-default bio">
+          <div class="panel-heading">
+            个人介绍
+          </div>
+          <div class="panel-body markdown">
+            <p>
+              <%= user.summary %>
+            </p>
+          </div>
+        </div>
+      <% } %>
+      <div class="tabbable">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a href="#topics" data-toggle="tab">
+              热门话题
+            </a>
+          </li>
+          <li>
+            <a href="#replies" data-toggle="tab">
+              最近回帖
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active recent-topics" id="topics">
+            <div class="panel panel-default">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <div class="title">
+                    <a title="想在项目里加个 jquery  插件,加入没有响应的 gem  包呢？" href="/topics/25813">
+                      想在项目里加个 jquery 插件,加入没有响应的 gem 包呢？
+                    </a>
+                  </div>
+                  <div class="info">
+                    <span class="node">
+                      <a class="node" href="/topics/node52">
+                        新手问题
+                      </a>
+                    </span>
+                    <span class="counter">
+                      2 人喜欢 • 2 条回复
+                    </span>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="title">
+                    <a title="Could not read gem at /Library/Ruby/Gems/2.0.0/ruby/2.0.0/cache/will_paginate-3.0.7.gem"
+                    href="/topics/25781">
+                      Could not read gem at /Library/Ruby/Gems/2.0.0/ruby/2.0.0/cache/will_paginate-3.0.7.gem
+                    </a>
+                  </div>
+                  <div class="info">
+                    <span class="node">
+                      <a class="node" href="/topics/node52">
+                        新手问题
+                      </a>
+                    </span>
+                    <span class="counter">
+                      1 人喜欢 • 7 条回复
+                    </span>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="title">
+                    <a title="RVM  安装后，一旦加入 RVM   环境变量，终端一打开将崩溃，提示如图：" href="/topics/26006">
+                      RVM 安装后，一旦加入 RVM 环境变量，终端一打开将崩溃，提示如图：
+                    </a>
+                  </div>
+                  <div class="info">
+                    <span class="node">
+                      <a class="node" href="/topics/node52">
+                        新手问题
+                      </a>
+                    </span>
+                    <span class="counter">
+                      0 人喜欢 • 7 条回复
+                    </span>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="title">
+                    <a title="Rails  s   无法开启" href="/topics/25819">
+                      Rails s 无法开启
+                    </a>
+                  </div>
+                  <div class="info">
+                    <span class="node">
+                      <a class="node" href="/topics/node52">
+                        新手问题
+                      </a>
+                    </span>
+                    <span class="counter">
+                      0 人喜欢 • 3 条回复
+                    </span>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="title">
+                    <a title="虚拟属性的 属性名＝ 方法不执行" href="/topics/25796">
+                      虚拟属性的 属性名＝ 方法不执行
+                    </a>
+                  </div>
+                  <div class="info">
+                    <span class="node">
+                      <a class="node" href="/topics/node52">
+                        新手问题
+                      </a>
+                    </span>
+                    <span class="counter">
+                      0 人喜欢 • 11 条回复
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../layout_footer %>

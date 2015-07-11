@@ -66,6 +66,7 @@ app.get('/post',entry.form)
 app.get('/active_acount',login.activeAcount)
 app.get('/tabs',tab.getTabsJson)
 app.get('/user/edit',account.form)
+app.get('/user/:login_name',account.show)
 
 // post
 app.post('/register',validate.required('login_name'),validate.lengthAbove('login_name',4),validate.required('email'),validate.emailConfirm(),validate.passConfirm(),register.submit)
