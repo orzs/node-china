@@ -8,37 +8,32 @@
     <div class="col-md-8">
       <ul class="nav nav-tabs">
         <li class="active">
-          <a href="/mexiqq">
+          <a href="/user/<%= user.login_name %>">
             个人信息
           </a>
         </li>
         <li class="">
-          <a href="/mexiqq/topics">
+          <a href="/user/<%= user.login_name %>/entries">
             帖子
           </a>
         </li>
         <li class="">
-          <a href="/mexiqq/favorites">
+          <a href="/user/<%= user.login_name %>/favorites">
             收藏
           </a>
         </li>
         <li class="">
-          <a href="/mexiqq/notes">
-            记事本
-          </a>
-        </li>
-        <li class="">
-          <a href="/mexiqq/followers">
+          <a href="/user/<%= user.login_name %>/followers">
             关注者
           </a>
         </li>
         <li class="">
-          <a href="/mexiqq/following">
+          <a href="/user/<%= user.login_name %>/following">
             正在关注
           </a>
         </li>
         <li class="">
-          <a href="/mexiqq/blocked">
+          <a href="/user/<%= user.login_name %>/blocked">
             已屏蔽
           </a>
         </li>
@@ -46,7 +41,7 @@
       <div class="panel panel-default userinfo">
         <div class="panel-body vcard clearfix">
           <ul class="list-group">
-            <% if(user.location_city != ''){ %>
+            <% if(user.location_city && user.location_city != ''){ %>
               <li class="adr list-group-item">
                 <label>
                   城市:
@@ -58,7 +53,7 @@
                 </span>
               </li>
             <% } %>
-            <% if(user.company != ''){ %>
+            <% if(user.company && user.company != ''){ %>
               <li class="adr list-group-item">
                 <label>
                   公司:
@@ -78,7 +73,7 @@
                 </a>
               </span>
             </li>
-            <% if(user.github != ''){ %>
+            <% if(user.github && user.github != ''){ %>
               <li class="list-group-item">
                 <label>
                   github:
@@ -90,7 +85,7 @@
                 </span>
               </li>
             <% } %>
-            <% if(user.twitter != ''){ %>
+            <% if(user.twitter && user.twitter != ''){ %>
               <li class="list-group-item">
                 <label>
                   Twitter:
@@ -102,7 +97,7 @@
                 </span>
               </li>
             <% } %>
-            <% if(user.website != ''){ %>
+            <% if(user.website && user.website != ''){ %>
               <li class="list-group-item">
                 <label>
                   博客:
@@ -114,7 +109,7 @@
                 </span>
               </li>
             <% } %>
-            <% if(user.signature != ''){ %>
+            <% if(user.signature && user.signature != ''){ %>
               <li class="list-group-item">
                 <label>
                   签名:
@@ -135,7 +130,7 @@
           </ul>
         </div>
       </div>
-      <% if(user.summary != ''){ %>
+      <% if(user.summary && user.summary != ''){ %>
         <div class="panel panel-default bio">
           <div class="panel-heading">
             个人介绍

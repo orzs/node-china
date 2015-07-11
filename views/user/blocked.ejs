@@ -1,0 +1,44 @@
+<% include ../layout_header %>
+<% include ../menu %>
+<div id="main" class="main-container container">
+  <div class="row">
+    <div class="sidebar col-md-4">
+      <% include left_slider %>
+    </div>
+    <div class="col-md-8">
+      <ul class="nav nav-tabs">
+        <li class="">
+          <a href="/user/<%= user.login_name %>">
+            个人信息
+          </a>
+        </li>
+        <li class="">
+          <a href="/user/<%= user.login_name %>/entries">
+            帖子
+          </a>
+        </li>
+        <li class="">
+          <a href="/user/<%= user.login_name %>/favorites">
+            收藏
+          </a>
+        </li>
+        <li class="">
+          <a href="/user/<%= user.login_name %>/followers">
+            关注者
+          </a>
+        </li>
+        <li class="">
+          <a href="/user/<%= user.login_name %>/following">
+            正在关注
+          </a>
+        </li>
+        <li class="active">
+          <a href="/user/<%= user.login_name %>/blocked">
+            已屏蔽
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<% include ../layout_footer %>

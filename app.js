@@ -66,6 +66,11 @@ app.get('/post',entry.form)
 app.get('/active_acount',login.activeAcount)
 app.get('/tabs',tab.getTabsJson)
 app.get('/user/edit',account.form)
+app.get('/user/:login_name/entries',account.showWithEntries)
+app.get('/user/:login_name/favorites',account.showWithFavorites)
+app.get('/user/:login_name/followers',account.showWithFollowers)
+app.get('/user/:login_name/following',account.showWithFollowing)
+app.get('/user/:login_name/blocked',account.showWithBlocked)
 app.get('/user/:login_name',account.show)
 
 // post

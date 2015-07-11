@@ -12,20 +12,20 @@
               <%= entry.title %>
             </h1>
             <div class="info">
-              <a class="node" href="/topics/node51">
+              <a class="node" href="/tab/<%= entry.tab %>">
                 <%= entry.tab %> 
               </a>
               ·
-              <a data-author="true" data-name="Mu-Fan teng" href="/ryudoawaru">
-                <%= entry.username %> 
+              <a data-author="true" data-name="Mu-Fan teng" href="/user/<%= author.login_name %>">
+                <%= author.login_name %> 
               </a>
               · 于
               <abbr class="timeago" title="<%= entry.create_date %>">
                 17 天前
               </abbr>
               发布 · 最后由
-              <a data-name="fredwu" href="/fredwu">
-                fredwu
+              <a data-name="fredwu" href="/user/<%= entry.last_reply_user %>">
+                <%= entry.last_reply_user %>
               </a>
               于
               <abbr class="timeago" title="2015-06-19T20:59:28+08:00">
@@ -35,9 +35,8 @@
             </div>
           </div>
           <div class="avatar media-right">
-            <a href="/ryudoawaru">
-              <img class="media-object avatar-48" src="https://ruby-china.org/avatar/c7c4962ce9539d003fd7f0f06539e9d3.png?s=96&amp;d=404"
-              alt="C7c4962ce9539d003fd7f0f06539e9d3">
+            <a href="/user/<%= author.login_name %>">
+              <img class="media-object avatar-48" src="<%= author.avatar %>">
             </a>
           </div>
         </div>

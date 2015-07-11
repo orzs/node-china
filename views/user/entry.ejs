@@ -12,12 +12,12 @@
             个人信息
           </a>
         </li>
-        <li class="">
+        <li class="active">
           <a href="/user/<%= user.login_name %>/entries">
             帖子
           </a>
         </li>
-        <li class="active">
+        <li class="">
           <a href="/user/<%= user.login_name %>/favorites">
             收藏
           </a>
@@ -40,27 +40,35 @@
       </ul>
       <div class="panel panel-default">
         <div class="panel-body">
-          <table class="node-topics table table-striped">
+          <table class="node-topics table table-striped ">
             <tbody>
               <tr class="head">
-                <td class="opts">节点</td>
+                <td class="node">节点</td>
                 <td class="title">标题</td>
+                <td class="replies">回复/喜欢</td>
               </tr>
               <% entries.forEach(function(entry){ %>
                 <tr class="topic">
-                  <td width="15%">
+                  <td class="node" width="15%">
                     <a class="node" href="/tab/<%= entry.tab %>"><%= entry.tab %></a>
                   </td>
                   <td class="title">
-                    <a title="<%= entry.title %>" href="/entry/<%= entry._id %>"><%= entry.title %></a>
+                    <a href="/entry/<%= entry._id %>"><%= entry.title %></a>
+                    <em>
+                      <abbr class="timeago" title="<%= entry.create_date %>">
+                        28 天前
+                      </abbr>
+                    </em>
                   </td>
+                  <td class="replies"><%= entry.reply_count %>/0</td>
                 </tr>
               <% }) %>
             </tbody>
           </table>
         </div>
         <div class="panel-footer">
-      </div>
+        </div>
+      </div> 
     </div>
   </div>
 </div>

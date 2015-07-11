@@ -1,0 +1,83 @@
+<% include ../layout_header %>
+<% include ../menu %>
+<div id="main" class="main-container container">
+  <div class="row">
+    <div class="sidebar col-md-4">
+      <% include left_slider %>
+    </div>
+    <div class="col-md-8">
+      <ul class="nav nav-tabs">
+        <li class="">
+          <a href="/user/<%= user.login_name %>">
+            个人信息
+          </a>
+        </li>
+        <li class="">
+          <a href="/user/<%= user.login_name %>/entries">
+            帖子
+          </a>
+        </li>
+        <li class="">
+          <a href="/user/<%= user.login_name %>/favorites">
+            收藏
+          </a>
+        </li>
+        <li class="">
+          <a href="/user/<%= user.login_name %>/followers">
+            关注者
+          </a>
+        </li>
+        <li class="active">
+          <a href="/user/<%= user.login_name %>/following">
+            正在关注
+          </a>
+        </li>
+        <li class="">
+          <a href="/user/<%= user.login_name %>/blocked">
+            已屏蔽
+          </a>
+        </li>
+      </ul>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <% users.forEach(function(index,user){ %> 
+              <div class="col-xs-4" style="min-width: 100px;">
+                <div class="media user-card">
+                  <div class="media-left">
+                    <a href="/user/<%= user.login_name %>">
+                      <img class="media-object avatar-48" src="<%= user.avatar %>"
+                      alt="1">
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <div class="media-heading">
+                      <a data-name="Rei" href="/user/<%= user.login_name %>">
+                        <%= user.login_name %> 
+                      </a>
+                    </div>
+                    <div class="infos">
+                      <div class="item opts">
+                        <a data-id="<%= user.login_name %>" class="button-follow-user  active" href="#">
+                          <i class="fa fa-user">
+                          </i>
+                          <span>
+                            取消关注
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+        <div class="panel-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../layout_footer %>
+

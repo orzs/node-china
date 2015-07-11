@@ -2,14 +2,14 @@
   <div class="panel-body">
     <div class="media">
       <div class="avatar media-left">
-        <a href="/mexiqq">
-          <img class="media-object avatar-120" src="https://ruby-china-files.b0.upaiyun.com/user/big_avatar/18899.jpg"
+        <a href="/user/<%= user.login_name %>">
+          <img class="media-object avatar-120" src="<%= user.avatar %>"
           alt="18899">
         </a>
       </div>
       <div class="media-body">
         <div class="item">
-          mexiqq (十四有缺)
+          <%= user.login_name %> (<%= user.name %>)
           <span class="opts pull-right">
           </span>
         </div>

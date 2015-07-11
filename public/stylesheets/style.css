@@ -367,3 +367,28 @@ textarea.form-control, #preview.form-control {
 .panel-body {
   padding: 15px;
 }
+
+.node-topics .head {
+  display: none;
+}
+
+table.node-topics td a {
+  color: #333;
+  font-weight: normal;
+}
+
+.node-topics td.title a:link, .node-topics td.title a:visited {
+  color: #2c64d7;
+  text-decoration: none;
+}
+
+.node-topics td.title em {
+  font-style: normal;
+  font-size: 12px;
+  color: #bbb;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  padding: 4px 5px;
+}
+

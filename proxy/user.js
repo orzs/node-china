@@ -1,6 +1,8 @@
 var models = require('../lib/main')
 var bcrypt = require('bcrypt')
 var User = models.User 
+var Entry = models.Entry
+var Eventproxy = require('eventproxy')
 
 exports.getByMame = function(login_name,fn){
   User.findOne({login_name:login_name},function(err,user){
@@ -71,4 +73,66 @@ exports.updateUserInfo = function(id,data,fn){
     if(err) return fn(err)
     fn(null,data)
   })
+}
+
+exports.getEntriesByMame = function(login_name,fn){
+  var ep = Eventproxy.create("user","entries",function(user,entries){
+    fn(null,user,entries)
+  })
+  ep.fail(fn)
+  User.findOne({login_name:login_name},ep.done(function(user){
+    Entry.find({author_id:user._id},{},{limit:30,sort:'-create_date'},ep.done('entries'))
+    ep.emit('user',user)
+  }))
+}
+
+exports.getFavoritesByMame = function(login_name,fn){
+  var ep = Eventproxy.create("user","entries",function(user,entries){
+    fn(null,user,entries)
+  })
+  ep.fail(fn)
+  User.findOne({login_name:login_name},ep.done(function(user){
+    var favorite_entry_ids = user.favorite_entry_ids
+    var proxy = new Eventproxy()
+    proxy.after('favorites_ready',favorite_entry_ids.length,function(favorites){
+      ep.emit('entries',favorites)
+    })
+    favorite_entry_ids.forEach(function(entry_id){
+      Entry.findById(entry_id,function(err,entry){
+        if(err) return fn(err)
+        proxy.emit('favorites_ready',entry)
+      })
+    })
+    ep.emit('user',user)
+  }))
+}
+
+exports.getFollowersByMame = function(login_name,fn){
+  var ep = Eventproxy.create("user","entries",function(entries,tabs){
+    fn(null,entries,tabs)
+  })
+  ep.fail(fn)
+  User.findOne({login_name:login_name},ep.done(function(user){
+    ep.emit('user',user)
+  }))
+}
+
+exports.getFollowingByMame = function(login_name,fn){
+  var ep = Eventproxy.create("user","entries",function(entries,tabs){
+    fn(null,entries,tabs)
+  })
+  ep.fail(fn)
+  User.findOne({login_name:login_name},ep.done(function(user){
+    ep.emit('user',user)
+  }))
+}
+
+exports.getBlockByMame = function(login_name,fn){
+  var ep = Eventproxy.create("user","entries",function(entries,tabs){
+    fn(null,entries,tabs)
+  })
+  ep.fail(fn)
+  User.findOne({login_name:login_name},ep.done(function(user){
+    ep.emit('user',user)
+  }))
 }

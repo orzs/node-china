@@ -24,7 +24,6 @@ exports.update = function(req,res,next){
   User.updateUserInfo(res.locals.user._id,data,function(err,data){
     if(err) return next(err)
     if(data.ok == 1){
-      // 更新session res user 信息
       User.get(res.locals.user._id,function(err,user){
         if(err) console.log(err)
         req.session.user = user 
@@ -44,6 +43,66 @@ exports.show = function(req,res,next){
     res.render('user/index',{
       title: 'account',
       user: user
+    })
+  })
+}
+
+exports.showWithEntries = function(req,res,next){
+  var login_name = req.params['login_name']
+  User.getEntriesByMame(login_name,function(err,user,entries){
+    if(err) return next(err)
+    res.render('user/entry',{
+      title: 'account',
+      user: user,
+      entries: entries
+    })
+  })
+}
+
+exports.showWithFavorites = function(req,res,next){
+  var login_name = req.params['login_name']
+  User.getFavoritesByMame(login_name,function(err,user,entries){
+    if(err) return next(err)
+    res.render('user/favorite',{
+      title: 'account',
+      user: user,
+      entries: entries 
+    })
+  })
+}
+
+exports.showWithFollowers = function(req,res,next){
+  var login_name = req.params['login_name']
+  User.getFollowersByMame(login_name,function(err,user,users){
+    if(err) return next(err)
+    res.render('user/index',{
+      title: 'account',
+      user: user,
+      users: users
+    })
+  })
+}
+
+exports.showWithFollowing = function(req,res,next){
+  var login_name = req.params['login_name']
+  User.getFollowingByMame(login_name,function(err,user,users){
+    if(err) return next(err)
+    res.render('user/index',{
+      title: 'account',
+      user: user,
+      users: users
+    })
+  })
+}
+
+exports.showWithBlocked = function(req,res,next){
+  var login_name = req.params['login_name']
+  User.getBlockedByMame(login_name,function(err,user,users){
+    if(err) return next(err)
+    res.render('user/index',{
+      title: 'account',
+      user: user,
+      users: users
     })
   })
 }
