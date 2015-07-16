@@ -106,3 +106,27 @@ exports.showWithBlocked = function(req,res,next){
     })
   })
 }
+
+exports.collectEntry = function(req,res,next){
+  console.log("user is",res.locals.user)
+  var data = req.body
+  var user_id = res.locals.user._id
+  User.collectEntryById(user_id,data.id,function(err,data){
+    if(data.ok == 1){
+      res.json({data:'ok',status:0,message:'收藏成功'})
+    }else{
+      res.json({status:1})}
+  })
+}
+
+exports.decollectEntry = function(req,res,next){
+  var data = req.body 
+  var user_id = res.locals.user._id
+  User.decollectEntryById(user_id,data.id,function(err,data){
+    if(data.ok == 1){
+      res.json({data:'ok',status:0,message:'取消搜藏成功'})
+    }else{
+      res.json({status:1})
+    }
+  })
+}

@@ -12,18 +12,20 @@ var routes = require('./routes/index');
 var register = require('./routes/register')
 var login = require('./routes/login')
 var reply = require('./routes/reply')
-var user = require('./middleware/user')
-var messages = require('./lib/messages')
 var entry = require('./routes/entry')
 var tab = require('./routes/tab')
 var account = require('./routes/user')
+
 var proxy = require("./proxy/main")
 var User = proxy.User
 var Reply = proxy.Reply
 var Entry = proxy.Entry  
+
+var messages = require('./lib/messages')
 var validate = require('./middleware/validate')
 var statistics = require('./middleware/statistics')
 var page = require('./middleware/page')
+var user = require('./middleware/user')
 
 var app = express();
 app.use(session({
@@ -74,6 +76,12 @@ app.get('/user/:login_name/blocked',account.showWithBlocked)
 app.get('/user/:login_name',account.show)
 
 // post
+app.post('/entry/:id/collect',account.collectEntry)
+//app.post('/entry/:id/de_collect',)
+//app.post('/entry/:id/like',)
+//app.post('/entry/:id/de_like',)
+//app.post('/entry/:id/follow',)
+//app.post('/entry/:id/de_foolow',)
 app.post('/register',validate.required('login_name'),validate.lengthAbove('login_name',4),validate.required('email'),validate.emailConfirm(),validate.passConfirm(),register.submit)
 app.post('/login',login.submit)
 app.post('/post',validate.required('title'),validate.lengthAbove('title',4),entry.submit)

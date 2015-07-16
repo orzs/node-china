@@ -46,22 +46,24 @@
         <div class="panel-footer clearfix">
           <div class="opts">
             <a title="喜欢" data-count="2" data-state="" data-type="Topic" data-id="25886"
-            class="likeable " href="#">
+            class="likeable " href="javascript:void(0);">
               <i class="fa fa-heart-o">
               </i>
               <span>
                 2 人喜欢
               </span>
             </a>
-            <a data-id="25886" data-followed="false" class="follow" href="#">
-              <i class="fa fa-eye">
-              </i>
-              关注
-            </a>
-            <a title="收藏" class="bookmark " data-id="25886" href="#">
-              <i class="fa fa-bookmark">
-              </i>
-            </a>
+            <% if(locals.user){ %>
+              <a data-id="25886" data-followed="false" class="follow" href="javascript:void(0);">
+                <i class="fa fa-eye">
+                </i>
+                关注
+              </a>
+              <a title="收藏" class="bookmark " data-id="25886" href="javascript:void(0);">
+                <i class="fa fa-bookmark">
+                </i>
+              </a>
+            <% } %>
             <span class="pull-right opts">
             </span>
           </div>
@@ -106,4 +108,9 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(".bookmark")
+
+</script>
 <% include layout_footer %>

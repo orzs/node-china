@@ -136,3 +136,17 @@ exports.getBlockByMame = function(login_name,fn){
     ep.emit('user',user)
   }))
 }
+
+exports.collectEntryById = function(user_id,entry_id,fn){
+  User.update({_id:user_id},{'$push':{"favorite_entry_ids":entry_id}},function(err,data){
+    if(err) return fn(err)
+    fn(null,data)
+  })
+}
+
+exports.decollectEntryById = function(user_id,entry_id,fn){
+  User.update({_id:user_id},{'$pull':{"favorite_entry_ids":entry_id}},function(err,data){
+    if(err) return fn(err)
+    fn(null,data)
+  })
+}
