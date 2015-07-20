@@ -71,6 +71,7 @@ exports.showWithFavorites = function(req,res,next){
   })
 }
 
+//  关注别人
 exports.showWithFollowers = function(req,res,next){
   var login_name = req.params['login_name']
   User.getFollowersByMame(login_name,function(err,user,users){
@@ -83,6 +84,7 @@ exports.showWithFollowers = function(req,res,next){
   })
 }
 
+//  关注自己
 exports.showWithFollowing = function(req,res,next){
   var login_name = req.params['login_name']
   User.getFollowingByMame(login_name,function(err,user,users){
@@ -95,6 +97,7 @@ exports.showWithFollowing = function(req,res,next){
   })
 }
 
+//  屏蔽别人
 exports.showWithBlocked = function(req,res,next){
   var login_name = req.params['login_name']
   User.getBlockedByMame(login_name,function(err,user,users){
@@ -108,10 +111,9 @@ exports.showWithBlocked = function(req,res,next){
 }
 
 exports.collectEntry = function(req,res,next){
-  console.log("user is",res.locals.user)
   var data = req.body
-  var user_id = res.locals.user._id
-  User.collectEntryById(user_id,data.id,function(err,data){
+  var entry_id = req.params['id']
+  User.collectEntryById(data.user_id,entry_id,function(err,data){
     if(data.ok == 1){
       res.json({data:'ok',status:0,message:'收藏成功'})
     }else{
@@ -121,8 +123,8 @@ exports.collectEntry = function(req,res,next){
 
 exports.decollectEntry = function(req,res,next){
   var data = req.body 
-  var user_id = res.locals.user._id
-  User.decollectEntryById(user_id,data.id,function(err,data){
+  var entry_id = req.params['id']
+  User.decollectEntryById(data.user_id,entry_id,function(err,data){
     if(data.ok == 1){
       res.json({data:'ok',status:0,message:'取消搜藏成功'})
     }else{

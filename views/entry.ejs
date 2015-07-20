@@ -110,7 +110,9 @@
 </div>
 
 <script type="text/javascript">
-  $(".bookmark")
-
+  $(".bookmark").click(function(){
+    $.post( "./<%= entry._id %>/collect", { user_id: '<%= locals.user._id %>' }, function( data ) {
+    }, "json");
+  })
 </script>
 <% include layout_footer %>
