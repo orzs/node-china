@@ -59,10 +59,19 @@
                 </i>
                 关注
               </a>
-              <a title="收藏" class="bookmark " data-id="25886" href="javascript:void(0);">
-                <i class="fa fa-bookmark">
-                </i>
-              </a>
+              <% locals.user.favorite_entry_ids.forEach(function(id){ if(id == entry._id){ locals.user.isFavorite = true; %>
+                <a title="收藏" class="bookmark followed" action="de_collect" data-id="25886" href="javascript:void(0);">
+                  <i class="fa fa-bookmark">
+                  </i>
+                </a>
+              <% }}) %>
+
+              <% if(!locals.user.isFavorite) { %>
+                <a title="收藏" class="bookmark" action="collect" data-id="25886" href="javascript:void(0);">
+                  <i class="fa fa-bookmark">
+                  </i>
+                </a>
+              <% } %>
             <% } %>
             <span class="pull-right opts">
             </span>
@@ -110,9 +119,21 @@
 </div>
 
 <script type="text/javascript">
-  $(".bookmark").click(function(){
-    $.post( "./<%= entry._id %>/collect", { user_id: '<%= locals.user._id %>' }, function( data ) {
-    }, "json");
-  })
+  <% if(locals.user) { %>
+    $(".bookmark").click(function(){
+      var action = $(".bookmark").attr('action')
+      $.post( "./<%= entry._id %>/"+action,{}, function(data) {
+        if(data.status == 0){
+          if(action == "collect"){
+            $(".bookmark").attr('action','de_collect')
+          }else{
+            $(".bookmark").attr('action','collect')
+          }
+          $(".bookmark").toggleClass('followed') 
+        }
+      }, "json");
+    })
+    console.log("<%= locals.user.favorite_entry_ids[0] %>")
+  <% } %>
 </script>
 <% include layout_footer %>

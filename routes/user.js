@@ -111,22 +111,28 @@ exports.showWithBlocked = function(req,res,next){
 }
 
 exports.collectEntry = function(req,res,next){
-  var data = req.body
   var entry_id = req.params['id']
-  User.collectEntryById(data.user_id,entry_id,function(err,data){
+  User.collectEntryById(req.user._id,entry_id,function(err,data){
     if(data.ok == 1){
-      res.json({data:'ok',status:0,message:'收藏成功'})
+      User.get(req.user._id,function(err,user){
+        if(err) return next(err)
+        req.session.user = user 
+        res.json({data:'ok',status:0,message:'收藏成功'})
+      })
     }else{
       res.json({status:1})}
   })
 }
 
 exports.decollectEntry = function(req,res,next){
-  var data = req.body 
   var entry_id = req.params['id']
-  User.decollectEntryById(data.user_id,entry_id,function(err,data){
+  User.decollectEntryById(req.user._id,entry_id,function(err,data){
     if(data.ok == 1){
+      User.get(req.user._id,function(err,user){
+        if(err) return next(err)
+        req.session.user = user 
       res.json({data:'ok',status:0,message:'取消搜藏成功'})
+      })
     }else{
       res.json({status:1})
     }

@@ -392,3 +392,6 @@ table.node-topics td a {
   padding: 4px 5px;
 }
 
+a.followed .fa {
+  color: #EB5424;
+}

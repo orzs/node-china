@@ -77,7 +77,7 @@ app.get('/user/:login_name',account.show)
 
 // post
 app.post('/entry/:id/collect',account.collectEntry)
-//app.post('/entry/:id/de_collect',)
+app.post('/entry/:id/de_collect',account.decollectEntry)
 //app.post('/entry/:id/like',)
 //app.post('/entry/:id/de_like',)
 //app.post('/entry/:id/follow',)
