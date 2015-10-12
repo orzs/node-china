@@ -137,6 +137,7 @@ exports.getBlockByMame = function(login_name,fn){
   }))
 }
 
+// 收藏主题
 exports.collectEntryById = function(user_id,entry_id,fn){
   User.update({_id:user_id},{'$push':{"favorite_entry_ids":entry_id}},function(err,data){
     if(err) return fn(err)
@@ -144,8 +145,23 @@ exports.collectEntryById = function(user_id,entry_id,fn){
   })
 }
 
+// 取消收藏
 exports.decollectEntryById = function(user_id,entry_id,fn){
   User.update({_id:user_id},{'$pull':{"favorite_entry_ids":entry_id}},function(err,data){
+    if(err) return fn(err)
+    fn(null,data)
+  })
+}
+
+exports.enjoyEntryById = function(user_id,entry_id,fn){
+  User.update({_id:user_id},{'$push':{"enjoy_entry_ids":entry_id}},function(err,data){
+    if(err) return fn(err)
+    fn(null,data)
+  })
+}
+
+exports.cancelEnjoyEntryById = function(user_id,entry_id,fn){
+  User.update({_id:user_id},{'$pull':{"enjoy_entry_ids":entry_id}},function(err,data){
     if(err) return fn(err)
     fn(null,data)
   })
