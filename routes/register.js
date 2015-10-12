@@ -18,6 +18,7 @@ exports.submit = function(req,res,next){
       User.createAndSave(data,function(err,user){
         if(err) return next(err)
         var url = "http://127.0.0.1:4000/active_acount?key=" + utility.md5(user.email + user.encrypted_password) + "&name=" + user.login_name
+        console.log("激活链接:",url);
         mail.sendActiveMail(user.email,user.login_name,url,function(err){
           if(err) console.log(err)
         })
