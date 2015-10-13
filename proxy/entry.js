@@ -118,16 +118,16 @@ exports.createAndSave = function(res,title,body,tab_id,tab_name,fn){
   Tab.addEntryCount(tab_id,ep.done('updateTab'))
 }
 
-exports.updateLikedCount = function(id,action){
+exports.updateLikedCount = function(id,action,fn){
   if(action == "like"){
     Entry.update({'_id':id},{'$inc':{'liked_count':1}},function(err,entry){
       if(err) return fn(err)
-//      fn(null,entry)
+      fn(null,entry)
     })
   }else if(action == "de_like"){
     Entry.update({'_id':id},{'$inc':{'liked_count':-1}},function(err,entry){
       if(err) return fn(err)
-//      fn(null,entry)
+      fn(null,entry)
     })
   }
 };

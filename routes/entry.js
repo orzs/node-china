@@ -60,7 +60,6 @@ exports.full = function(req,res,next){
     if(err) return next(err)
     var user = req.user;
     entry = packEntryWithLoginUser(entry,user);
-    console.log("entry",entry.liked_count);
     res.render('entry',{
       title:'Entry',
       entry:entry,

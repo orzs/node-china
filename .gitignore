@@ -28,6 +28,8 @@ xcuserdata
 
 ## node
 node_modules/
+npm-debug.log
+public/images/*
 
 ## bower
 bower_components/

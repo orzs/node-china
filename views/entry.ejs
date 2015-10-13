@@ -81,7 +81,7 @@
               <% } %>
 
               <% if(entry.isFavorite) { %>
-                <a title="取消收藏" class="bookmark followed" action="de_collect" data-id="25886" href="javascript:void(0);">
+                <a title="收藏" class="bookmark followed" action="de_collect" data-id="25886" href="javascript:void(0);">
                   <i class="fa fa-bookmark">
                   </i>
                 </a>
@@ -168,18 +168,18 @@
     });
       
     $(".bookmark").click(function(){
-      var action = $(this).attr('action');
+      var action = $(".bookmark").attr('action')
       $.post( "./<%= entry._id %>/"+action,{}, function(data) {
         if(data.status == 0){
           if(action == "collect"){
-            $(".bookmark").attr('action','de_collect');
+            $(".bookmark").attr('action','de_collect')
           }else{
-            $(".bookmark").attr('action','collect');
+            $(".bookmark").attr('action','collect')
           }
-          $(".bookmark").toggleClass('followed');
+          $(".bookmark").toggleClass('followed') 
         }
       }, "json");
-    });
+    })
   <% } %>
 </script>
 <% include layout_footer %>
