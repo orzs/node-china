@@ -45,23 +45,43 @@
         </div>
         <div class="panel-footer clearfix">
           <div class="opts">
-            <a title="喜欢" data-count="2" data-state="" data-type="Topic" data-id="25886"
-            class="likeable " href="javascript:void(0);">
-              <i class="fa fa-heart-o">
-              </i>
-              <span>
-                2 人喜欢
-              </span>
-            </a>
-            <% if(locals.user){ %>
-              <a data-id="25886" data-followed="false" class="follow" href="javascript:void(0);">
-                <i class="fa fa-eye">
+            <% if(entry.isAttention) { %>
+              <a title="取消喜欢" data-count="2" data-state="" data-type="Topic" data-id="25886"
+              class="likeable followed" action="de_like" href="javascript:void(0);">
+                <i class="fa fa-heart-o">
                 </i>
-                关注
+                <span>
+                  ３ 人喜欢
+                </span>
               </a>
-              
+            <% }else{ %>
+              <a title="取消喜欢" data-count="2" data-state="" data-type="Topic" data-id="25886"
+              class="likeable" action="like" href="javascript:void(0);">
+                <i class="fa fa-heart-o">
+                </i>
+                <span>
+                  1 人喜欢
+                </span>
+              </a>
+            <% } %>
+
+            <% if(locals.user){ %>
+              <% if(entry.isLike) { %>
+                <a title="取消关注" data-id="25886" data-followed="false" class="follow followed" action="de_foolow" href="javascript:void(0);">
+                  <i class="fa fa-eye">
+                  </i>
+                  取消关注
+                </a>
+              <% }else{ %>
+                <a title="关注" data-id="25886" data-followed="false" class="follow" action="follow" href="javascript:void(0);">
+                  <i class="fa fa-eye">
+                  </i>
+                  关注
+                </a>
+              <% } %>
+
               <% if(entry.isFavorite) { %>
-                <a title="收藏" class="bookmark followed" action="de_collect" data-id="25886" href="javascript:void(0);">
+                <a title="取消收藏" class="bookmark followed" action="de_collect" data-id="25886" href="javascript:void(0);">
                   <i class="fa fa-bookmark">
                   </i>
                 </a>
@@ -119,19 +139,47 @@
 
 <script type="text/javascript">
   <% if(locals.user) { %>
+    $(".likeable").click(function(){
+      var action = $(this).attr('action');
+      $.post( "./<%= entry._id %>/"+action,{}, function(data) {
+        if(data.status == 0){
+          if(action == "like"){
+            $(".likeable").attr('action','de_like');
+          }else{
+            $(".likeable").attr('action','like');
+          }
+          $(".likeable").toggleClass('followed');
+        }
+      }, "json");
+    });
+
+    $(".follow").click(function(){
+      var action = $(this).attr('action');
+      $.post( "./<%= entry._id %>/"+action,{}, function(data) {
+        if(data.status == 0){
+          if(action == "follow"){
+            $(".follow").attr('action','de_foolow');
+          }else{
+            $(".follow").attr('action','follow');
+          }
+          $(".follow").toggleClass('followed');
+        }
+      }, "json");
+    });
+      
     $(".bookmark").click(function(){
-      var action = $(".bookmark").attr('action')
+      var action = $(this).attr('action');
       $.post( "./<%= entry._id %>/"+action,{}, function(data) {
         if(data.status == 0){
           if(action == "collect"){
-            $(".bookmark").attr('action','de_collect')
+            $(".bookmark").attr('action','de_collect');
           }else{
-            $(".bookmark").attr('action','collect')
+            $(".bookmark").attr('action','collect');
           }
-          $(".bookmark").toggleClass('followed') 
+          $(".bookmark").toggleClass('followed');
         }
       }, "json");
-    })
+    });
   <% } %>
 </script>
 <% include layout_footer %>

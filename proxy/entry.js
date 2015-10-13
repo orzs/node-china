@@ -122,12 +122,12 @@ exports.updateLikedCount = function(id,action){
   if(action == "like"){
     Entry.update({'_id':id},{'$inc':{'liked_count':1}},function(err,entry){
       if(err) return fn(err)
-      fn(null,entry)
+//      fn(null,entry)
     })
   }else if(action == "de_like"){
     Entry.update({'_id':id},{'$inc':{'liked_count':-1}},function(err,entry){
       if(err) return fn(err)
-      fn(null,entry)
+//      fn(null,entry)
     })
   }
 };
