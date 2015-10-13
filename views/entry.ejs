@@ -46,7 +46,7 @@
         <div class="panel-footer clearfix">
           <div class="opts">
             <a title="喜欢" data-count="2" data-state="" data-type="Topic" data-id="25886"
-            class="likeable" href="javascript:void(0);">
+            class="likeable " href="javascript:void(0);">
               <i class="fa fa-heart-o">
               </i>
               <span>
@@ -59,14 +59,13 @@
                 </i>
                 关注
               </a>
-              <% locals.user.favorite_entry_ids.forEach(function(id){ if(id == entry._id){ locals.user.isFavorite = true; %>
+              
+              <% if(entry.isFavorite) { %>
                 <a title="收藏" class="bookmark followed" action="de_collect" data-id="25886" href="javascript:void(0);">
                   <i class="fa fa-bookmark">
                   </i>
                 </a>
-              <% }}) %>
-
-              <% if(!locals.user.isFavorite) { %>
+              <% }else{ %>
                 <a title="收藏" class="bookmark" action="collect" data-id="25886" href="javascript:void(0);">
                   <i class="fa fa-bookmark">
                   </i>
@@ -120,34 +119,19 @@
 
 <script type="text/javascript">
   <% if(locals.user) { %>
-    $(".likeable").click(function(){
-      var action = $(".likeable").attr('action');
-//      $.post( "./<%= entry._id %>/"+action,{}, function(data) {
-//        if(data.status == 0){
-              if(action == "collect"){
-                $(".likeable").attr('action','de_collect');
-              }else{
-                $(".likeable").attr('action','collect');
-              }
-              $(".likeable").toggleClass('followed');      
-//        }
-//      }, "json");
-    });
-  
     $(".bookmark").click(function(){
-      var action = $(".bookmark").attr('action');
+      var action = $(".bookmark").attr('action')
       $.post( "./<%= entry._id %>/"+action,{}, function(data) {
         if(data.status == 0){
           if(action == "collect"){
-            $(".bookmark").attr('action','de_collect');
+            $(".bookmark").attr('action','de_collect')
           }else{
-            $(".bookmark").attr('action','collect');
+            $(".bookmark").attr('action','collect')
           }
-          $(".bookmark").toggleClass('followed');
+          $(".bookmark").toggleClass('followed') 
         }
       }, "json");
-    });
-    console.log("<%= locals.user.favorite_entry_ids[0] %>");
+    })
   <% } %>
 </script>
 <% include layout_footer %>

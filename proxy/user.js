@@ -166,3 +166,17 @@ exports.cancelEnjoyEntryById = function(user_id,entry_id,fn){
     fn(null,data)
   })
 }
+
+exports.attenteEntryById = function(user_id,entry_id,fn){
+  User.update({_id:user_id},{'$push':{"attention_entry_ids":entry_id}},function(err,data){
+    if(err) return fn(err)
+    fn(null,data)
+  })
+}
+
+exports.cancenAttenteEntryById = function(user_id,entry_id,fn){
+  User.update({_id:user_id},{'$pull':{"attention_entry_ids":entry_id}},function(err,data){
+    if(err) return fn(err)
+    fn(null,data)
+  })
+}

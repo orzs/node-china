@@ -120,7 +120,8 @@ exports.collectEntry = function(req,res,next){
         res.json({data:'ok',status:0,message:'收藏成功'})
       })
     }else{
-      res.json({status:1})}
+      res.json({status:1})
+    }
   })
 }
 
@@ -132,6 +133,66 @@ exports.decollectEntry = function(req,res,next){
         if(err) return next(err)
         req.session.user = user 
       res.json({data:'ok',status:0,message:'取消搜藏成功'})
+      })
+    }else{
+      res.json({status:1})
+    }
+  })
+}
+
+exports.enjoyEntry = function(req,res,next){
+  var entry_id = req.params['id'];
+  User.enjoyEntryById(req.user._id,entry_id,function(err,data){
+    if(data.ok == 1){
+      User.get(req.user._id,function(err,user){
+        if(err) return next(err)
+        req.session.user = user 
+        res.json({data:'ok',status:0,message:'喜欢成功'})
+      })
+    }else{
+      res.json({status:1})
+    }
+  })
+}
+
+exports.cancelEnjoyEntry = function(req,res,next){
+  var entry_id = req.params['id'];
+  User.cancelEnjoyEntryById(req.user._id,entry_id,function(err,data){
+    if(data.ok == 1){
+      User.get(req.user._id,function(err,user){
+        if(err) return next(err)
+        req.session.user = user 
+        res.json({data:'ok',status:0,message:'取消喜欢成功'})
+      })
+    }else{
+      res.json({status:1})
+    }
+  })
+}
+
+exports.attenteEntry = function(req,res,next){
+  var entry_id = req.params['id'];
+  User.attenteEntryById(req.user._id,entry_id,function(err,data){
+    if(data.ok == 1){
+      User.get(req.user._id,function(err,user){
+        if(err) return next(err)
+        req.session.user = user 
+        res.json({data:'ok',status:0,message:'关注成功'})
+      })
+    }else{
+      res.json({status:1})
+    }
+  })
+}
+
+exports.cancelAttenteEntry = function(req,res,next){
+  var entry_id = req.params['id'];
+  User.cancelAttenteEntryById(req.user._id,entry_id,function(err,data){
+    if(data.ok == 1){
+      User.get(req.user._id,function(err,user){
+        if(err) return next(err)
+        req.session.user = user 
+        res.json({data:'ok',status:0,message:'取消关注成功'})
       })
     }else{
       res.json({status:1})
