@@ -1,5 +1,6 @@
 var proxy = require("../proxy/main")
 var User = proxy.User 
+var Entry = proxy.Entry
 
 exports.form = function(req,res,next){
   if(!res.locals.user) return next()
@@ -144,6 +145,7 @@ exports.enjoyEntry = function(req,res,next){
   var entry_id = req.params['id'];
   User.enjoyEntryById(req.user._id,entry_id,function(err,data){
     if(data.ok == 1){
+      Entry.updateLikedCount(entry_id,"like");
       User.get(req.user._id,function(err,user){
         if(err) return next(err)
         req.session.user = user 
@@ -159,6 +161,7 @@ exports.cancelEnjoyEntry = function(req,res,next){
   var entry_id = req.params['id'];
   User.cancelEnjoyEntryById(req.user._id,entry_id,function(err,data){
     if(data.ok == 1){
+      Entry.updateLikedCount(entry_id,"de_like");
       User.get(req.user._id,function(err,user){
         if(err) return next(err)
         req.session.user = user 
