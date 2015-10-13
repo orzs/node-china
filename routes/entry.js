@@ -60,6 +60,7 @@ exports.full = function(req,res,next){
     if(err) return next(err)
     var user = req.user;
     entry = packEntryWithLoginUser(entry,user);
+    console.log("entry",entry.liked_count);
     res.render('entry',{
       title:'Entry',
       entry:entry,
@@ -73,19 +74,21 @@ exports.full = function(req,res,next){
  * 绑定和当前登陆用户的关系
  */
 function packEntryWithLoginUser(entry,user){
-  for(var id in user.favorite_entry_ids){
-    if(user.favorite_entry_ids[id] == entry._id){
-      entry.isFavorite = true;
+  if(user){
+    for(var id in user.favorite_entry_ids){
+      if(user.favorite_entry_ids[id] == entry._id){
+        entry.isFavorite = true;
+      }
     }
-  }
-  for(var id in user.attention_entry_ids){
-    if(user.attention_entry_ids[id] == entry._id){
-      entry.isLike = true;
+    for(var id in user.attention_entry_ids){
+      if(user.attention_entry_ids[id] == entry._id){
+        entry.isAttention = true;
+      }
     }
-  }
-  for(var id in user.enjoy_entry_ids){
-    if(user.enjoy_entry_ids[id] == entry._id){
-      entry.isAttention = true;
+    for(var id in user.enjoy_entry_ids){
+      if(user.enjoy_entry_ids[id] == entry._id){
+        entry.isLike = true;
+      }
     }
   }
   return entry;

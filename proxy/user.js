@@ -174,7 +174,7 @@ exports.attenteEntryById = function(user_id,entry_id,fn){
   })
 }
 
-exports.cancenAttenteEntryById = function(user_id,entry_id,fn){
+exports.cancelAttenteEntryById = function(user_id,entry_id,fn){
   User.update({_id:user_id},{'$pull':{"attention_entry_ids":entry_id}},function(err,data){
     if(err) return fn(err)
     fn(null,data)

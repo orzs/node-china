@@ -81,7 +81,7 @@ app.post('/entry/:id/de_collect',account.decollectEntry)
 app.post('/entry/:id/like',account.enjoyEntry);
 app.post('/entry/:id/de_like',account.cancelEnjoyEntry);
 app.post('/entry/:id/follow',account.attenteEntry);
-app.post('/entry/:id/de_foolow',account.cancelAttenteEntry);
+app.post('/entry/:id/de_follow',account.cancelAttenteEntry);
 
 app.post('/register',validate.required('login_name'),validate.lengthAbove('login_name',4),validate.required('email'),validate.emailConfirm(),validate.passConfirm(),register.submit)
 app.post('/login',login.submit)

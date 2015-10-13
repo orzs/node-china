@@ -45,13 +45,13 @@
         </div>
         <div class="panel-footer clearfix">
           <div class="opts">
-            <% if(entry.isAttention) { %>
+            <% if(entry.isLike) { %>
               <a title="取消喜欢" data-count="2" data-state="" data-type="Topic" data-id="25886"
               class="likeable followed" action="de_like" href="javascript:void(0);">
                 <i class="fa fa-heart-o">
                 </i>
                 <span>
-                  ３ 人喜欢
+                   <%= entry.liked_count %>人喜欢
                 </span>
               </a>
             <% }else{ %>
@@ -60,17 +60,17 @@
                 <i class="fa fa-heart-o">
                 </i>
                 <span>
-                  1 人喜欢
+                   <%= entry.liked_count %>人喜欢
                 </span>
               </a>
             <% } %>
 
             <% if(locals.user){ %>
-              <% if(entry.isLike) { %>
-                <a title="取消关注" data-id="25886" data-followed="false" class="follow followed" action="de_foolow" href="javascript:void(0);">
+              <% if(entry.isAttention) { %>
+                <a title="取消关注" data-id="25886" data-followed="false" class="follow followed" action="de_follow" href="javascript:void(0);">
                   <i class="fa fa-eye">
                   </i>
-                  取消关注
+                  关注
                 </a>
               <% }else{ %>
                 <a title="关注" data-id="25886" data-followed="false" class="follow" action="follow" href="javascript:void(0);">
@@ -158,7 +158,7 @@
       $.post( "./<%= entry._id %>/"+action,{}, function(data) {
         if(data.status == 0){
           if(action == "follow"){
-            $(".follow").attr('action','de_foolow');
+            $(".follow").attr('action','de_follow');
           }else{
             $(".follow").attr('action','follow');
           }
