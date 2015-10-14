@@ -51,16 +51,16 @@
                 <i class="fa fa-heart-o">
                 </i>
                 <span>
-                   <%= entry.liked_count %>人喜欢
+                   <span class="like-count"><%= entry.liked_count %></span>人喜欢
                 </span>
               </a>
             <% }else{ %>
-              <a title="取消喜欢" data-count="2" data-state="" data-type="Topic" data-id="25886"
+              <a title="喜欢" data-count="2" data-state="" data-type="Topic" data-id="25886"
               class="likeable" action="like" href="javascript:void(0);">
                 <i class="fa fa-heart-o">
                 </i>
                 <span>
-                   <%= entry.liked_count %>人喜欢
+                   <span class="like-count"><%= entry.liked_count %></span>人喜欢
                 </span>
               </a>
             <% } %>
@@ -140,43 +140,50 @@
 <script type="text/javascript">
   <% if(locals.user) { %>
     $(".likeable").click(function(){
-      var action = $(this).attr('action');
-      $.post( "./<%= entry._id %>/"+action,{}, function(data) {
+      var $likeable = $(this);
+      var $like_count = $likeable.find(".like-count");
+      var action = $likeable.attr('action');
+      var count = parseInt($like_count.text());
+      $.post( "./<%= entry._id %>/"+action, {}, function(data) {
         if(data.status == 0){
           if(action == "like"){
-            $(".likeable").attr('action','de_like');
+            $likeable.attr('action','de_like');
+            $like_count.text(count + 1);
           }else{
-            $(".likeable").attr('action','like');
+            $likeable.attr('action','like');
+            $like_count.text(count - 1);
           }
-          $(".likeable").toggleClass('followed');
+          $likeable.toggleClass('followed');
         }
       }, "json");
     });
 
     $(".follow").click(function(){
-      var action = $(this).attr('action');
-      $.post( "./<%= entry._id %>/"+action,{}, function(data) {
+      var $follow = $(this);
+      var action = $follow.attr('action');
+      $.post( "./<%= entry._id %>/"+action, {}, function(data) {
         if(data.status == 0){
           if(action == "follow"){
-            $(".follow").attr('action','de_follow');
+            $follow.attr('action','de_follow');
           }else{
-            $(".follow").attr('action','follow');
+            $follow.attr('action','follow');
           }
-          $(".follow").toggleClass('followed');
+          $follow.toggleClass('followed');
         }
       }, "json");
     });
       
     $(".bookmark").click(function(){
-      var action = $(".bookmark").attr('action')
-      $.post( "./<%= entry._id %>/"+action,{}, function(data) {
+      var $bookmark = $(this);
+      var action = $bookmark.attr('action');
+      $.post( "./<%= entry._id %>/"+action, {}, function(data) {
         if(data.status == 0){
           if(action == "collect"){
-            $(".bookmark").attr('action','de_collect')
+            $bookmark.attr('action','de_collect');
           }else{
-            $(".bookmark").attr('action','collect')
+            $bookmark.attr('action','collect');
           }
-          $(".bookmark").toggleClass('followed') 
+          $bookmark.toggleClass('followed') ;
         }
       }, "json");
     })
