@@ -30,6 +30,8 @@ xcuserdata
 node_modules/
 npm-debug.log
 public/images/*
+public/npm-debug.log
+.*.swap
 
 ## bower
 bower_components/
