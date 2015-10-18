@@ -10,7 +10,7 @@ exports.submit = function(req,res,next){
 }
 
 exports.edit = function(req,res,next){
-  var body = req.params['body'];
+  var body = req.body;
   var reply_id = req.params['reply_id'];
   Reply.updateBody(reply_id,body,function(err,data){
     if(data.ok == 1){
