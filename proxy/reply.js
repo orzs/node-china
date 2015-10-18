@@ -50,3 +50,17 @@ exports.createAndSave = function(res, entry_id, body, fn) {
     ep.emit('saveReply', reply)
   }))
 }
+
+exports.updateLikedCount = function(id,action,fn){
+  if(action == "like"){
+    Reply.update({'_id':id},{'$inc':{'liked_count':1}},function(err,entry){
+      if(err) return fn(err)
+      fn(null,entry)
+    })
+  }else if(action == "de_like"){
+    Reply.update({'_id':id},{'$inc':{'liked_count':-1}},function(err,entry){
+      if(err) return fn(err)
+      fn(null,entry)
+    })
+  }
+};

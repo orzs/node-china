@@ -210,3 +210,44 @@ exports.cancelAttenteEntry = function(req,res,next){
     }
   })
 }
+
+exports.enjoyReply = function(req,res,next){
+  var reply_id = req.params['id'];
+  User.enjoyReplyById(req.user._id,reply_id,function(err,data){
+    if(data.ok == 1){
+      Reply.updateLikedCount(reply_id,"like",function(err,entry){
+        if(err){} //TODO  
+        //TODO 
+      });
+
+      User.get(req.user._id,function(err,user){
+        if(err) return next(err)
+        req.session.user = user 
+        res.json({data:'ok',status:0,message:'喜欢成功'})
+      })
+    }else{
+      res.json({status:1,message:'喜欢失败'})
+    }
+  })
+}
+
+exports.cancelEnjoyReply = function(req,res,next){
+  var reply_id = req.params['id'];
+  User.cancelEnjoyReplyById(req.user._id,reply_id,function(err,data){
+    if(data.ok == 1){
+      Reply.updateLikedCount(reply_id,"de_like",function(err,entry){
+        if(err){} //TODO  
+        //TODO 
+      });
+
+      User.get(req.user._id,function(err,user){
+        if(err) return next(err)
+        req.session.user = user 
+        res.json({data:'ok',status:0,message:'取消喜欢成功'})
+      })
+    }else{
+      res.json({status:1,message:'取消喜欢势失败'})
+    }
+  })
+}
+
