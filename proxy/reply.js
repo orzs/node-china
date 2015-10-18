@@ -54,13 +54,20 @@ exports.createAndSave = function(res, entry_id, body, fn) {
 exports.updateLikedCount = function(id,action,fn){
   if(action == "like"){
     Reply.update({'_id':id},{'$inc':{'liked_count':1}},function(err,entry){
-      if(err) return fn(err)
-      fn(null,entry)
+      if(err) return fn(err);
+      fn(null,entry);
     })
   }else if(action == "de_like"){
     Reply.update({'_id':id},{'$inc':{'liked_count':-1}},function(err,entry){
-      if(err) return fn(err)
-      fn(null,entry)
+      if(err) return fn(err);
+      fn(null,entry);
     })
   }
+};
+
+exports.updateBody = function(id,body,fn){
+  Reply.update({'_id':id},{'$set':{'body':body}},function(err,data){
+    if(err) return fn(err);
+    fn(null,data);
+  })
 };
