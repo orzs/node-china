@@ -23,12 +23,12 @@
           </abbr>
         </span>
         <span class="opts pull-right">
-          <a title="喜欢" data-count="3" data-state="" data-type="Reply" data-id="261737"
-          class="likeable " href="#">
+          <a title="喜欢" data-count="3" data-state="" data-type="Reply" data-id="261737"  action="like"
+          class="likeable" href="javascript:void(0);">
             <i class="fa fa-heart-o">
             </i>
             <span>
-              3 人喜欢
+              <span class="like-count">5</span> 人喜欢
             </span>
           </a>
           <a class="edit fa fa-pencil" data-uid="5841" title="修改回帖" href="javascript:void(0);">
@@ -48,7 +48,7 @@
 <script type="text/javascript">
   <% if(locals.user) { %>
     // 修改评论(未做用户判断)
-    $("#replies").on("click", "a", function(){
+    $("#replies").on("click", ".edit", function(){
       var $edit_btn = $(this);
       if ($edit_btn.hasClass("act")) {
         $edit_btn.removeClass("act").closest(".reply").find(".markdown").show();
@@ -65,6 +65,27 @@
         });
         editor.render();
       }
+    });
+
+    // 评论的喜欢
+    $("#replies").on("click", ".likeable", function(){
+      var $likeable = $(this);
+      var $like_count = $likeable.find(".like-count");
+      var action = $likeable.attr('action');
+      var count = parseInt($like_count.text());
+      // $.post( "./<%= entry._id %>/"+action, {}, function(data) {
+        // if(data.status == 0){
+          if(action == "like"){
+            $likeable.attr('action','de_like');
+            $like_count.text(count + 1);
+          }else{
+            $likeable.attr('action','like');
+            $like_count.text(count - 1);
+          }
+          $likeable.toggleClass('followed');
+        // }
+      // }, "json");
+      // }
     });
   <% } %>
 </script>

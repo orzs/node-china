@@ -139,7 +139,8 @@
 
 <script type="text/javascript">
   <% if(locals.user) { %>
-    $(".likeable").click(function(){
+    // 主题的喜欢
+    $(".topic-detail .likeable").click(function(){
       var $likeable = $(this);
       var $like_count = $likeable.find(".like-count");
       var action = $likeable.attr('action');
@@ -158,6 +159,7 @@
       }, "json");
     });
 
+    // 主题的关注
     $(".follow").click(function(){
       var $follow = $(this);
       var action = $follow.attr('action');
@@ -172,7 +174,8 @@
         }
       }, "json");
     });
-      
+    
+     // 主题的收藏
     $(".bookmark").click(function(){
       var $bookmark = $(this);
       var action = $bookmark.attr('action');
@@ -186,7 +189,7 @@
           $bookmark.toggleClass('followed') ;
         }
       }, "json");
-    })
+    });
   <% } %>
 </script>
 <% include layout_footer %>
