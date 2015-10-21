@@ -14,7 +14,9 @@ exports.edit = function(req,res,next){
   var reply_id = req.params['reply_id'];
   Reply.updateBody(reply_id,body,function(err,data){
     if(data.ok == 1){
-      res.json({data:'ok',status:0,message:'更新成功'}); 
+      Reply.getReplyByReplyId(reply_id,function(err,reply){
+        res.json({data:'ok',status:0,message:'更新成功',body:reply.body}); 
+      });
     }else{
       res.json({data:'fail', status:1,message:'更新失败'}); 
     }
