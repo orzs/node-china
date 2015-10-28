@@ -179,7 +179,7 @@
     $(".bookmark").click(function(){
       var $bookmark = $(this);
       var action = $bookmark.attr('action');
-      $.post( "./<%= entry._id %>/"+action, {}, function(data) {
+      $.post( "./<%= entry._id %>/" + action, {}, function(data) {
         if(data.status == 0){
           if(action == "collect"){
             $bookmark.attr('action','de_collect');
