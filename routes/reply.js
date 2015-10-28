@@ -22,3 +22,11 @@ exports.edit = function(req,res,next){
     }
   });
 }
+
+exports.jsonReply = function(req,res,next){
+  var reply_id = req.params['id'];
+  Reply.getReplyByReplyId(reply_id,function(err,reply){
+    if(err)  next(err)
+    res.json({data:reply,status:0,message:''});
+  })
+}

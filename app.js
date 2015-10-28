@@ -28,12 +28,14 @@ var page = require('./middleware/page')
 var user = require('./middleware/user')
 
 var app = express();
+
+// 配置 session 存储
 app.use(session({
   cookie: { 
     path: '/', 
     httpOnly: true,
     secure: false, 
-    maxAge: 3*24*60*6000 
+    maxAge: 3*24*60*6000
   },
   secret: 'node-china_dev',
   saveUninitialized: false,
@@ -56,6 +58,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// 自定义中间件
 app.use(user)
 app.use(messages)
 
@@ -73,7 +77,8 @@ app.get('/user/:login_name/favorites',account.showWithFavorites)
 app.get('/user/:login_name/followers',account.showWithFollowers)
 app.get('/user/:login_name/following',account.showWithFollowing)
 app.get('/user/:login_name/blocked',account.showWithBlocked)
-app.get('/user/:login_name',account.show)
+app.get('/user/:login_name',account.show);
+app.get('/reply/:id',reply.jsonReply);
 
 // post
 app.post('/entry/:id/collect',account.collectEntry)
@@ -85,12 +90,12 @@ app.post('/entry/:id/de_follow',account.cancelAttenteEntry);
 app.post('/reply/:id/like',account.enjoyReply);
 app.post('/reply/:id/de_like',account.cancelEnjoyReply);
 app.post('/reply/:id',reply.edit);
-
 app.post('/register',validate.required('login_name'),validate.lengthAbove('login_name',4),validate.required('email'),validate.emailConfirm(),validate.passConfirm(),register.submit)
 app.post('/login',login.submit)
 app.post('/post',validate.required('title'),validate.lengthAbove('title',4),entry.submit)
 app.post('/reply',reply.submit)
 app.post('/tab',tab.submit)
+
 app.post('/account',multer({
   dest:'./public/images/',
   rename: function(fieldname,filename){
