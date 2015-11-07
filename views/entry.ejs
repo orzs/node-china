@@ -145,7 +145,7 @@
       var $like_count = $likeable.find('.like-count');
       var action = $likeable.attr('action');
       var count = parseInt($like_count.text());
-      $.post( './<%= entry._id %>/' + action, {}, function(data) {
+      $.post('./<%= entry._id %>/' + action, {}, function(data) {
         if(data.status == 0){
           if(action == 'like'){
             $likeable.attr('action','de_like');
@@ -163,7 +163,7 @@
     $('.follow').click(function(){
       var $follow = $(this);
       var action = $follow.attr('action');
-      $.post( './<%= entry._id %>/' + action, {}, function(data) {
+      $.post('./<%= entry._id %>/' + action, {}, function(data) {
         if(data.status == 0){
           if(action == 'follow'){
             $follow.attr('action','de_follow');
@@ -179,7 +179,7 @@
     $('.bookmark').click(function(){
       var $bookmark = $(this);
       var action = $bookmark.attr('action');
-      $.post( './<%= entry._id %>/' + action, {}, function(data) {
+      $.post('./<%= entry._id %>/' + action, {}, function(data) {
         if(data.status == 0){
           if(action == 'collect'){
             $bookmark.attr('action','de_collect');
