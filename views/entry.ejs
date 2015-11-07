@@ -140,14 +140,14 @@
 <script type="text/javascript">
   <% if(locals.user) { %>
     // 主题的喜欢
-    $(".topic-detail .likeable").click(function(){
+    $('.topic-detail .likeable').click(function(){
       var $likeable = $(this);
-      var $like_count = $likeable.find(".like-count");
+      var $like_count = $likeable.find('.like-count');
       var action = $likeable.attr('action');
       var count = parseInt($like_count.text());
-      $.post( "./<%= entry._id %>/"+action, {}, function(data) {
+      $.post( './<%= entry._id %>/' + action, {}, function(data) {
         if(data.status == 0){
-          if(action == "like"){
+          if(action == 'like'){
             $likeable.attr('action','de_like');
             $like_count.text(count + 1);
           }else{
@@ -156,39 +156,39 @@
           }
           $likeable.toggleClass('followed');
         }
-      }, "json");
+      }, 'json');
     });
 
     // 主题的关注
-    $(".follow").click(function(){
+    $('.follow').click(function(){
       var $follow = $(this);
       var action = $follow.attr('action');
-      $.post( "./<%= entry._id %>/"+action, {}, function(data) {
+      $.post( './<%= entry._id %>/' + action, {}, function(data) {
         if(data.status == 0){
-          if(action == "follow"){
+          if(action == 'follow'){
             $follow.attr('action','de_follow');
           }else{
             $follow.attr('action','follow');
           }
           $follow.toggleClass('followed');
         }
-      }, "json");
+      }, 'json');
     });
     
      // 主题的收藏
-    $(".bookmark").click(function(){
+    $('.bookmark').click(function(){
       var $bookmark = $(this);
       var action = $bookmark.attr('action');
-      $.post( "./<%= entry._id %>/"+action, {}, function(data) {
+      $.post( './<%= entry._id %>/' + action, {}, function(data) {
         if(data.status == 0){
-          if(action == "collect"){
+          if(action == 'collect'){
             $bookmark.attr('action','de_collect');
           }else{
             $bookmark.attr('action','collect');
           }
           $bookmark.toggleClass('followed') ;
         }
-      }, "json");
+      }, 'json');
     });
   <% } %>
 </script>

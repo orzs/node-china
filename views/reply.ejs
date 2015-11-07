@@ -1,6 +1,6 @@
 <div class="items panel-body">
   <% replies.forEach(function(reply,index){ %>
-  <div class="reply" id="reply<%= index + 1 %>">
+  <div class="reply" id="reply<%= index + 1 %>" data-id="<%= reply.id %>">
     <div class="avatar">
       <a href="/user/<%= reply.author.login_name %>">
         <img class="media-object avatar-48" src="<%= reply.author.avatar %>">
@@ -48,44 +48,86 @@
 <script type="text/javascript">
   <% if(locals.user) { %>
     // 修改评论(未做用户判断)
-    $("#replies").on("click", ".edit", function(){
+    $('#replies').on('click', '.edit', function(){
       var $edit_btn = $(this);
-      if ($edit_btn.hasClass("act")) {
-        $edit_btn.removeClass("act").closest(".reply").find(".markdown").show();
-        $edit_btn.closest(".reply").find(".editor_block").remove();
+      var $reply = $edit_btn.closest('.reply');
+      var reply_id = $reply.attr('data-id');
+
+      // 若修改按钮有act标记,则执行缺消修改操作
+      if ($edit_btn.hasClass('act')) {
+        $edit_btn.removeClass('act');
+        $reply.find('.markdown').show();
+        $reply.find('.editor_block').remove();
 
       } else {
-        var editor_block = '<div class="editor_block"><textarea id="editor" name="body" rows="5" class="form-control"></textarea></div>';
-        $edit_btn.addClass("act").closest(".reply").find(".markdown").hide();
-        $edit_btn.closest(".reply").append(editor_block);
+        var editor_block = '<div class="editor_block">\
+              <form  >\
+                <p><input  type="hidden" name="entry_id" value="<%= entry._id %>"/></p>\
+                <div id="reply" class="form-group">\
+                  <textarea id="editor" name="body" rows="5" class="form-control"></textarea>\
+                </div>\
+                <div class="form-group">\
+                  <p><input class="btn btn-primary btn_edit_reply" type="button" value="comment"/>\
+                  <input class="btn btn-warning btn_edit_reply_cancel" type="button" value="cancel"/></p>\
+                </div>\
+              </form>\
+            </div>'; 
+        $edit_btn.addClass('act');
+        $reply.find('.markdown').hide();
+        $reply.append(editor_block);
 
         var editor = new Editor({
           element: document.getElementById('editor'),
-          status:false
+          status: false
         });
         editor.render();
+
+        // 往编辑器里插入原来的评论内容
+        $.get('/reply/' + reply_id, {}, function(result) {
+          editor.codemirror.setValue(result.data.body);
+        }, 'json');
+
+        // 点击按钮,提交评论,并删除编辑器,插入新评论
+        $reply.on('click', '.btn_edit_reply', function(){
+          $.post( '/reply/'+ reply_id, {}, function(data) {
+            if(data.status == 0){
+            }
+          }, 'json');
+        });
+
+        // 点击cancel按钮,删除编辑器,显示评论
+        $reply.on('click', '.btn_edit_reply_cancel', function(){
+          $reply.find(".editor_block").remove();
+          $reply.find('.markdown').show();
+          $edit_btn.removeClass('act');
+        });
+
       }
     });
 
     // 评论的喜欢
-    $("#replies").on("click", ".likeable", function(){
-      var $likeable = $(this);
-      var $like_count = $likeable.find(".like-count");
+    $('#replies').on('click', '.likeable', function(){
+      var $likeable = $(this);      
+      var $reply = $likeable.closest('.reply');
+      var $like_count = $likeable.find('.like-count');
+      var reply_id = $reply.attr('data-id');
       var action = $likeable.attr('action');
       var count = parseInt($like_count.text());
-      // $.post( "./<%= entry._id %>/"+action, {}, function(data) {
-        // if(data.status == 0){
-          if(action == "like"){
+      var a = '/reply/' + reply_id + '/' + action;
+      console.log(a);
+      $.post('/reply/' + reply_id + '/' + action, {}, function(data) {
+        console.log(action);
+        if (data.status == 0) {
+          if (action == 'like') {
             $likeable.attr('action','de_like');
             $like_count.text(count + 1);
-          }else{
+          } else {
             $likeable.attr('action','like');
             $like_count.text(count - 1);
           }
           $likeable.toggleClass('followed');
-        // }
-      // }, "json");
-      // }
+        }
+      }, 'json');
     });
   <% } %>
 </script>

@@ -133,7 +133,7 @@ exports.decollectEntry = function(req,res,next){
       User.get(req.user._id,function(err,user){
         if(err) return next(err)
         req.session.user = user 
-      res.json({data:'ok',status:0,message:'取消搜藏成功'})
+      res.json({data:'ok',status:0,message:'取消收藏成功'})
       })
     }else{
       res.json({status:1})
