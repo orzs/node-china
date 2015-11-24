@@ -1,11 +1,13 @@
 var express = require('express');
-var session = require('express-session')
-var path = require('path')
-var favicon = require('serve-favicon')
-var logger = require('morgan')
-var cookieParser = require('cookie-parser')
-var bodyParser = require('body-parser')
-var RedisStore = require('connect-redis')(session)
+var express_session = require('express-session');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var RedisStore = require('connect-redis')(express_session);
+var redis = require('redis');
+var rClient = redis.createClient();
 
 var app = express();
 
@@ -27,32 +29,32 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 /*
- * custome middleware
- */
-var messages = require('./lib/messages')
-var user = require('./middleware/user')
-app.use(user)
-app.use(messages)
-
-/*
  * session save 
  */
-app.use(session({
-  cookie: { 
-    path: '/', 
+
+var session = express_session({
+  cookie:{
+    path: '/',
     httpOnly: true,
-    secure: false, 
+    secure: false,
     maxAge: 3*24*60*6000
   },
   secret: 'node-china_dev',
   saveUninitialized: false,
   name: 'node-china.id',
   resave: true,
-  store: new RedisStore({
-    host: '127.0.0.1',
-    post: '6379'
-  })
-}));
+  store: new RedisStore({client:rClient})
+});
+
+app.use(session);
+
+/*
+ * custome middleware
+ */
+var messages = require('./lib/messages')
+var user = require('./middleware/user')
+app.use(user)
+app.use(messages)
 
 /*
  * routers 
@@ -95,6 +97,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
+app.channel = 'chat';
+app.session = session;
 
 module.exports = app;
 

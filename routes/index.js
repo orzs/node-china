@@ -82,3 +82,4 @@ router.use('/tab/:name/:page?',page(Entry.getCount,'tab',25),statistics(User.get
 router.use('/entries/:page?',page(Entry.getCount,null,25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.list)
 
 module.exports = router;
+

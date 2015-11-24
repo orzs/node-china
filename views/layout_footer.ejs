@@ -29,4 +29,12 @@
       </div>
     </footer>
   </body>
+
+  <script src="/socket.io/socket.io.js"></script> 
+  <script src="/javascripts/socket-io.js"></script>
+  <script>
+    <% if(locals.user) {%>
+      initSocketIo('<%= locals.user._id %>');
+    <% } %>
+  </script>
 </html>

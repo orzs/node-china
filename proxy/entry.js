@@ -1,9 +1,9 @@
-var models = require('../lib/main')
-var User = require('./user') 
-var Reply = require('./reply') 
-var Eventproxy = require('eventproxy')
-var Entry = models.Entry 
-var Tab = require('./tab')
+var models = require('../lib/main');
+var User = require('./user');
+var Reply = require('./reply'); 
+var Eventproxy = require('eventproxy');
+var Entry = models.Entry;
+var Tab = require('./tab');
 var Marked = require('marked');
 
 exports.getRange = function(skip,perpage,fn){
@@ -98,6 +98,13 @@ exports.getFullEntry = function(entry_id,fn){
     Reply.getRepliesByEntryId(entry_id,ep.done('replies'))
     ep.emit('entry',entry)
   })) 
+}
+
+exports.getEntryById = function(entry_id,fn){
+  Entry.findOne({_id:entry_id},function(err,entry){
+    if(err) return fn(err);
+    fn(null,entry);
+  });
 }
 
 exports.createAndSave = function(res,title,body,tab_id,tab_name,fn){

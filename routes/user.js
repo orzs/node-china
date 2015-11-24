@@ -1,6 +1,8 @@
-var proxy = require("../proxy/main")
-var User = proxy.User 
-var Entry = proxy.Entry
+var proxy = require("../proxy/main");
+var pub = require("../middleware/messagePublish");
+var User = proxy.User;
+var Entry = proxy.Entry;
+var Notification = proxy.Notification;
 
 exports.form = function(req,res,next){
   if(!res.locals.user) return next()
@@ -120,6 +122,23 @@ exports.collectEntry = function(req,res,next){
         req.session.user = user 
         res.json({data:'ok',status:0,message:'收藏成功'})
       })
+
+      Entry.getEntryById(entry_id,function(err,entry){
+        if(err) return next(err); 
+        var data = {
+          from_userId: req.user._id,
+          to_userId: entry.author_id,
+          type: Notification.NotificationType.COLLECT_ENTRY,
+          entry_id: entry_id
+        };
+
+        Notification.createNotification(data,function(err,notification){
+          Notification.sendNotification(notification,function(err){
+            if(err){} //TODO
+            //TODO 
+          });
+        });
+      }); 
     }else{
       res.json({status:1})
     }
@@ -133,8 +152,25 @@ exports.decollectEntry = function(req,res,next){
       User.get(req.user._id,function(err,user){
         if(err) return next(err)
         req.session.user = user 
-      res.json({data:'ok',status:0,message:'取消收藏成功'})
+        res.json({data:'ok',status:0,message:'取消收藏成功'})
       })
+
+      Entry.getEntryById(entry_id,function(err,entry){
+        if(err) return next(err); 
+        var data = {
+          from_userId: req.user._id,
+          to_userId: entry.author_id,
+          type: Notification.NotificationType.UNCOLLECT_ENTRY,
+          entry_id: entry_id
+        };
+
+        Notification.createNotification(data,function(err,notification){
+          Notification.sendNotification(notification,function(err){
+            if(err){} //TODO
+            //TODO 
+          });
+        });
+      }); 
     }else{
       res.json({status:1})
     }
@@ -155,6 +191,23 @@ exports.enjoyEntry = function(req,res,next){
         req.session.user = user 
         res.json({data:'ok',status:0,message:'喜欢成功'})
       })
+
+      Entry.getEntryById(entry_id,function(err,entry){
+        if(err) return next(err); 
+        var data = {
+          from_userId: req.user._id,
+          to_userId: entry.author_id,
+          type: Notification.NotificationType.ENjOY_ENTRY,
+          entry_id: entry_id
+        };
+
+        Notification.createNotification(data,function(err,notification){
+          Notification.sendNotification(notification,function(err){
+            if(err){} //TODO
+            //TODO 
+          });
+        });
+      }); 
     }else{
       res.json({status:1})
     }
@@ -175,6 +228,23 @@ exports.cancelEnjoyEntry = function(req,res,next){
         req.session.user = user 
         res.json({data:'ok',status:0,message:'取消喜欢成功'})
       })
+
+      Entry.getEntryById(entry_id,function(err,entry){
+        if(err) return next(err); 
+        var data = {
+          from_userId: req.user._id,
+          to_userId: entry.author_id,
+          type: Notification.NotificationType.UNENjOY_ENTRY,
+          entry_id: entry_id
+        };
+
+        Notification.createNotification(data,function(err,notification){
+          Notification.sendNotification(notification,function(err){
+            if(err){} //TODO
+            //TODO 
+          });
+        });
+      }); 
     }else{
       res.json({status:1})
     }
@@ -190,6 +260,23 @@ exports.attenteEntry = function(req,res,next){
         req.session.user = user 
         res.json({data:'ok',status:0,message:'关注成功'})
       })
+
+      Entry.getEntryById(entry_id,function(err,entry){
+        if(err) return next(err); 
+        var data = {
+          from_userId: req.user._id,
+          to_userId: entry.author_id,
+          type: Notification.NotificationType.FOLLOW_ENTRY,
+          entry_id: entry_id
+        };
+
+        Notification.createNotification(data,function(err,notification){
+          Notification.sendNotification(notification,function(err){
+            if(err){} //TODO
+            //TODO 
+          });
+        });
+      }); 
     }else{
       res.json({status:1})
     }
@@ -204,7 +291,25 @@ exports.cancelAttenteEntry = function(req,res,next){
         if(err) return next(err)
         req.session.user = user 
         res.json({data:'ok',status:0,message:'取消关注成功'})
+        pub.publish(req.user._id,'取消关注成功');
       })
+
+      Entry.getEntryById(entry_id,function(err,entry){
+        if(err) return next(err); 
+        var data = {
+          from_userId: req.user._id,
+          to_userId: entry.author_id,
+          type: Notification.NotificationType.UNFOLLOW_ENTRY,
+          entry_id: entry_id
+        };
+
+        Notification.createNotification(data,function(err,notification){
+          Notification.sendNotification(notification,function(err){
+            if(err){} //TODO
+            //TODO 
+          });
+        });
+      }); 
     }else{
       res.json({status:1})
     }

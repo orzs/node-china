@@ -21,6 +21,15 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+var socketIO = require('socket.io');
+var io = socketIO(server);
+
+var socketIoExceptionSession = require('socket.io-express-session');
+io.use(socketIoExceptionSession(app.session));
+
+var setEvent = require('../socket-server');
+setEvent(io);
+
 /**
  * Listen on provided port, on all network interfaces.
  */
