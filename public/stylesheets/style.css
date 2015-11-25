@@ -75,7 +75,7 @@ footer a {
 }
 
 .topics .topic .count a:hover{
-  background: #102b6a;
+  background: #102B6A;
 }
   
 .topics .topic .count a:link, .topics .topic .count a:hover, .topics .topic .count a:visited {
@@ -236,8 +236,12 @@ b , strong{
   color: #EB5424;
 }
 
-.notification-count .new {
+.header .navbar-default .navbar-nav .notification-count .new{
   color: #F86334; 
+}
+
+.header .navbar-default .navbar-nav .notification-count .zero{
+  color: #333; 
 }
 
 .topics .node-info .name strong {

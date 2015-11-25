@@ -21,6 +21,8 @@ if(typeof NotificationType == "undefined"){
 　NotificationType.STAR_USER = 13;
 }
 
+exports.NotificationType = NotificationType;
+
 exports.createNotification = function(data,fn){
   var notification = new Notification({
     "from_userId": data.from_userId,
@@ -91,8 +93,16 @@ exports.sendNotification = function(notification,fn){
   }
 
   message += messageType + ":" + entry_id;
-  pub.publish(to_userId,message);
+  Notification.count({'to_userId':to_userId,'has_read':false},function(err,total){
+    var notification = {
+      'count': total,
+      'message': message 
+    };  
+    pub.publish(to_userId,JSON.stringify(notification));
+  }); 
 };
 
-exports.NotificationType = NotificationType;
+exports.calculateNoneReadMessageCount = function(to_userId,fn){
+  Notification.count({'to_userId':to_userId,'has_read':false},fn); 
+};
 

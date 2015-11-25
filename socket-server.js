@@ -1,8 +1,12 @@
 'use strict';
 var redis = require('redis');
+var Notification = require('./proxy/notification');
+var pub = require('./middleware/messagePublish');
 
 module.exports = function(io){
   io.on('connection',function(socket){
+
+    // 订阅频道
     var channel = socket.handshake.session.user._id;
     var sub = redis.createClient();
     sub.subscribe(channel);
@@ -11,6 +15,12 @@ module.exports = function(io){
 
     socket.on('join',function(message){
       console.log('join',message);
+      Notification.calculateNoneReadMessageCount(channel,function(err,total){
+        var notification = {
+          'count': total
+        };
+        pub.publish(channel,JSON.stringify(notification)); 
+      });
     });
 
     socket.on(channel,function(message){
