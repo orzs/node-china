@@ -60,6 +60,7 @@ exports.full = function(req,res,next){
     if(err) return next(err)
     var user = req.user;
     entry = packEntryWithLoginUser(entry,user);
+    replies = packRepliesWithLoginUser(replies,user);
     res.render('entry',{
       title:'Entry',
       entry:entry,
@@ -74,21 +75,32 @@ exports.full = function(req,res,next){
  */
 function packEntryWithLoginUser(entry,user){
   if(user){
-    for(var id in user.favorite_entry_ids){
-      if(user.favorite_entry_ids[id] == entry._id){
-        entry.isFavorite = true;
-      }
-    }
-    for(var id in user.attention_entry_ids){
-      if(user.attention_entry_ids[id] == entry._id){
-        entry.isAttention = true;
-      }
-    }
-    for(var id in user.enjoy_entry_ids){
-      if(user.enjoy_entry_ids[id] == entry._id){
-        entry.isLike = true;
-      }
-    }
+    entry.isFavorite = in_Array(user.favorite_entry_ids,entry._id);
+    entry.isAttention = in_Array(user.attention_entry_ids,entry._id);
+    entry.isLike = in_Array(user.enjoy_entry_ids,entry._id);
   }
   return entry;
 } 
+
+function packRepliesWithLoginUser(replies,user){
+  if(user){
+    for(var id in replies){
+      var reply = replies[id];
+      console.log('reply',reply);
+      var in_array = in_Array(user.enjoy_reply_ids,reply._id); 
+      console.log(reply._id,":"+in_array);
+      reply.isLike = in_array;
+    } 
+  }
+  return replies;
+}
+
+function in_Array(array,key){
+  for(var id in array){
+    if(array[id] == key){
+      return true;
+    }
+  }
+  return false;
+}
+

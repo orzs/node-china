@@ -189,7 +189,7 @@ exports.enjoyReplyById = function(user_id,reply_id,fn){
 }
 
 exports.cancelEnjoyReplyById = function(user_id,reply_id,fn){
-  User.update({_id:user_id},{'$pull':{"enjoy_reply_ids":entry_id}},function(err,data){
+  User.update({_id:user_id},{'$pull':{"enjoy_reply_ids":reply_id}},function(err,data){
     if(err) return fn(err)
     fn(null,data)
   })

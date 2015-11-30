@@ -22,21 +22,32 @@
             17 天前
           </abbr>
         </span>
+
         <span class="opts pull-right">
-          <a title="喜欢" data-count="3" data-state="" data-type="Reply" data-id="261737"  action="like"
-          class="likeable" href="javascript:void(0);">
-            <i class="fa fa-heart-o">
-            </i>
-            <span>
-              <span class="like-count">5</span> 人喜欢
-            </span>
-          </a>
+          <% if(reply.isLike){ %>
+            <a title="喜欢" data-count="<%= reply.liked_count %>" data-state="" data-type="Reply" data-id="261737"  action="de_like" class="likeable followed" href="javascript:void(0);">
+              <i class="fa fa-heart-o">
+              </i>
+              <span>
+                <span class="like-count"><%= reply.liked_count %></span> 人喜欢
+              </span>
+            </a>
+          <% }else{ %> 
+            <a title="喜欢" data-count="<%= reply.liked_count %>" data-state="" data-type="Reply" data-id="261737"  action="like" class="likeable" href="javascript:void(0);">
+              <i class="fa fa-heart-o">
+              </i>
+              <span>
+                <span class="like-count"><%= reply.liked_count %></span> 人喜欢
+              </span>
+            </a>
+          <% } %>
           <a class="edit fa fa-pencil" data-uid="5841" title="修改回帖" href="javascript:void(0);">
           </a>
           <a data-floor="1" data-login="ryudoawaru" title="回复此楼" class="btn-reply fa fa-mail-reply"
           href="#">
           </a>
         </span>
+
       </div>
       <div class="markdown">
         <%- reply.html %> 
@@ -45,6 +56,7 @@
   </div>
   <% }) %>
 </div>
+
 <script type="text/javascript">
   <% if(locals.user) { %>
     // 修改评论(未做用户判断)
@@ -114,7 +126,6 @@
       var action = $likeable.attr('action');
       var count = parseInt($like_count.text());
       var a = '/reply/' + reply_id + '/' + action;
-      console.log(a);
       $.post('/reply/' + reply_id + '/' + action, {}, function(data) {
         console.log(action);
         if (data.status == 0) {

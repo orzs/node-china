@@ -2,6 +2,7 @@ var proxy = require("../proxy/main");
 var pub = require("../middleware/messagePublish");
 var User = proxy.User;
 var Entry = proxy.Entry;
+var Reply = proxy.Reply;
 var Notification = proxy.Notification;
 
 exports.form = function(req,res,next){
