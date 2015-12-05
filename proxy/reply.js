@@ -69,5 +69,6 @@ exports.updateBody = function(id,body,fn){
   Reply.update({'_id':id},{'$set':{'body':body}},function(err,data){
     if(err) return fn(err);
     fn(null,data);
-  })
+  });
 };
+

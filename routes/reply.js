@@ -13,12 +13,16 @@ exports.edit = function(req,res,next){
   var body = req.body;
   var reply_id = req.params['reply_id'];
   Reply.updateBody(reply_id,body,function(err,data){
-    if(data.ok == 1){
-      Reply.getReplyByReplyId(reply_id,function(err,reply){
-        res.json({data:'ok',status:0,message:'更新成功',body:reply.body}); 
-      });
+    if(!err){
+      if(data.ok == 1){
+        Reply.getReplyByReplyId(reply_id,function(err,reply){
+          res.json({data:'ok',status:0,message:'更新成功',body:reply.body}); 
+        });
+      }else{
+        res.json({data:'fail', status:1,message:'更新失败'}); 
+      }
     }else{
-      res.json({data:'fail', status:1,message:'更新失败'}); 
+      next(err);
     }
   });
 }
@@ -30,3 +34,4 @@ exports.jsonReply = function(req,res,next){
     res.json({data:reply,status:1,message:''});
   })
 }
+

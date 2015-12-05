@@ -1,5 +1,6 @@
-var proxy = require("../proxy/main")
-var Entry = proxy.Entry 
+var proxy = require("../proxy/main");
+var Entry = proxy.Entry;
+var searchClient = require("../middleware/elasticSearchClient");
 
 exports.list = function(req,res,next){
   var page = req.page 
@@ -48,8 +49,19 @@ exports.form = function(req,res){
 
 exports.submit = function(req,res,next){
   var data = req.body
-  Entry.createAndSave(res,data.title,data.body,data.tab_id,data.tab_name,function(err){
+  Entry.createAndSave(res,data.title,data.body,data.tab_id,data.tab_name,function(err,entry){
     if(err) return next(err)
+
+    // 简历索引，用于查询
+    searchClient.index({
+      index: 'node_china',
+      type: 'entry',
+      body: entry
+    }, function (error, response) {
+      if(error) console.log('error:',error);
+      else console.log('response:',response);
+    });
+
     res.redirect('/entries')
   })
 }
@@ -95,6 +107,9 @@ function packRepliesWithLoginUser(replies,user){
   return replies;
 }
 
+/*
+ * util function 
+ */
 function in_Array(array,key){
   for(var id in array){
     if(array[id] == key){

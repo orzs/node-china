@@ -327,12 +327,12 @@ exports.enjoyReply = function(req,res,next){
       });
 
       User.get(req.user._id,function(err,user){
-        if(err) return next(err)
-        req.session.user = user 
-        res.json({data:'ok',status:0,message:'喜欢成功'})
-      })
+        if(err) return next(err);
+        req.session.user = user;
+        res.json({data:'ok',status:0,message:'喜欢成功'});
+      });
     }else{
-      res.json({status:1,message:'喜欢失败'})
+      res.json({status:1,message:'喜欢失败'});
     }
   })
 }

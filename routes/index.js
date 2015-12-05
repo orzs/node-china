@@ -9,6 +9,7 @@ var reply = require('./reply')
 var entry = require('./entry')
 var tab = require('./tab')
 var account = require('./user')
+var search = require('./search');
 
 // proxy
 var proxy = require("../proxy/main")
@@ -37,6 +38,10 @@ router.get('/user/:login_name/following',account.showWithFollowing)
 router.get('/user/:login_name/blocked',account.showWithBlocked)
 router.get('/user/:login_name',account.show);
 router.get('/reply/:id',reply.jsonReply);
+
+// search api
+router.get('/search/all',search.searchAll);
+router.get('/search/entry',search.searchEntry);
 
 // api post
 router.post('/entry/:id/collect',account.collectEntry)
