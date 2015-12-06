@@ -10,6 +10,7 @@ var entry = require('./entry');
 var tab = require('./tab');
 var account = require('./user');
 var search = require('./search');
+var notification = require('./notification');
 
 // proxy
 var proxy = require("../proxy/main");
@@ -31,6 +32,7 @@ router.get('/post',entry.form);
 router.get('/active_acount',login.activeAcount);
 router.get('/tabs',tab.getTabsJson);
 router.get('/user/edit',account.form);
+
 router.get('/user/:login_name/entries',account.showWithEntries);
 router.get('/user/:login_name/favorites',account.showWithFavorites);
 router.get('/user/:login_name/followers',account.showWithFollowers);
@@ -49,12 +51,12 @@ router.post('/entry/:id/de_follow',account.cancelAttenteEntry);
 router.post('/reply/:id/like',account.enjoyReply);
 router.post('/reply/:id/de_like',account.cancelEnjoyReply);
 router.post('/reply/:id',reply.edit);
+
 router.post('/register',validate.required('login_name'),validate.lengthAbove('login_name',4),validate.required('email'),validate.emailConfirm(),validate.passConfirm(),register.submit);
 router.post('/login',login.submit);
 router.post('/post',validate.required('title'),validate.lengthAbove('title',4),entry.submit);
 router.post('/reply',reply.submit);
 router.post('/tab',tab.submit);
-
 router.post('/account',multer({
   dest:'./public/images/',
   rename: function(fieldname,filename){
@@ -76,13 +78,15 @@ router.post('/account',multer({
   }),account.update);
 
 // api 列表
-router.use('/list/:feature',page(Entry.getCount,'feature',25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.listWithFeature);
+router.use('/list/:feature/:page?',page(Entry.getCount,'feature',25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.listWithFeature);
 
 router.use('/tab/:name/:page?',page(Entry.getCount,'tab',25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.listWithTab);
 
 router.use('/entries/:page?',page(Entry.getCount,null,25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.list);
 
-router.use('/search/all',page(Entry.getCount,null,25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),search.searchAll);
+router.use('/search/all/:page?',page(Entry.getCount,null,25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),search.searchAll);
+
+router.use('/notifications/:page?',page(Entry.getCount,null,25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),notification.list);
 
 module.exports = router;
 

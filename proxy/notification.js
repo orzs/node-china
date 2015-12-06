@@ -1,8 +1,12 @@
 var models = require('../lib/main');
-var pub = require('../middleware/messagePublish');
 var Notification = models.Notification;
-var NotificationType;
+var proxy = require('../proxy/main');
+var User = proxy.User;
+var Entry = proxy.Entry;
+var Eventproxy = require('eventproxy');
+var pub = require('../middleware/messagePublish');
 
+var NotificationType;
 if(typeof NotificationType == "undefined"){
   NotificationType = {};
   NotificationType.NONE = 0;
@@ -20,7 +24,6 @@ if(typeof NotificationType == "undefined"){
 　NotificationType.STAR_ENTRY = 12;
 　NotificationType.STAR_USER = 13;
 }
-
 exports.NotificationType = NotificationType;
 
 exports.createNotification = function(data,fn){
@@ -34,6 +37,30 @@ exports.createNotification = function(data,fn){
 
   notification.save(fn);
 };
+
+exports.calculateNoneReadMessageCount = function(to_userId,fn){
+  Notification.count({'to_userId':to_userId,'has_read':false},fn); 
+};
+
+exports.getNoReadNotification = function(userId,skip,perpage,fn){
+  Notification.find({ has_read:false,to_userId:userId },{},{ skip:skip,limit:perpage,sort:"-create_date" },function(err,notifications){
+    var proxy = new Eventproxy(); 
+    proxy.after('notifications_ready',notifications.length,function(detail_notifications){
+      fn(null,detail_notifications);
+    });
+    notifications.forEach(function(notification,index){
+      var ep = Eventproxy.create("user","entry",function(user,entry){
+        notification.user = user;
+        notification.entry = entry;
+        proxy.emit('notifications_ready',notification); 
+      });
+      ep.fail(fn);
+
+      User.get(notification.from_userId,ep.done('user')); 
+      Entry.getEntryById(notification.entry_id,ep.done('entry'));
+    });
+  }); 
+}
 
 exports.sendNotification = function(notification,fn){
   var from_userId = notification.from_userId; 
@@ -100,9 +127,5 @@ exports.sendNotification = function(notification,fn){
     };  
     pub.publish(to_userId,JSON.stringify(notification));
   }); 
-};
-
-exports.calculateNoneReadMessageCount = function(to_userId,fn){
-  Notification.count({'to_userId':to_userId,'has_read':false},fn); 
 };
 
