@@ -1,1 +1,43 @@
-<%= response %>
+<% include layout_header %>
+<% include menu %>
+<div id="main" class="main-container container">
+  <div class="row">
+    <div class="col-md-9 col-sm-9">
+      <div class="topics panel panel-default">
+        <div class="panel-heading clearfix">
+          <div class="node-info">
+            <div class="name">
+              <span>共搜到<%= total %>个关于<%= searchKey %>的话题</span>
+              <div class="pull-right">
+              </div>
+            </div>
+            <div class="summary">
+            <p>初级的全文话题搜索</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <% include entries %>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar col-md-3">
+      <% include new_entry_button %>
+      <% include tip %>
+      <% include communities %>
+      <div class="panel panel-default">
+        <div class="panel-heading">推荐 Ruby 资源</div>
+        <ul class="list-group">
+          <li class="list-group-item"><a href="http://railscasts-china.com/" target="_blank" rel="nofollow">Rails 视频教程</a></li>
+          <li class="list-group-item"><a href="https://ruby.taobao.org" target="_blank" rel="nofollow">RubyGems 淘宝镜像</a></li>
+          <li class="list-group-item"><a href="http://guides.ruby-china.org">Rails Guides 中文版</a></li> 
+        </ul>
+      </div>
+      <% include data_report %>
+    </div>
+  </div>
+</div>
+
+<% include layout_footer %>
+

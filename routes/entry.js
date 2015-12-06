@@ -3,20 +3,20 @@ var Entry = proxy.Entry;
 var searchClient = require("../middleware/elasticSearchClient");
 
 exports.list = function(req,res,next){
-  var page = req.page 
+  var page = req.page; 
   Entry.getRange(page.skip,page.perpage,function(err,entries,tabs){
-    if(err) return next(err)
+    if(err) return next(err);
     res.render('index',{
       title: '首页',
       entries: entries,
       tabs: tabs 
-    })
-  })
+    });
+  });
 }
 
 exports.listWithTab = function(req,res,next){
-  var tab = req.params['name']
-  var page = req.page 
+  var tab = req.params['name'];
+  var page = req.page;
   
   Entry.getTabRange(tab,page.skip,page.perpage,function(err,entries,tab){
     if(err) return next(err)
@@ -24,8 +24,8 @@ exports.listWithTab = function(req,res,next){
       title: tab.name,
       tab: tab,
       entries: entries
-    }) 
-  })
+    }); 
+  });
 }
 
 exports.listWithFeature = function(req,res,next){
