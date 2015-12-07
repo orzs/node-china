@@ -46,7 +46,7 @@ exports.createAndSave = function(res, entry_id, body, fn) {
   })
   ep.fail(fn)
   reply.save(ep.done(function(reply) {
-    Entry.updateReplyInfo(entry_id, reply._id, res.locals.user.login_name, ep.done('updateEntry'))
+    Entry.updateReplyInfo(entry_id, reply._id, reply.create_date, res.locals.user.login_name, ep.done('updateEntry'))
     ep.emit('saveReply', reply)
   }))
 }

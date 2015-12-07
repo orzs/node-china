@@ -18,7 +18,7 @@ function initSocketIo(channel){
       $('.count').text(); 
       $('#notification').attr('class','zero');
     }else{
-      $('.count').text(notification.count); 
+      $('#notification .count').text(notification.count); 
       $('#notification').attr('class','new');
     }
   });

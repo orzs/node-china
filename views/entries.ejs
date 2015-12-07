@@ -16,12 +16,13 @@
        <div class="info">
           <a class="node" href="/tab/<%= entry.tab %>"><%= entry.tab %></a>
            • 
-          <a data-name="Mu-Fan teng" href="/user/<%= entry.username %>"><%= entry.username %></a>•
+          <a data-name="Mu-Fan teng" href="/user/<%= entry.username %>"><%= entry.username %></a>
+           •
           <span class="hidden-mobile">
           <% if(entry.last_reply_user){ %> 
-            最后由 <a data-name="<%= entry.last_reply_user %>" href="/user/<%= entry.last_reply_user %>"><%= entry.last_reply_user %></a> 于 <abbr class="timeago" title="11 天前">11 天前</abbr>回复
+            最后由 <a data-name="<%= entry.last_reply_user %>" href="/user/<%= entry.last_reply_user %>"><%= entry.last_reply_user %></a> 于<abbr class="timeago" title="<%= entry.last_reply_date %>"><%= entry.timeTrap %></abbr>回复
           <% }else{ %> 
-            于 <abbr class="timeago" title="11 天前">11 天前</abbr>发布
+            于<abbr class="timeago" title="<%= entry.create_date %>"><%= entry.timeTrap %></abbr>发布
           <% } %>
           </span>
        </div>
