@@ -1,1 +1,52 @@
-<%= notifications %>
+<% include layout_header %>
+<% include menu %>
+
+<div id="main" class="main-container container">
+  <div id="notifications" class="panel panel-default">
+    <div class="tools panel-heading">
+      <a class="btn btn-danger" data-disable-with="清空中..." rel="nofollow" data-method="post" href="/notifications/clear"><i class="fa fa-fa fa-trash"></i> <span>标记已读</span></a>
+      <div class="pull-right"><h4>通知提醒</h4></div>
+    </div>
+    <div class="panel-body">
+    <% notifications.forEach(function(notification){ %>
+      <div class="media notification" id="notification-838862">
+        <div class="media-left avatar">
+          <a href="/user/<%= notification.user.login_name %>"><img class="media-object avatar-48" src="<%= notification.user.avatar %>"></a>
+        </div>
+        <div class="media-body" style='vertical-align:middle;' >
+            <span class="user">
+              <a data-name="<%= notification.user.login_name %>" href="/user/<%= notification.user.login_name %>"><%= notification.user.login_name %></a>
+            </span>
+            <span class="info">回复了帖子
+              <a title="<%= notification.entry.title %>" href="/entry/<%= notification.entry._id %>"><%= notification.entry.title %></a> 
+            </span>
+            <span class="date"><i class="fa fa-clock-o"></i> <abbr class="timeago" title="2015-12-07T12:19:25+08:00">1 小时前</abbr></span>
+        </div>
+
+        <div class="media-right opts">
+        <a data-remote="true" rel="nofollow" data-method="delete" href="/notifications/838862"><i class="fa fa-trash"></i> </a>
+        </div>
+      </div>
+    <% }) %>
+    </div>
+    <div class="panel-footer">
+      <ul class="pagination">
+        <li class="prev previous_page disabled">
+          <a href="#">← 上一页</a>
+        </li> 
+        <li class="active">
+          <a rel="start" href="/notifications?page=1">1</a>
+        </li> 
+        <li>
+          <a rel="next" href="/notifications?page=2">2</a>
+        </li> 
+        <li class="next next_page ">
+          <a rel="next" href="/notifications?page=2">下一页 →</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<% include layout_footer %>
+

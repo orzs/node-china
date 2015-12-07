@@ -399,3 +399,8 @@ table.node-topics td a {
 a.followed .fa {
   color: #EB5424;
 }
+
+#notifications .notification .date {
+  font-size: 12px;
+  color: #aaa;
+}

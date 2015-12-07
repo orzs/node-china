@@ -62,6 +62,22 @@ exports.getNoReadNotification = function(userId,skip,perpage,fn){
   }); 
 }
 
+exports.clearNoReadNotification = function(userId,fn){
+  Notification.find({ has_read:false,to_userId:userId },{},{},function(err,notifications){
+    var proxy = new Eventproxy();
+    proxy.after('notifications_update',notifications.length,function(notifications){
+      fn(null,notifications);    
+    });
+    proxy.fail(fn);
+    notifications.forEach(function(notification,index){
+      Notification.update({ _id:notification._id },{'$set':{'has_read':true}},function(err,notification){
+        if(err) return fn(err);
+        proxy.emit('notifications_update',notification);
+      });
+    });
+  });
+}
+
 exports.sendNotification = function(notification,fn){
   var from_userId = notification.from_userId; 
   var to_userId = notification.to_userId;
