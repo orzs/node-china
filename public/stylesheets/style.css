@@ -404,3 +404,13 @@ a.followed .fa {
   font-size: 12px;
   color: #aaa;
 }
+
+#notifications .notification {
+  border-bottom: 1px solid #F0F0F0;
+}
+
+#notifications .notification:last-child {
+  margin-bottom: 0px;
+  border-bottom: 0px;
+  padding-bottom: 0px;
+}
