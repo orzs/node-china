@@ -1,6 +1,6 @@
 <div class="panel-footer clearfix">
-  <ul class="pagination">
-    <% if (page.count > 1) { %>
+  <% if (page.count > 1) { %>
+    <ul class="pagination">
       <% if(page.number) {%>
         <li class="prev previous_page"><a href="/entries/<%= page.number %>">← 上一页</a></li> 
       <% }else{ %>
@@ -54,6 +54,6 @@
       <% }else{ %>
         <li class="next next_page disabled"><a href="#">下一页 →</a></li>
       <% } %>
-    <% } %>
-  </ul>
+    </ul>
+  <% } %>
 </div>
