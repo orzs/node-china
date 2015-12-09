@@ -21,17 +21,21 @@
               </a>
               · 于
               <abbr class="timeago" title="<%= entry.create_date %>">
-                17 天前
+              <%= entry.create_timeTrap %> 
               </abbr>
-              发布 · 最后由
+              发布 
+              <% if(entry.last_reply){ %>
+              · 最后由
               <a data-name="fredwu" href="/user/<%= entry.last_reply_user %>">
                 <%= entry.last_reply_user %>
               </a>
               于
-              <abbr class="timeago" title="2015-06-19T20:59:28+08:00">
-                2 天前
+              <abbr class="timeago" title="<%= entry.last_reply_date %>">
+              <%= entry.last_reply_timeTrap %> 
               </abbr>
-              回复 · 705 次阅读
+              回复 
+              <% } %>
+              · <%= entry.read_count %> 次阅读
             </div>
           </div>
           <div class="avatar media-right">

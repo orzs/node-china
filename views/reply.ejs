@@ -13,13 +13,14 @@
             <%= reply.username %>
           </a>
         </span>
+          ·
         <span class="time">
           <a class="reply-floor" href="#reply<%= index + 1 %>">
             #<%= index + 1 %>
           </a>
           ·
-          <abbr class="timeago" title="2015-06-04T22:14:20+08:00">
-            17 天前
+          <abbr class="timeago" title="<%= reply.create_date %>">
+            <%= reply.timeTrap %>
           </abbr>
         </span>
 
@@ -41,11 +42,15 @@
               </span>
             </a>
           <% } %>
-          <a class="edit fa fa-pencil" data-uid="5841" title="修改回帖" href="javascript:void(0);">
-          </a>
-          <a data-floor="1" data-login="ryudoawaru" title="回复此楼" class="btn-reply fa fa-mail-reply"
-          href="#">
-          </a>
+          <% if(locals.user && reply.author_id == locals.user._id){ %>
+            <a class="edit fa fa-pencil" data-uid="5841" title="修改回帖" href="javascript:void(0);">
+            </a>
+          <% } %>
+          <% if(locals.user){ %> 
+            <a data-floor="1" data-login="ryudoawaru" title="回复此楼" class="btn-reply fa fa-mail-reply"
+            href="#">
+            </a>
+          <% } %>
         </span>
 
       </div>

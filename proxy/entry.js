@@ -45,6 +45,11 @@ exports.getTabRange = function(tab,skip,perpage,fn){
       ep.emit('entries',detail_entries)
     })
     entries.forEach(function(entry,index){
+      if(entry.last_reply_user){
+        entry.timeTrap = calculateTimeInterval(entry.last_reply_date); 
+      }else{
+        entry.timeTrap = calculateTimeInterval(entry.create_date);; 
+      }
       User.get(entry.author_id,function(err,user){
         if(err) fn(err)
         entry.author = user
@@ -73,6 +78,11 @@ exports.getFeatureRange = function(feature,skip,perpage,fn){
       fn(null,detail_entries)
     })
     entries.forEach(function(entry,index){
+      if(entry.last_reply_user){
+        entry.timeTrap = calculateTimeInterval(entry.last_reply_date); 
+      }else{
+        entry.timeTrap = calculateTimeInterval(entry.create_date);; 
+      }
       User.get(entry.author_id,function(err,user){
         if(err) fn(err)
         entry.author = user
@@ -95,14 +105,20 @@ exports.updateReplyInfo = function(id,last_reply,last_reply_date,login_name,fn){
 
 exports.getFullEntry = function(entry_id,fn){
   var ep = Eventproxy.create("entry","author","replies",function(entry,author,replies){
-    fn(null,entry,author,replies)
-  })
-  ep.fail(fn)
+    fn(null,entry,author,replies);
+  });
+  ep.fail(fn);
   Entry.findOne({_id:entry_id},ep.done(function(entry){
-    User.get(entry.author_id,ep.done('author'))
-    Reply.getRepliesByEntryId(entry_id,ep.done('replies'))
-    ep.emit('entry',entry)
-  })) 
+    entry.create_timeTrap = calculateTimeInterval(entry.create_date);
+    entry.last_reply_timeTrap = calculateTimeInterval(entry.last_reply_date);
+    User.get(entry.author_id,ep.done('author'));
+    Reply.getRepliesByEntryId(entry_id,ep.done('replies'));
+    ep.emit('entry',entry);
+
+    Entry.update({_id:entry_id},{'$inc':{'read_count':1}},function(err,data){
+      if(err) console.log(err);  
+    });
+  }));
 }
 
 exports.getEntryById = function(entry_id,fn){

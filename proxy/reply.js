@@ -13,6 +13,7 @@ exports.getRepliesByEntryId = function(entry_id, fn) {
       fn(null,replies)
     })
     replies.forEach(function(reply){
+      reply.timeTrap = calculateTimeInterval(reply.create_date);
       User.get(reply.author_id,function(err,user){
         if(err) return fn(err)
         reply.author = user
@@ -72,3 +73,27 @@ exports.updateBody = function(id,body,fn){
   });
 };
 
+/*
+ * util 函数
+ */ 
+function calculateTimeInterval(old_time){
+  
+  now_time = new Date();
+  var timeInterVal = Math.abs(Date.parse(now_time)/1000 - Date.parse(old_time)/1000);
+  var timeTrap;
+  console.log('timeInterVal:',timeInterVal);
+  if(timeInterVal<60){
+    timeTrap = "1分钟内"; 
+  }else if(timeInterVal>=60 && timeInterVal<(60*60)){
+    timeTrap = Math.round(timeInterVal/60) + " 分钟前"; 
+  }else if(timeInterVal>=(60*60) && timeInterVal<(60*60*24)){
+    timeTrap = Math.round(timeInterVal/(60*60)) + "小时前"; 
+  }else if(timeInterVal>=(60*60*24) && timeInterVal<(60*60*24*30)){
+    timeTrap = Math.round(timeInterVal/(60*60*24)) + "天前";
+  }else if(timeInterVal>=(60*60*24*30) && timeInterVal<(60*60*24*30*12)){
+    timeTrap = Math.round(timeInterVal/(60*60*24*30)) + "个月前";
+  }else{
+    timeTrap = Math.round(timeInterVal/(60*60*24*30*12)) + "年前";
+  }
+  return timeTrap;
+}
