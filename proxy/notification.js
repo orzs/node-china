@@ -43,12 +43,14 @@ exports.calculateNoneReadMessageCount = function(to_userId,fn){
 };
 
 exports.getNoReadNotification = function(userId,skip,perpage,fn){
+  console.log('skip:' + skip + 'perpage:' + perpage);
   Notification.find({ has_read:false,to_userId:userId },{},{ skip:skip,limit:perpage,sort:"-create_date" },function(err,notifications){
     var proxy = new Eventproxy(); 
     proxy.after('notifications_ready',notifications.length,function(detail_notifications){
       fn(null,detail_notifications);
     });
     notifications.forEach(function(notification,index){
+      notification.timeTrap = calculateTimeInterval(notification.create_date);
       var ep = Eventproxy.create("user","entry",function(user,entry){
         notification.user = user;
         notification.entry = entry;
@@ -58,13 +60,6 @@ exports.getNoReadNotification = function(userId,skip,perpage,fn){
 
       User.get(notification.from_userId,ep.done('user')); 
       Entry.getEntryById(notification.entry_id,ep.done(function(entry){
-        if(entry){
-          if(entry.last_reply){
-            entry.timeTrap = calculateTimeInterval(entry.last_reply_date);
-          }else{
-            entry.timeTrap = calculateTimeInterval(entry.create_date);
-          }
-        }
         ep.emit('entry',entry);
       }));
     });

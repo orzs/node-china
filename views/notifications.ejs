@@ -10,7 +10,7 @@
 
     <div class="panel-body">
     <% notifications.forEach(function(notification){ %>
-      <div class="media notification" id="notification-838862">
+      <div class="media notification" id="notification-<%= notification._id %>">
         <div class="media-left avatar">
           <a href="/user/<%= notification.user.login_name %>"><img class="media-object avatar-48" src="<%= notification.user.avatar %>"></a>
         </div>
@@ -21,32 +21,16 @@
             <span class="info">回复了帖子
               <a title="<%= notification.entry.title %>" href="/entry/<%= notification.entry._id %>"><%= notification.entry.title %></a> 
             </span>
-            <span class="date"><i class="fa fa-clock-o"></i> <abbr class="timeago" title="2015-12-07T12:19:25+08:00"></abbr></span>
+            <span class="date"><i class="fa fa-clock-o"></i> <abbr class="timeago" title="<%= notification.create_date %>"><%= notification.timeTrap %></abbr></span>
         </div>
 
         <div class="media-right opts">
-        <a data-remote="true" rel="nofollow" data-method="delete" href="/notifications/838862"><i class="fa fa-trash"></i><%= notification.entry.reply_count %></a>
+        <a data-remote="true" rel="nofollow" data-method="delete" href="/notifications/838862"><i class="fa fa-trash"></i></a>
         </div>
       </div>
     <% }) %>
     </div>
-
-    <div class="panel-footer">
-      <ul class="pagination">
-        <li class="prev previous_page disabled">
-          <a href="#">← 上一页</a>
-        </li> 
-        <li class="active">
-          <a rel="start" href="/notifications?page=1">1</a>
-        </li> 
-        <li>
-          <a rel="next" href="/notifications?page=2">2</a>
-        </li> 
-        <li class="next next_page ">
-          <a rel="next" href="/notifications?page=2">下一页 →</a>
-        </li>
-      </ul>
-    </div>
+    <% include pager %>
   </div>
 </div>
 

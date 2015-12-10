@@ -50,11 +50,12 @@ module.exports = function(fn,flag,perpage){
           skip: page * perpage,
           total: total,
           count: Math.ceil(total/perpage),
-          option: url 
+          option: url,
+          searchKey:searchText 
         };
         next();
       });
-    }else if(flag == 'notification'){
+    }else if(flag == 'notifications'){
       fn(req.user._id,function(err,total){
         if(err) return next(err);
         req.page = res.locals.page ={

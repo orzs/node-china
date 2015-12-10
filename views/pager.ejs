@@ -1,56 +1,56 @@
-<div class="panel-footer clearfix">
+<div class="panel-footer clearfix" id="page-footer">
   <% if (page.count > 1) { %>
     <ul class="pagination">
       <% if(page.number) {%>
-        <li class="prev previous_page"><a href="/<%= page.option %>/<%= page.number %>">← 上一页</a></li> 
+        <li class="prev previous_page"><a href="/<%= page.option %>/<%= page.number %><% if(page.searchKey){ %>?searchKey=<%= page.searchKey %> <% } %>">← 上一页</a></li> 
       <% }else{ %>
         <li class="prev previous_page disabled"><a href="#">← 上一页</a></li> 
       <% } %>
-      <li><a href="/<%= page.option %>/1">1</a></li> 
-      <li><a href="/<%= page.option %>/2">2</a></li> 
+      <li><a href="/<%= page.option %>/1<% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>">1</a></li> 
+      <li><a href="/<%= page.option %>/2<% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>">2</a></li> 
 
       <% if(page.number < 2){ %>
-        <li><a href="/<%= page.option %>/3">3</a></li> 
-        <li><a href="/<%= page.option %>/4">4</a></li> 
-        <li><a href="/<%= page.option %>/5">5</a></li> 
+        <li><a href="/<%= page.option %>/3<% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>">3</a></li> 
+        <li><a href="/<%= page.option %>/4<% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>">4</a></li> 
+        <li><a href="/<%= page.option %>/5<% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>">5</a></li> 
         <li class="disabled"><a href="#">…</a></li> 
       <% } %>  
 
       <% if(page.number < 6 && page.number > 1){ %>
         <% for(var i=3;i<page.number + 4;i++){ %>
-          <li><a href="/<%= page.option %>/<%= i%>"><%= i%></a></li> 
+          <li><a href="/<%= page.option %>/<%= i%><% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>"><%= i%></a></li> 
         <% } %>
         <li class="disabled"><a href="#">…</a></li> 
       <% } %> 
 
       <% if(page.number > 5 && page.number < 94){ %>
         <li class="disabled"><a href="#">…</a></li> 
-        <li><a href="/<%= page.option %>/<%= page.number - 1%>"><%= page.number - 1 %></a></li>
-        <li><a href="/<%= page.option %>/<%= page.number %>"><%= page.number %></a></li>
-        <li><a href="/<%= page.option %>/<%= page.number + 1%>"><%= page.number + 1 %></a></li>
-        <li><a href="/<%= page.option %>/<%= page.number + 2%>"><%= page.number + 2 %></a></li>
-        <li><a href="/<%= page.option %>/<%= page.number + 3%>"><%= page.number + 3 %></a></li>
+        <li><a href="/<%= page.option %>/<%= page.number - 1%><% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>"><%= page.number - 1 %></a></li>
+        <li><a href="/<%= page.option %>/<%= page.number %><% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>"><%= page.number %></a></li>
+        <li><a href="/<%= page.option %>/<%= page.number + 1%><% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>"><%= page.number + 1 %></a></li>
+        <li><a href="/<%= page.option %>/<%= page.number + 2%><% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>"><%= page.number + 2 %></a></li>
+        <li><a href="/<%= page.option %>/<%= page.number + 3%><% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>"><%= page.number + 3 %></a></li>
         <li class="disabled"><a href="#">…</a></li> 
       <% } %>
 
       <% if(page.number > 93 && page.number < 98) {%>
         <li class="disabled"><a href="#">…</a></li> 
         <% for(var i=page.number - 1;i<99;i++){ %> 
-          <li><a href="/<%= page.option %>/<%= i%>"><%= i%></a></li> 
+          <li><a href="/<%= page.option %>/<%= i%><% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>"><%= i%></a></li> 
         <% } %>
       <% } %>
 
       <% if(page.number > 97){ %> 
         <li class="disabled"><a href="#">…</a></li> 
-        <li><a href="/<%= page.option %>/97">97</a></li> 
-        <li><a href="/<%= page.option %>/98">98</a></li> 
+        <li><a href="/<%= page.option %>/97<% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>">97</a></li> 
+        <li><a href="/<%= page.option %>/98<% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>">98</a></li> 
       <% } %>  
      
-      <li><a href="/<%= page.option %>/99">99</a></li> 
-      <li><a href="/<%= page.option %>/100">100</a></li> 
+      <li><a href="/<%= page.option %>/99<% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>">99</a></li> 
+      <li><a href="/<%= page.option %>/100<% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>">100</a></li> 
 
       <% if (page.number < 99){ %>
-          <li class="next next_page "><a rel="next" href="/<%= page.option %>/<%= page.number + 2 %>">下一页 →</a></li>
+          <li class="next next_page "><a rel="next" href="/<%= page.option %>/<%= page.number + 2 %><% if(page.searchKey){ %>?searchKey=<%= page.searchKey %><% } %>">下一页 →</a></li>
       <% }else{ %>
         <li class="next next_page disabled"><a href="#">下一页 →</a></li>
       <% } %>
