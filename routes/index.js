@@ -35,6 +35,7 @@ router.get('/active_acount',login.activeAcount);
 router.get('/tabs',tab.getTabsJson);
 router.get('/user/edit',account.form);
 router.get('/notifications/clear',notification.clear);
+router.get('/notification/:id',notification.read);
 
 router.get('/user/:login_name/entries',account.showWithEntries);
 router.get('/user/:login_name/favorites',account.showWithFavorites);

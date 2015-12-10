@@ -18,3 +18,12 @@ exports.clear = function(req,res,next){
     res.redirect('/notifications');
   });
 }
+
+exports.read = function(req,res,next){
+  var notification_id = req.params['id'];
+  Notification.readNotification(notification_id,function(err,notification){
+    if(err) return next(err); 
+    res.redirect('/notifications');
+  });
+
+}

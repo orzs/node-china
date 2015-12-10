@@ -82,6 +82,13 @@ exports.clearNoReadNotification = function(userId,fn){
   });
 }
 
+exports.readNotification = function(notification_id,fn){
+ Notification.update({ _id:notification_id },{'$set':{'has_read':true}},function(err,data){
+   if(err) return fn(err);
+   fn(null,data);
+ }); 
+}
+
 exports.getCount = function(userId,fn){
   Notification.count({has_read:false,to_userId:userId},fn);
 }
