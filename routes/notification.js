@@ -2,7 +2,8 @@ var proxy = require("../proxy/main");
 var Notification = proxy.Notification;
 
 exports.list = function(req,res,next){
-  Notification.getNoReadNotification(req.user._id,0,20,function(err,notifications){
+  var page = req.page;
+  Notification.getNoReadNotification(req.user._id,page.skip,page.perpage,function(err,notifications){
     if(err) return next(err);
     res.render('notifications',{
       title: '未读消息',

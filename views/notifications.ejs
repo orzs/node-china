@@ -7,6 +7,7 @@
       <a class="btn btn-danger" data-disable-with="清空中..." rel="nofollow" data-method="post" href="/notifications/clear"><i class="fa fa-fa fa-trash"></i> <span>标记已读</span></a>
       <div class="pull-right"><h4>通知提醒</h4></div>
     </div>
+
     <div class="panel-body">
     <% notifications.forEach(function(notification){ %>
       <div class="media notification" id="notification-838862">
@@ -20,15 +21,16 @@
             <span class="info">回复了帖子
               <a title="<%= notification.entry.title %>" href="/entry/<%= notification.entry._id %>"><%= notification.entry.title %></a> 
             </span>
-            <span class="date"><i class="fa fa-clock-o"></i> <abbr class="timeago" title="2015-12-07T12:19:25+08:00">1 小时前</abbr></span>
+            <span class="date"><i class="fa fa-clock-o"></i> <abbr class="timeago" title="2015-12-07T12:19:25+08:00"></abbr></span>
         </div>
 
         <div class="media-right opts">
-        <a data-remote="true" rel="nofollow" data-method="delete" href="/notifications/838862"><i class="fa fa-trash"></i> </a>
+        <a data-remote="true" rel="nofollow" data-method="delete" href="/notifications/838862"><i class="fa fa-trash"></i><%= notification.entry.reply_count %></a>
         </div>
       </div>
     <% }) %>
     </div>
+
     <div class="panel-footer">
       <ul class="pagination">
         <li class="prev previous_page disabled">
