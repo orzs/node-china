@@ -6,7 +6,7 @@ exports.searchAll = function(req,res,next){
   var searchText = req.query['searchKey']; 
   Search.searchAll(searchText,page.skip,page.perpage,function(err,total,entries){
     if(err) return next(err);
-    res.render('search_results',{
+    res.render('search/search_results',{
       title: '搜索',
       total: total,
       searchKey: searchText,

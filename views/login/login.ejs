@@ -1,5 +1,5 @@
-<% include layout_header %>
-<% include menu %>
+<% include ../base/layout_header %>
+<% include ../base/menu %>
 <div id="main" class="main-container container">
   <div class="row">
     <div class="col-md-5 col-md-offset-2">
@@ -8,7 +8,7 @@
           登录
         </div>
         <div class="panel-body">
-          <% include messages %>
+          <% include ../component/messages %>
           <form class="simple_form " novalidate="novalidate" id="new_user" action="/login"
           accept-charset="UTF-8" method="post">
             <div class="form-group">
@@ -60,4 +60,4 @@
     </div>
   </div>
 </div>
- <% include layout_footer %>
+ <% include ../base/layout_footer %>

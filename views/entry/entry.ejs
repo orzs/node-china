@@ -1,5 +1,5 @@
-<% include layout_header %>
-<% include menu %>
+<% include ../base/layout_header %>
+<% include ../base/menu %>
 
 <div id="main" class="main-container container">
   <div class="row">
@@ -113,7 +113,7 @@
           </b>
           条回复
         </div>
-        <% include reply %>
+        <% include ../reply/reply %>
         <div class="panel-footer clearfix">
         </div>
       </div>
@@ -126,7 +126,7 @@
           回帖
         </div>
         <div class="panel-body">
-          <% include new_reply_form %>
+          <% include ../reply/new_reply_form %>
         </div>
       </div>
     <!-- end 回复框 -->
@@ -134,9 +134,9 @@
 
     <div class="sidebar col-md-3">
       <!-- 小贴士-->
-      <% include tip %>
+      <% include ../component/tip %>
       <!-- start  其它节点话题 -->
-      <% include other_entries %>
+      <% include ../entry/other_entries %>
     </div>
   </div>
 </div>
@@ -196,4 +196,4 @@
     });
   <% } %>
 </script>
-<% include layout_footer %>
+<% include ../base/layout_footer %>

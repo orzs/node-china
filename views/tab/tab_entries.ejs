@@ -1,31 +1,32 @@
-<% include layout_header %>
-<% include menu %>
+<% include ../base/layout_header %>
+<% include ../base/menu %>
 <div id="main" class="main-container container">
   <div class="row">
     <div class="col-md-9 col-sm-9">
       <div class="topics panel panel-default">
         <div class="panel-heading clearfix">
-          <div class="filter pull-right">
-            <span class="l">查看:</span>
-            <a href="/entries" class="active">默认</a> /
-            <a href="/list/good" class="popular"><i class="fa fa-diamond"></i> 优质帖子</a> /
-            <a href="/list/no_reply">无人问津</a> /
-            <a href="/list/last">最新创建</a>
+          <div class="node-info">
+            <div class="name">
+              <strong><%= tab.name %></strong> <span class="total">共有<%= tab.entry_count %>  个讨论主题,<%= tab.follower_count %> 个用户关注这个标签</span>
+                <div class="pull-right">
+                </div>
+            </div>
+            <div class="summary">
+            <p><%= tab.description %></p>
+            </div>
           </div>
         </div>
-
         <div class="panel-body">
-          <% include entries %>
+          <% include ../entry/entries %>
         </div>
-        <% include pager %>
+        <% include ../component/pager %>
       </div>
-      <% include tabs %>
     </div>
 
     <div class="sidebar col-md-3">
-      <% include new_entry_button %>
-      <% include tip %>
-      <% include communities %>
+      <% include ../component/new_entry_button %>
+      <% include ../component/tip %>
+      <% include ../component/communities %>
       <div class="panel panel-default">
         <div class="panel-heading">推荐 Ruby 资源</div>
         <ul class="list-group">
@@ -34,9 +35,10 @@
           <li class="list-group-item"><a href="http://guides.ruby-china.org">Rails Guides 中文版</a></li> 
         </ul>
       </div>
-      <% include data_report %>
+      <% include ../component/data_report %>
     </div>
   </div>
 </div>
 
-<% include layout_footer %>
+<% include ../base/layout_footer %>
+

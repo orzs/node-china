@@ -4,7 +4,7 @@ var utility = require('utility');
 var User = proxy.User;
 
 exports.form = function(req,res){
-  res.render('login',{title: 'Login'})
+  res.render('login/login',{title: 'Login'})
 }
 
 exports.submit = function(req,res,next){
@@ -22,7 +22,7 @@ exports.submit = function(req,res,next){
       }else{
         req.session.regenerate(function(err){
           req.session.user = user; 
-          res.redirect('/entries');
+          res.redirect('entry/entries');
         });
       }
     }else{
@@ -35,7 +35,7 @@ exports.submit = function(req,res,next){
 exports.logout = function(req,res){
   req.session.destroy(function(err){
     if(err) throw err
-    res.redirect('/entries')
+    res.redirect('entry/entries')
   })
 }
 

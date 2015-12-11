@@ -6,7 +6,7 @@ exports.list = function(req,res,next){
   var page = req.page; 
   Entry.getRange(page.skip,page.perpage,function(err,entries,tabs){
     if(err) return next(err);
-    res.render('index',{
+    res.render('entry/index',{
       title: '首页',
       entries: entries,
       tabs: tabs 
@@ -20,7 +20,7 @@ exports.listWithTab = function(req,res,next){
   
   Entry.getTabRange(tab,page.skip,page.perpage,function(err,entries,tab){
     if(err) return next(err)
-    res.render('tab_entries',{
+    res.render('tab/tab_entries',{
       title: tab.name,
       tab: tab,
       entries: entries
@@ -34,7 +34,7 @@ exports.listWithFeature = function(req,res,next){
 
   Entry.getFeatureRange(feature,page.skip,page.perpage,function(err,entries){
     if(err) return next(err)
-    res.render('feature_entries',{
+    res.render('feature/feature_entries',{
       title: feature,
       entries: entries 
     })
@@ -42,7 +42,7 @@ exports.listWithFeature = function(req,res,next){
 }
 
 exports.form = function(req,res){
-  res.render('post',{
+  res.render('entry/post',{
     title: 'Post'
   })
 }
@@ -62,7 +62,7 @@ exports.submit = function(req,res,next){
       else console.log('response:',response);
     });
 
-    res.redirect('/entries')
+    res.redirect('entry/entries')
   })
 }
 
@@ -73,7 +73,7 @@ exports.full = function(req,res,next){
     var user = req.user;
     entry = packEntryWithLoginUser(entry,user);
     replies = packRepliesWithLoginUser(replies,user);
-    res.render('entry',{
+    res.render('entry/entry',{
       title:'Entry',
       entry:entry,
       author:author,
