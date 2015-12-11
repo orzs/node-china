@@ -22,6 +22,11 @@ a community which running on node.js. [apply site](http://104.131.148.64:4000/en
 
 - [contributors](https://github.com/orzs/node-china/graphs/contributors)
 
+## questions
+
+- [issues](https://github.com/orzs/node-china/issues)
+- ljw040426@gmail.com
+
 ## thanks
 
 - ruby-china
