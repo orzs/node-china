@@ -22,7 +22,7 @@ exports.submit = function(req,res,next){
       }else{
         req.session.regenerate(function(err){
           req.session.user = user; 
-          res.redirect('entry/entries');
+          res.redirect('/entries');
         });
       }
     }else{
@@ -35,7 +35,7 @@ exports.submit = function(req,res,next){
 exports.logout = function(req,res){
   req.session.destroy(function(err){
     if(err) throw err
-    res.redirect('entry/entries')
+    res.redirect('/entries')
   })
 }
 
