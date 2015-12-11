@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - "0.12"
+  - "0.11"
+  - "0.10"
+
+services:
+- mongodb
+- redis-server
+- elasticsearch
+
+before_install:
+- npm install bower -g
+- cd public && bower install
+
+before_script:
+
+script: make clean
+
+after_success:
+
+after_failure:
+
+after_script:
