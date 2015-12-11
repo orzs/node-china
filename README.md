@@ -1,5 +1,5 @@
 # node-china
-a community which running on node.js.
+a community which running on node.js. [apply site](http://104.131.148.64:4000/entries)
 
 ## requirements
 
@@ -10,17 +10,17 @@ a community which running on node.js.
 - bower v1.4.1+
 - GNU make v3.8.1+
 
-## start
+## development
 ```
+  $ git clone https://github.com/orzs/node-china.git && cd node-china
   $ npm install 
-  $ cd public & bower install
-  $ make start
+  $ cd public && bower install
+  $ cd .. && make start
 ```
 
 ## contributors
 
-- 十四
-- Laker
+- [contributors](https://github.com/orzs/node-china/graphs/contributors)
 
 ## thanks
 
