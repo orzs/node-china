@@ -1,5 +1,6 @@
 # node-china
-a community which running on node.js. [apply site](http://104.131.148.64:4000/entries)
+a community which running on node.js. [apply site](http://104.131.148.64:4000/entries)  
+[![Build Status](https://travis-ci.org/orzs/node-china.png)](https://travis-ci.org/orzs/node-china)
 
 ## requirements
 
