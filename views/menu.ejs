@@ -44,7 +44,7 @@
         <li class="nav-search hidden-xs">
           <form class="navbar-form form-search" action="/search/all" method="get">
             <div class="form-group">
-              <input class="form-control" name="searchKey" type="text" value="" placeholder="搜索本站内容">
+              <input class="form-control search-box" name="searchKey" type="text" value="" placeholder="搜索本站内容">
             </div>
             <i class="fa btn-search fa-search"></i>
             <i class="fa btn-close fa-times-circle"></i>
@@ -60,3 +60,16 @@
     </div>
   </nav>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+
+  // 搜索框动画
+  $('.btn-search').on('click', function() {
+    $('.form-search').addClass('active');
+  });
+  $('.btn-close').on('click', function() {
+    $('.form-search').removeClass('active');
+  });
+  // 搜索框动画 结束
+});
+</script>

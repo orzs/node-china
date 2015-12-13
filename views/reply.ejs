@@ -106,7 +106,9 @@
 
         // 点击按钮,提交评论,并删除编辑器,插入新评论
         $reply.on('click', '.btn_edit_reply', function(){
+          console.log("message");
           $.post( '/reply/'+ reply_id, {}, function(data) {
+              console.log(data);
             if(data.status == 0){
             }
           }, 'json');
