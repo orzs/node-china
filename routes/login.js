@@ -4,7 +4,7 @@ var utility = require('utility');
 var User = proxy.User;
 
 exports.form = function(req,res){
-  res.render('login',{title: 'Login'})
+  res.render('login/login',{title: 'Login'})
 }
 
 exports.submit = function(req,res,next){

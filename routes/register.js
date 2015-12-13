@@ -5,7 +5,7 @@ var User = proxy.User;
 var searchClient = require('../middleware/elasticSearchClient');
 
 exports.form = function(req,res){
-  res.render('register',{title: 'Register'});
+  res.render('login/register',{title: 'Register'});
 }
 
 exports.submit = function(req,res,next){

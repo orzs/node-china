@@ -11,7 +11,7 @@ exports.searchAll = function(searchText,skip,perpage,fn){
       query: {
         multi_match: {
           query: searchText,        
-          fields: ['title','body','tab']
+          fields: ['title','body','tab','username']
         }
       }
     }
@@ -50,7 +50,7 @@ exports.getCount = function(searchText,fn){
       query: {
         multi_match: {
           query: searchText,        
-          fields: ['title','body','tab']
+          fields: ['title','body','tab','username']
         }
       }
     }

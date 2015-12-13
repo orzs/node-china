@@ -82,15 +82,15 @@ router.post('/account',multer({
   }),account.update);
 
 // api 列表
-router.use('/list/:feature/:page?',page(Entry.getCount,'feature',5),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.listWithFeature);
+router.use('/list/:feature/:page?',page(Entry.getCount,'feature',25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.listWithFeature);
 
-router.use('/tab/:name/:page?',page(Entry.getCount,'tab',5),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.listWithTab);
+router.use('/tab/:name/:page?',page(Entry.getCount,'tab',25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.listWithTab);
 
-router.use('/entries/:page?',page(Entry.getCount,'entries',5),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.list);
+router.use('/entries/:page?',page(Entry.getCount,'entries',25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),entry.list);
 
-router.use('/search/all/:page?',page(Search.getCount,'search',5),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),search.searchAll);
+router.use('/search/all/:page?',page(Search.getCount,'search',25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),search.searchAll);
 
-router.use('/notifications/:page?',page(Notification.getCount,'notifications',5),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),notification.list);
+router.use('/notifications/:page?',page(Notification.getCount,'notifications',25),statistics(User.getCount,'user'),statistics(Entry.getCount,'entry'),statistics(Reply.getCount,'reply'),notification.list);
 
 module.exports = router;
 
