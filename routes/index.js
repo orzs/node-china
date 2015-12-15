@@ -11,6 +11,7 @@ var tab = require('./tab');
 var account = require('./user');
 var search = require('./search');
 var notification = require('./notification');
+var staticPage = require('./staticPage');
 
 // proxy
 var proxy = require("../proxy/main");
@@ -24,6 +25,10 @@ var Search = proxy.Search;
 var validate = require('../middleware/validate');
 var statistics = require('../middleware/statistics');
 var page = require('../middleware/page');
+
+// api get 
+router.get('/wiki',staticPage.wiki);
+router.get('/api',staticPage.api);
 
 // api get 
 router.get('/entry/:id',entry.full);

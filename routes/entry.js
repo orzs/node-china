@@ -62,7 +62,7 @@ exports.submit = function(req,res,next){
       else console.log('response:',response);
     });
 
-    res.redirect('entry/entries')
+    res.redirect('/entries')
   })
 }
 
